@@ -15,6 +15,6 @@ class CreateTransferToAnotherAccount extends Create {
 	 * @return $this
 	 */
 	public function setTargetBankAccount( $oBankAccount ) {
-		return $this->setParam( 'transfer_bank_account', $oBankAccount->getUri() );
+		return $this->setRequestDataItem( 'transfer_bank_account', $oBankAccount->getUri() );
 	}
 }

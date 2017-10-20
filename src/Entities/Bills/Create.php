@@ -2,22 +2,24 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RequestBase;
+use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
 /**
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
  */
-class Create extends RequestBase {
+class Create extends Api {
 
 	/**
 	 * @param array $aAdditionalData
 	 * @return BillVO|null
 	 */
 	public function create( $aAdditionalData = array() ) {
+
+		$this->setRequestData( $aAdditionalData, true );
 		$oResult = $this->getFreeagentApi()
-						->createBill( array_merge( $this->getParams(), $aAdditionalData ) );
+						->createBill();
 
 		$oNew = null;
 		if ( !empty( $oResult->array ) ) {
@@ -31,7 +33,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setCategoryId( $nId ) {
-		return $this->setParam( 'category', '[categories]:' . $nId );
+		return $this->setRequestDataItem( 'category', '[categories]:' . $nId );
 	}
 
 	/**
@@ -39,7 +41,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setComment( $sComment ) {
-		return $this->setParam( 'comments', $sComment );
+		return $this->setRequestDataItem( 'comments', $sComment );
 	}
 
 	/**
@@ -47,7 +49,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setContact( $oContact ) {
-		return $this->setParam( 'contact', $oContact->getUri() );
+		return $this->setRequestDataItem( 'contact', $oContact->getUri() );
 	}
 
 	/**
@@ -63,7 +65,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setEcStatus( $sStatus ) {
-		return $this->setParam( 'ec_status', $sStatus );
+		return $this->setRequestDataItem( 'ec_status', $sStatus );
 	}
 
 	/**
@@ -71,7 +73,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setReference( $sRef ) {
-		return $this->setParam( 'reference', $sRef );
+		return $this->setRequestDataItem( 'reference', $sRef );
 	}
 
 	/**
@@ -79,7 +81,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setSalesTaxRate( $nRate ) {
-		return $this->setParam( 'sales_tax_rate', (string)$nRate );
+		return $this->setRequestDataItem( 'sales_tax_rate', (string)$nRate );
 	}
 
 	/**
@@ -87,6 +89,6 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setTotalValue( $nTotal ) {
-		return $this->setParam( 'total_value', (string)round( $nTotal, 2 ) );
+		return $this->setRequestDataItem( 'total_value', (string)round( $nTotal, 2 ) );
 	}
 }

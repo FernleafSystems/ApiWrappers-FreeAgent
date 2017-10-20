@@ -17,7 +17,7 @@ class Find extends FindBase {
 	public function find() {
 		$aBills = array();
 		$oResult = $this->getFreeagentApi()
-						->getBankTransactionsAlt( $this->getParams() );
+						->getBankTransactionsAlt();
 
 		if ( $oResult->success && !empty( $oResult->array ) ) {
 			$aBills = array_map(
@@ -36,7 +36,7 @@ class Find extends FindBase {
 	 * @return $this
 	 */
 	public function setBankAccount( $oBankAccount ) {
-		return $this->setParam( 'bank_account', $oBankAccount->getUri() );
+		return $this->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
 	}
 
 	/**
@@ -44,6 +44,6 @@ class Find extends FindBase {
 	 * @return $this
 	 */
 	public function setView( $sView = 'all' ) {
-		return $this->setParam( 'view', $sView );
+		return $this->setRequestDataItem( 'view', $sView );
 	}
 }

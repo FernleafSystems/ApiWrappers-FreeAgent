@@ -19,10 +19,27 @@ class Api extends BaseApi {
 	private $oAuthProvider;
 
 	/**
+	 * @return Freeagent
+	 */
+	public function getOAuthProvider() {
+		if ( empty( $this->oAuthProvider ) ) {
+			$this->oAuthProvider = new Freeagent();
+		}
+
+		/** @var Connection $oCon */
+		$oCon = $this->getConnection();
+		return $this->oAuthProvider
+			->setBaseUrl( $this->getBaseUrl() )
+			->setIsSandbox( $oCon->isSandbox() );
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function prepFinalRequestData() {
-		$this->setRequestDataItem( 'key', $this->getConnection()->getApiKey() );
+		/** @var Connection $oCon */
+		$oCon = $this->getConnection();
+		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->getAccessToken() ) );
 		return parent::prepFinalRequestData();
 	}
 
@@ -37,9 +54,27 @@ class Api extends BaseApi {
 	}
 
 	/**
-	 * @return FreeAgent
+	 * @param int|string $mDatedOn
+	 * @return $this
 	 */
-	protected function getProvider() {
-		return $this->oAuthProvider;
+	public function setDatedOn( $mDatedOn ) {
+		return $this->setDateAttribute( 'dated_on', $mDatedOn );
+	}
+
+	/**
+	 * @param string     $sAttribute
+	 * @param int|string $mDate
+	 * @return $this
+	 */
+	public function setDateAttribute( $sAttribute, $mDate ) {
+		return $this->setRequestDataItem( $sAttribute, $this->filterDateValue( $mDate ) );
+	}
+
+	/**
+	 * @param int|string $mDate
+	 * @return string
+	 */
+	protected function filterDateValue( $mDate ) {
+		return preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $mDate ) ? $mDate : gmdate( 'Y-m-d', $mDate );
 	}
 }

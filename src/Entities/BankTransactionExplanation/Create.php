@@ -2,30 +2,30 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
+use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction\BankTransactionVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RequestBase;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
 
 /**
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  */
-class Create extends RequestBase {
+class Create extends Api {
 
 	/**
 	 * @return BankTransactionExplanationVO|null
 	 */
 	public function create() {
 
-		$aParams = $this->getParams();
-		if ( empty( $aParams[ 'description' ] ) ) {
+		$sDescription = $this->getParam( 'description' );
+		if ( empty( $sDescription ) ) {
 			$this->setDescription( 'Filler description for Bank Transaction Explanation.' );
 		}
 
 		$oResult = $this->getFreeagentApi()
-						->createBankTransactionExplanationAlt( $this->getParams() );
+						->createBankTransactionExplanationAlt();
 
 		$oNew = null;
 		if ( !empty( $oResult->array ) ) {
@@ -40,7 +40,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setAssociatedPaidTo( $sAssociatedTo, $sAssociatedId ) {
-		return $this->setParam( 'paid_' . $sAssociatedTo, $sAssociatedId );
+		return $this->setRequestDataItem( 'paid_' . $sAssociatedTo, $sAssociatedId );
 	}
 
 	/**
@@ -48,8 +48,8 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setBankAccount( $oBankAccount ) {
-		return $this->unsetParam( 'bank_transaction' )
-					->setParam( 'bank_account', $oBankAccount->getUri() );
+		return $this->removeRequestDataItem( 'bank_transaction' )
+					->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
 	}
 
 	/**
@@ -57,8 +57,8 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setBankTxn( $oBankTxn ) {
-		return $this->unsetParam( 'bank_account' )
-					->setParam( 'bank_transaction', $oBankTxn->getUri() )
+		return $this->removeRequestDataItem( 'bank_account' )
+					->setRequestDataItem( 'bank_transaction', $oBankTxn->getUri() )
 					->setDatedOn( $oBankTxn->getDatedOn() );
 	}
 
@@ -67,7 +67,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setBillPaid( $oBill ) {
-		return $this->unsetParam( 'paid_invoice' )
+		return $this->removeRequestDataItem( 'paid_invoice' )
 					->setAssociatedPaidTo( 'bill', $oBill->getUri() );
 	}
 
@@ -76,7 +76,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setInvoicePaid( $oInvoice ) {
-		return $this->unsetParam( 'paid_bill' )
+		return $this->removeRequestDataItem( 'paid_bill' )
 					->setAssociatedPaidTo( 'invoice', $oInvoice->getUri() );
 	}
 
@@ -85,7 +85,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setDescription( $sDesc ) {
-		return $this->setParam( 'description', $sDesc );
+		return $this->setRequestDataItem( 'description', $sDesc );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setCategory( $sDesc ) {
-		return $this->setParam( 'category', $sDesc );
+		return $this->setRequestDataItem( 'category', $sDesc );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setForeignCurrencyValue( $nValue ) {
-		return $this->setParam( 'foreign_currency_value', $nValue );
+		return $this->setRequestDataItem( 'foreign_currency_value', $nValue );
 	}
 
 	/**
@@ -109,6 +109,6 @@ class Create extends RequestBase {
 	 * @return $this
 	 */
 	public function setValue( $nValue ) {
-		return $this->setParam( 'gross_value', $nValue );
+		return $this->setRequestDataItem( 'gross_value', $nValue );
 	}
 }

@@ -30,8 +30,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	/**
 	 * @return string
 	 */
-	public function getClientSecret() {
-		return $this->getStringParam( 'client_secret' );
+	public function getAccessToken() {
+		return $this->getStringParam( 'access_token' );
 	}
 
 	/**
@@ -39,20 +39,6 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 */
 	public function getExpiration() {
 		return $this->getNumericParam( 'expiration' );
-	}
-
-	/**
-	 * @return Freeagent
-	 */
-	public function getOAuthProvider() {
-		$oProvider = $this->getParam( 'oauth_provider' );
-		if ( empty( $oProvider ) ) {
-			$oProvider = new Freeagent();
-			$this->setParam( 'oauth_provider', $oProvider );
-		}
-		return $oProvider
-			->setBaseUrl( $this->getBaseUrl() )
-			->setIsSandbox( $this->isSandbox() );
 	}
 
 	/**
@@ -103,8 +89,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @param string $sVal
 	 * @return $this
 	 */
-	public function setClientSecret( $sVal ) {
-		return $this->setParam( 'client_secret', $sVal );
+	public function setAccessToken( $sVal ) {
+		return $this->setParam( 'access_token', $sVal );
 	}
 
 	/**

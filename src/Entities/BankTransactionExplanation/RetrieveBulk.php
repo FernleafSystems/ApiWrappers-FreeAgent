@@ -2,14 +2,14 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
+use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RequestBase;
 
 /**
  * Class RetrieveBulk
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  */
-class RetrieveBulk extends RequestBase {
+class RetrieveBulk extends Api {
 
 	/**
 	 * @return BankTransactionExplanationVO[]|null
@@ -17,7 +17,7 @@ class RetrieveBulk extends RequestBase {
 	public function retrieve() {
 		$aExplanations = null;
 		$oResult = $this->getFreeagentApi()
-						->getBankTransactionExplanations( $this->getParams() );
+						->getBankTransactionExplanations();
 		if ( $oResult->success ) {
 			$aExplanations = array_map(
 				function ( $aExplanation ) {
@@ -34,6 +34,6 @@ class RetrieveBulk extends RequestBase {
 	 * @return $this
 	 */
 	public function setBankAccount( $oBankAccount ) {
-		return $this->setParam( 'bank_account', $oBankAccount->getUri() );
+		return $this->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
 	}
 }

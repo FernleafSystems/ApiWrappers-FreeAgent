@@ -2,11 +2,13 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 
+use FernleafSystems\ApiWrappers\Freeagent\Api;
+
 /**
  * Class FindBase
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
  */
-class FindBase extends RequestBase {
+class FindBase extends Api {
 
 	/**
 	 * @param int $nDate
@@ -14,13 +16,8 @@ class FindBase extends RequestBase {
 	 * @return $this
 	 */
 	public function setDateRange( $nDate, $nRadius = 5 ) {
-
-		$nDaysRadius = 86400 * $nRadius;
-
-		$aParams = $this->getParams();
-		$aParams[ 'from_date' ] = gmdate( 'Y-m-d', $nDate - $nDaysRadius );
-		$aParams[ 'to_date' ] = gmdate( 'Y-m-d', $nDate + $nDaysRadius );
-
-		return $this->setParams( $aParams );
+		$nDaysRadius = 86400*$nRadius;
+		return $this->setRequestDataItem( 'from_date', gmdate( 'Y-m-d', $nDate - $nDaysRadius ) )
+					->setRequestDataItem( 'to_date', gmdate( 'Y-m-d', $nDate + $nDaysRadius ) );
 	}
 }

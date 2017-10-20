@@ -18,17 +18,13 @@ class Find extends FindBase {
 		/** @var BillVO[] $aBills */
 		$aBills = array();
 
-		$aParams = $this->getParams();
-		if ( isset( $aParams[ 'reference' ] ) ) { // not a true API parameter
-			$sReference = $aParams[ 'reference' ];
-			unset( $aParams[ 'reference' ] );
-		}
-		else {
-			$sReference = null;
+		$sReference = $this->getRequestDataItem( 'reference' ); // TODO: Stop setting it in the req. data
+		if ( !empty( $sReference ) ) { // not a true API parameter
+			$this->removeRequestDataItem( 'reference' );
 		}
 
 		$oResult = $this->getFreeagentApi()
-						->getBills( $aParams );
+						->getBills();
 
 		if ( $oResult->success && !empty( $oResult->array ) ) {
 			$aBills = array_map(
@@ -65,7 +61,7 @@ class Find extends FindBase {
 	 * @return $this
 	 */
 	public function setContact( $oContact ) {
-		return $this->setParam( 'contact', $oContact->getUri() );
+		return $this->setRequestDataItem( 'contact', $oContact->getUri() );
 	}
 
 	/**
@@ -73,6 +69,6 @@ class Find extends FindBase {
 	 * @return $this
 	 */
 	public function setBillReference( $sBillReference ) {
-		return $this->setParam( 'reference', $sBillReference );
+		return $this->setRequestDataItem( 'reference', $sBillReference );
 	}
 }

@@ -50,6 +50,6 @@ class Retrieve extends Api {
 	 * @return $this
 	 */
 	public function setIncludeLineItems( $bInclude = true ) {
-		return $this->setParam( 'nested_invoice_items', $bInclude ? 'true' : 'false' );
+		return $this->setRequestDataItem( 'nested_invoice_items', $bInclude ? 'true' : 'false' );
 	}
 }

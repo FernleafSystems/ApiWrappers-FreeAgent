@@ -2,14 +2,14 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
 
+use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RequestBase;
 
 /**
  * Class Upload
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
  */
-class Upload extends RequestBase {
+class Upload extends Api {
 
 	/**
 	 * @var array

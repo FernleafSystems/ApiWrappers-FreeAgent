@@ -13,8 +13,8 @@ class CreateManual extends Create {
 	 * @throws \Exception
 	 */
 	public function create() {
-		$aParams = $this->getParams();
-		if ( isset( $aParams[ 'bank_transaction' ] ) ) {
+		$sTxn = $this->getRequestDataItem( 'bank_transaction' );
+		if ( !empty( $sTxn ) ) {
 			throw new \Exception( 'Trying to create a manual transaction explanation with a bank transaction specified' );
 		}
 
