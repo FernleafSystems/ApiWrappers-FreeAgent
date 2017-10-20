@@ -1,12 +1,13 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\FreeAgent;
+namespace FernleafSystems\ApiWrappers\Freeagent;
 
+use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
 
 /**
  * Class Connection
- * @package FernleafSystems\ApiWrappers\FreeAgent
+ * @package FernleafSystems\ApiWrappers\Freeagent
  */
 class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
@@ -29,15 +30,29 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	/**
 	 * @return string
 	 */
-	public function getExpiration() {
-		return $this->getNumericParam( 'expiration' );
+	public function getClientSecret() {
+		return $this->getStringParam( 'client_secret' );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getClientSecret() {
-		return $this->getStringParam( 'client_secret' );
+	public function getExpiration() {
+		return $this->getNumericParam( 'expiration' );
+	}
+
+	/**
+	 * @return Freeagent
+	 */
+	public function getOAuthProvider() {
+		$oProvider = $this->getParam( 'oauth_provider' );
+		if ( empty( $oProvider ) ) {
+			$oProvider = new Freeagent();
+			$this->setParam( 'oauth_provider', $oProvider );
+		}
+		return $oProvider
+			->setBaseUrl( $this->getBaseUrl() )
+			->setIsSandbox( $this->isSandbox() );
 	}
 
 	/**
@@ -62,6 +77,13 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isSandbox() {
+		return (bool)$this->getParam( 'sandbox' );
+	}
+
+	/**
 	 * @param string $sVal
 	 * @return $this
 	 */
@@ -83,6 +105,14 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 */
 	public function setClientSecret( $sVal ) {
 		return $this->setParam( 'client_secret', $sVal );
+	}
+
+	/**
+	 * @param bool $bIsSandbox
+	 * @return $this
+	 */
+	public function setIsSandbox( $bIsSandbox ) {
+		return $this->setParam( 'sandbox', $bIsSandbox );
 	}
 
 	/**

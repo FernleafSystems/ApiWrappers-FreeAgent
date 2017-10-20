@@ -1,6 +1,6 @@
 {
   "name":         "fernleafsystems/apiwrappers-freeagent",
-  "description":  "Wrappers for Domain Whois Lookup APIs",
+  "description":  "PHP Wrapper For The FreeAgent API",
   "authors":      [
 	{
 	  "name":     "Paul Goodchild",
@@ -18,13 +18,13 @@
   "require":      {
 	"php":                              ">=5.4.0",
 	"fernleafsystems/apiwrappers-base": "^1.0.0",
-	"cloudmanaged/oauth2-freeagent":    "^1.0.0"
+	"league/oauth2-client":             "^2.0"
   },
   "require-dev":  {
   },
   "autoload":     {
 	"psr-4": {
-	  "FernleafSystems\\ApiWrappers\\FreeAgent\\": "src"
+	  "FernleafSystems\\ApiWrappers\\Freeagent\\": "src"
 	}
   }
 }

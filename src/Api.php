@@ -1,7 +1,8 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\FreeAgent;
+namespace FernleafSystems\ApiWrappers\Freeagent;
 
+use CloudManaged\OAuth2\Client\Provider\FreeAgent;
 use FernleafSystems\ApiWrappers\Base\BaseApi;
 
 /**
@@ -11,6 +12,11 @@ use FernleafSystems\ApiWrappers\Base\BaseApi;
 class Api extends BaseApi {
 
 	const REQUEST_METHOD = 'get';
+
+	/**
+	 * @var FreeAgent
+	 */
+	private $oAuthProvider;
 
 	/**
 	 * @return array
@@ -28,5 +34,12 @@ class Api extends BaseApi {
 		$oCon = $this->getConnection();
 		$sBase = sprintf( $oCon->getBaseUrl() );
 		return rtrim( $sBase, '/' ) . '/';
+	}
+
+	/**
+	 * @return FreeAgent
+	 */
+	protected function getProvider() {
+		return $this->oAuthProvider;
 	}
 }
