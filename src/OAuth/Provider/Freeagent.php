@@ -88,4 +88,15 @@ class Freeagent extends AbstractProvider {
 		$this->bIsSandbox = (bool)$bIsSandbox;
 		return $this;
 	}
+
+	public function urlUserDetails( AccessToken $token = null ) {
+		return $this->sBaseUrl.'company';
+	}
+
+	public function userDetails( $response, AccessToken $token ) {
+		$response = (array)( $response->company );
+		$company = new Company( $response );
+
+		return $company;
+	}
 }

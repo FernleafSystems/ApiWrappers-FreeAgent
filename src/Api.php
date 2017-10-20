@@ -2,8 +2,8 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
-use CloudManaged\OAuth2\Client\Provider\FreeAgent;
 use FernleafSystems\ApiWrappers\Base\BaseApi;
+use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 
 /**
  * Class Api
@@ -14,7 +14,7 @@ class Api extends BaseApi {
 	const REQUEST_METHOD = 'get';
 
 	/**
-	 * @var FreeAgent
+	 * @var Freeagent
 	 */
 	private $oAuthProvider;
 
