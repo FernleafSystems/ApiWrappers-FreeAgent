@@ -2,30 +2,24 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
 /**
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
  */
-class Create extends Api {
+class Create extends Retrieve {
+
+	const REQUEST_METHOD = 'post';
 
 	/**
 	 * @param array $aAdditionalData
 	 * @return BillVO|null
 	 */
 	public function create( $aAdditionalData = array() ) {
-
-		$this->setRequestData( $aAdditionalData, true );
-		$oResult = $this->getFreeagentApi()
-						->createBill();
-
-		$oNew = null;
-		if ( !empty( $oResult->array ) ) {
-			$oNew = ( new BillVO() )->applyFromArray( $oResult->array );
-		}
-		return $oNew;
+		return $this->setRequestData( $aAdditionalData, true )
+					->send()
+					->asVoResponse();
 	}
 
 	/**

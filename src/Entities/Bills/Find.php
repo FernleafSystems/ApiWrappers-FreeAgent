@@ -11,6 +11,8 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
  */
 class Find extends FindBase {
 
+	const REQUEST_ENDPOINT = 'bills';
+
 	/**
 	 * @return BillVO[]
 	 */
@@ -18,20 +20,16 @@ class Find extends FindBase {
 		/** @var BillVO[] $aBills */
 		$aBills = array();
 
-		$sReference = $this->getRequestDataItem( 'reference' ); // TODO: Stop setting it in the req. data
-		if ( !empty( $sReference ) ) { // not a true API parameter
-			$this->removeRequestDataItem( 'reference' );
-		}
+		$aResults = $this->send()
+						->getCoreResponseData();
 
-		$oResult = $this->getFreeagentApi()
-						->getBills();
-
-		if ( $oResult->success && !empty( $oResult->array ) ) {
+		$sReference = $this->getStringParam( 'bill_reference' ); // TODO: Stop setting it in the req. data
+		if ( !empty( $aResults ) ) {
 			$aBills = array_map(
 				function ( $aBill ) {
 					return ( new BillVO() )->applyFromArray( $aBill );
 				},
-				$oResult->array
+				$aResults
 			);
 
 			if ( !empty( $sReference ) ) {
@@ -51,7 +49,7 @@ class Find extends FindBase {
 	 * @return BillVO|null
 	 */
 	public function findByReference( $sBillReference ) {
-		$aBills = $this->setBillReference( $sBillReference )
+		$aBills = $this->setParam( 'bill_reference', $sBillReference )
 					   ->find();
 		return ( isset( $aBills[ 0 ] ) ? $aBills[ 0 ] : null );
 	}

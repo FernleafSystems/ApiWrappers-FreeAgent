@@ -2,24 +2,20 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
  * Class Update
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
  */
-class Update extends Api {
+class Update extends Create {
+
+	const REQUEST_METHOD = 'put';
 
 	/**
-	 * @param int   $nId
 	 * @param array $aUpdateData
-	 * @return bool
+	 * @return BillVO|null
 	 */
-	public function update( $nId, $aUpdateData = array() ) {
-
-		$oResult = $this->getFreeagentApi()
-						->updateBill( $nId, $aUpdateData );
-
-		return isset( $oResult->success ) && $oResult->success;
+	public function update( $aUpdateData = array() ) {
+		return $this->setRequestData( $aUpdateData )
+					->asVoResponse();
 	}
 }

@@ -10,21 +10,19 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  */
 class Retrieve extends Api {
 
-	/**
-	 * @param int $nId
-	 * @return BillVO|null
-	 */
-	public function asVo( $nId ) {
-		$aData = $this->retrieve( $nId );
-		return !empty( $aData ) ? ( new BillVO() )->applyFromArray( $aData ) : null;
-	}
+	const REQUEST_ENDPOINT = 'bills';
 
 	/**
-	 * @param int $nId
-	 * @return array
+	 * @return BillVO|null
 	 */
-	public function retrieve( $nId ) {
-		return $this->getFreeagentApi()
-					->getBill( $nId )->array;
+	public function asVoResponse() {
+		$aData = $this->send()
+					  ->getCoreResponseData();
+
+		$oNew = null;
+		if ( !empty( $aData ) ) {
+			$oNew = ( new BillVO() )->applyFromArray( $aData );
+		}
+		return $oNew;
 	}
 }
