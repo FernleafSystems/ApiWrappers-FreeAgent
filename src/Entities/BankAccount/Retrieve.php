@@ -2,29 +2,19 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount
  */
-class Retrieve extends Api {
+class Retrieve extends Base {
 
 	/**
-	 * @param int $nId
-	 * @return BankAccountVO|null
+	 * @throws \Exception
 	 */
-	public function asVo( $nId ) {
-		$aData = $this->retrieve( $nId );
-		return !empty( $aData ) ? ( new BankAccountVO() )->applyFromArray( $aData ) : null;
-	}
-
-	/**
-	 * @param int $nId
-	 * @return array
-	 */
-	public function retrieve( $nId ) {
-		return $this->getFreeagentApi()
-					->getBankAccount( $nId )->array;
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make API request to retrieve without an Entity ID' );
+		}
 	}
 }
