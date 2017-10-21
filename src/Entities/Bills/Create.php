@@ -8,7 +8,7 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
  */
-class Create extends Retrieve {
+class Create extends Base {
 
 	const REQUEST_METHOD = 'post';
 
@@ -18,7 +18,7 @@ class Create extends Retrieve {
 	 */
 	public function create( $aAdditionalData = array() ) {
 		return $this->setRequestData( $aAdditionalData, true )
-					->asVoResponse();
+					->sendRequestWithVoResponse();
 	}
 
 	/**

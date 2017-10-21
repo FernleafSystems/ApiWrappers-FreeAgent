@@ -2,7 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction\BankTransactionVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
@@ -12,26 +11,20 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  */
-class Create extends Api {
+class Create extends Base {
+
+	const REQUEST_METHOD = 'post';
 
 	/**
 	 * @return BankTransactionExplanationVO|null
 	 */
 	public function create() {
 
-		$sDescription = $this->getParam( 'description' );
+		$sDescription = $this->getRequestDataItem( 'description' );
 		if ( empty( $sDescription ) ) {
 			$this->setDescription( 'Filler description for Bank Transaction Explanation.' );
 		}
-
-		$oResult = $this->getFreeagentApi()
-						->createBankTransactionExplanationAlt();
-
-		$oNew = null;
-		if ( !empty( $oResult->array ) ) {
-			$oNew = ( new BankTransactionExplanationVO() )->applyFromArray( $oResult->array );
-		}
-		return $oNew;
+		return $this->sendRequestWithVoResponse();
 	}
 
 	/**

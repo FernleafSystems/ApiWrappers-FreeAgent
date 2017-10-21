@@ -15,7 +15,6 @@ class Update extends Create {
 	 * @return BillVO|null
 	 */
 	public function update( $aUpdateData = array() ) {
-		return $this->setRequestData( $aUpdateData )
-					->asVoResponse();
+		return $this->create( $aUpdateData );
 	}
 }

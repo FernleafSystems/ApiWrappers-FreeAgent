@@ -6,15 +6,13 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanat
  * Class RetrieveLinked
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  */
-class RetrieveLinked extends Api {
+class RetrieveLinked extends Base {
 
 	/**
 	 * @param BankTransactionExplanationVO $oExplanation
-	 * @return BankTransactionExplanationVO|null
+	 * @return $this
 	 */
-	public function asVo( $oExplanation ) {
-		return ( new Retrieve() )
-			->setFreeagentApi( $this->getFreeagentApi() )
-			->asVo( $oExplanation->getLinkedTransferExplanationId() );
+	public function setExplanation( $oExplanation ) {
+		return $this->setEntityId( $oExplanation->getLinkedTransferExplanationId() );
 	}
 }

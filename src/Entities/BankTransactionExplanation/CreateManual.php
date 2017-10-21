@@ -9,15 +9,13 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanat
 class CreateManual extends Create {
 
 	/**
-	 * @return BankTransactionExplanationVO|null
 	 * @throws \Exception
 	 */
-	public function create() {
+	protected function preSendVerification() {
+		parent::preSendVerification();
 		$sTxn = $this->getRequestDataItem( 'bank_transaction' );
 		if ( !empty( $sTxn ) ) {
 			throw new \Exception( 'Trying to create a manual transaction explanation with a bank transaction specified' );
 		}
-
-		return parent::create();
 	}
 }

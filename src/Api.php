@@ -3,6 +3,9 @@
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
 use FernleafSystems\ApiWrappers\Base\BaseApi;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation\BankTransactionExplanationVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 
 /**
@@ -99,6 +102,13 @@ class Api extends BaseApi {
 	}
 
 	/**
+	 * @return EntityVO
+	 */
+	public function getNewEntityResourceVO() {
+		return new EntityVO();
+	}
+
+	/**
 	 * @return string
 	 */
 	protected function getRequestEndpoint() {
@@ -118,6 +128,21 @@ class Api extends BaseApi {
 	 */
 	public function hasEntityId() {
 		return !is_null( $this->getEntityId() );
+	}
+
+	/**
+	 * @return EntityVO|BillVO|BankTransactionExplanationVO|null
+	 */
+	public function sendRequestWithVoResponse() {
+		$aData = $this->send()
+					  ->getCoreResponseData();
+
+		$oNew = null;
+		if ( !empty( $aData ) ) {
+			$oNew = $this->getNewEntityResourceVO()
+						 ->applyFromArray( $aData );
+		}
+		return $oNew;
 	}
 
 	/**

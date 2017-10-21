@@ -2,27 +2,19 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
  */
-class Retrieve extends Api {
-
-	const REQUEST_ENDPOINT = 'bills';
+class Retrieve extends Base {
 
 	/**
-	 * @return BillVO|null
+	 * @throws \Exception
 	 */
-	public function asVoResponse() {
-		$aData = $this->send()
-					  ->getCoreResponseData();
-
-		$oNew = null;
-		if ( !empty( $aData ) ) {
-			$oNew = ( new BillVO() )->applyFromArray( $aData );
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make "retrieve" API request without an Entity ID' );
 		}
-		return $oNew;
 	}
 }
