@@ -2,14 +2,13 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
 
 /**
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
  */
-class Create extends Api {
+class Create extends Base {
 
 	/**
 	 * @param BankAccountVO $oBankAccountVo

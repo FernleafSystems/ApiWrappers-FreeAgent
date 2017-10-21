@@ -17,4 +17,14 @@ class Update extends Create {
 	public function update( $aUpdateData = array() ) {
 		return $this->create( $aUpdateData );
 	}
+
+	/**
+	 * @throws \Exception
+	 */
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make "update" API request without an Entity ID' );
+		}
+	}
 }

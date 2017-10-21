@@ -2,21 +2,15 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
  * Class Hide
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  */
-class Hide extends Api {
-
+class Hide extends Update {
 	/**
-	 * @param int $nContactId
-	 * @return bool
+	 * @return ContactVO|null
 	 */
-	public function hide( $nContactId ) {
-		return ( new Update() )->setFreeagentApi( $this->getFreeagentApi() )
-							   ->update( $nContactId, [ 'status' => 'Hidden' ] );
+	public function hide() {
+		return $this->update( [ 'status' => 'Hidden' ] );
 	}
-
 }

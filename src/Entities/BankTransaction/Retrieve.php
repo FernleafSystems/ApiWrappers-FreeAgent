@@ -8,24 +8,15 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
  */
-class Retrieve extends Api {
+class Retrieve extends Base {
 
 	/**
-	 * @param int $nId
-	 * @return BankTransactionVO|null
+	 * @throws \Exception
 	 */
-	public function asVo( $nId ) {
-		$aData = $this->retrieve( $nId );
-		return !empty( $aData ) ? ( new BankTransactionVO() )->applyFromArray( $aData ) : null;
-	}
-
-	/**
-	 * @param int $nId
-	 * @return array
-	 */
-	public function retrieve( $nId ) {
-		$oResult = $this->getFreeagentApi()
-						->getBankTransaction( $nId );
-		return $oResult->array;
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make API request to retrieve without an Entity ID' );
+		}
 	}
 }

@@ -2,29 +2,19 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  */
-class Retrieve extends Api {
+class Retrieve extends Base {
 
 	/**
-	 * @param int $nId
-	 * @return ContactVO|null
+	 * @throws \Exception
 	 */
-	public function asVo( $nId ) {
-		$aData = $this->retrieve( $nId );
-		return !empty( $aData ) ? ( new ContactVO() )->applyFromArray( $aData ) : null;
-	}
-
-	/**
-	 * @param int $nId
-	 * @return array
-	 */
-	public function retrieve( $nId ) {
-		return $this->getFreeagentApi()
-					->getContact( $nId )->array;
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make "retrieve" API request without an Entity ID' );
+		}
 	}
 }

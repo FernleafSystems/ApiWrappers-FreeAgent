@@ -3,9 +3,11 @@
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
 use FernleafSystems\ApiWrappers\Base\BaseApi;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction\BankTransactionVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation\BankTransactionExplanationVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 
 /**
@@ -131,7 +133,7 @@ class Api extends BaseApi {
 	}
 
 	/**
-	 * @return EntityVO|BillVO|BankTransactionExplanationVO|null
+	 * @return EntityVO|BillVO|BankTransactionExplanationVO|BankTransactionVO|ContactVO|null
 	 */
 	public function sendRequestWithVoResponse() {
 		$aData = $this->send()
