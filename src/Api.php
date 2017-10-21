@@ -50,18 +50,11 @@ class Api extends BaseApi {
 		$oCon = $this->getConnection();
 		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->getAccessToken() ) );
 
-		$aFinal = array(
-			'headers' => $this->getRequestHeaders()
-		);
+		$aFinal = parent::prepFinalRequestData();
 
-		// Where does the data get sent, as a query, or post/put body
-		$sDataBodyKey = ( $this->getHttpRequestMethod() == 'get' ) ? 'query' : 'json';
-
+		$sChannel = $this->getDataChannel();
 		if ( in_array( $this->getHttpRequestMethod(), [ 'post', 'put' ] ) ) {
-			$aFinal[ $sDataBodyKey ] = [ $this->getDataPackageKey() => $this->getRequestDataFinal() ];
-		}
-		else {
-			$aFinal[ $sDataBodyKey ] = $this->getRequestDataFinal();
+			$aFinal[ $sChannel ] = [ $this->getDataPackageKey() => $aFinal[ $sChannel ] ];
 		}
 
 		return $aFinal;
