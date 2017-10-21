@@ -6,20 +6,16 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  */
-class Create extends Api {
+class Create extends Base {
+
+	const REQUEST_METHOD = 'post';
 
 	/**
-	 * @param array $aNewData
+	 * @param array $aData
 	 * @return InvoiceVO|null
 	 */
-	public function create( $aNewData ) {
-		$oResult = $this->getFreeagentApi()
-						->createInvoice( $aNewData );
-
-		$oNew = null;
-		if ( !empty( $oResult->array ) ) {
-			$oNew = ( new InvoiceVO() )->applyFromArray( $oResult->array );
-		}
-		return $oNew;
+	public function create( $aData = array() ) {
+		return $this->setRequestData( $aData, true )
+					->sendRequestWithVoResponse();
 	}
 }

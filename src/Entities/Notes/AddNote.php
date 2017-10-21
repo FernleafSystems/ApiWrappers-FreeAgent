@@ -10,6 +10,8 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
  */
 class AddNote extends Base {
 
+	const REQUEST_METHOD = 'post';
+
 	/**
 	 * @throws \Exception
 	 */

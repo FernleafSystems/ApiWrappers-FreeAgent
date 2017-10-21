@@ -2,47 +2,20 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
-
 /**
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  */
-class Retrieve extends Api {
-
-	use StdClassAdapter;
+class Retrieve extends Base {
 
 	/**
-	 * @param int    $nId
-	 * @param string $sToFile
-	 * @return bool|string base64 encoded string
+	 * @throws \Exception
 	 */
-	public function asPdf( $nId, $sToFile = '' ) {
-		$aData = $this->getFreeagentApi()
-					  ->getInvoiceAsPdf( $nId )->array;
-		if ( !empty( $sToFile ) ) {
-			return (bool)file_put_contents( $sToFile, base64_decode( $aData[ 'content' ] ) );
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make "retrieve" API request without an Entity ID' );
 		}
-		return isset( $aData[ 'content' ] ) ? $aData[ 'content' ] : '';
-	}
-
-	/**
-	 * @param int $nId
-	 * @return InvoiceVO|null
-	 */
-	public function asVo( $nId ) {
-		$aData = $this->retrieve( $nId );
-		return !empty( $aData ) ? ( new InvoiceVO() )->applyFromArray( $aData ) : null;
-	}
-
-	/**
-	 * @param int $nId
-	 * @return array
-	 */
-	public function retrieve( $nId ) {
-		return $this->getFreeagentApi()
-					->getInvoice( $nId, $this->getRawDataAsArray() )->array;
 	}
 
 	/**
