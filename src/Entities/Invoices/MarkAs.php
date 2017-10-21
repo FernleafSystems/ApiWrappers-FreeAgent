@@ -2,55 +2,68 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
- * TODO
  * Class MarkAs
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  */
-class MarkAs extends Api {
+class MarkAs extends Base {
+
+	const REQUEST_METHOD = 'put';
 
 	/**
-	 * @param string $nId
 	 * @return bool
 	 */
-	public function cancelled( $nId ) {
-		return $this->markAs( $nId, 'cancelled' );
+	public function cancelled() {
+		return $this->markAs( 'cancelled' );
 	}
 
 	/**
-	 * @param string $nId
 	 * @return bool
 	 */
-	public function draft( $nId ) {
-		return $this->markAs( $nId, 'draft' );
+	public function draft() {
+		return $this->markAs( 'draft' );
 	}
 
 	/**
-	 * @param string $nId
 	 * @return bool
 	 */
-	public function scheduled( $nId ) {
-		return $this->markAs( $nId, 'scheduled' );
+	public function scheduled() {
+		return $this->markAs( 'scheduled' );
 	}
 
 	/**
-	 * @param string $nId
 	 * @return bool
 	 */
-	public function sent( $nId ) {
-		return $this->markAs( $nId, 'sent' );
+	public function sent() {
+		return $this->markAs( 'sent' );
 	}
 
 	/**
-	 * @param string $nId
-	 * @param string $aAs
+	 * @param string $sAs
 	 * @return bool
 	 */
-	protected function markAs( $nId, $aAs ) {
-		$oResult = $this->getFreeagentApi()
-						->updateInvoiceAs( $nId, $aAs );
-		return $oResult->success;
+	protected function markAs( $sAs ) {
+		return $this->setParam( 'mark_as', $sAs )
+					->send()
+					->isLastRequestSuccess();
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getUrlEndpoint() {
+		return sprintf( 'invoices/%s/transitions/mark_as_%s',
+			$this->getEntityId(), $this->getParam( 'mark_as' )
+		);
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	protected function preSendVerification() {
+		parent::preSendVerification();
+		if ( !$this->hasEntityId() ) {
+			throw new \Exception( 'Attempting to make "retrieve" API request without an Entity ID' );
+		}
 	}
 }
