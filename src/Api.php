@@ -99,13 +99,6 @@ class Api extends BaseApi {
 	}
 
 	/**
-	 * @return int[]
-	 */
-	public function getSuccessfulResponseCodes() {
-		return [ 200, 201 ];
-	}
-
-	/**
 	 * @return string
 	 */
 	protected function getRequestEndpoint() {
@@ -125,13 +118,6 @@ class Api extends BaseApi {
 	 */
 	public function hasEntityId() {
 		return !is_null( $this->getEntityId() );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isLastRequestSuccess() {
-		return in_array( $this->getLastApiResponse()->getStatusCode(), [ 200, 201 ] );
 	}
 
 	/**

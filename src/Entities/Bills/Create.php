@@ -18,7 +18,6 @@ class Create extends Retrieve {
 	 */
 	public function create( $aAdditionalData = array() ) {
 		return $this->setRequestData( $aAdditionalData, true )
-					->send()
 					->asVoResponse();
 	}
 

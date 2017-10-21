@@ -21,9 +21,8 @@ class Find extends FindBase {
 		$aBills = array();
 
 		$aResults = $this->send()
-						->getCoreResponseData();
+						 ->getCoreResponseData();
 
-		$sReference = $this->getStringParam( 'bill_reference' ); // TODO: Stop setting it in the req. data
 		if ( !empty( $aResults ) ) {
 			$aBills = array_map(
 				function ( $aBill ) {
@@ -32,6 +31,7 @@ class Find extends FindBase {
 				$aResults
 			);
 
+			$sReference = $this->getStringParam( 'bill_reference' );
 			if ( !empty( $sReference ) ) {
 				foreach ( $aBills as $nKey => $oBill ) {
 					if ( $sReference != $oBill->getReference() ) {
