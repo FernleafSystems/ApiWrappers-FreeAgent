@@ -18,8 +18,10 @@ class Create extends Base {
 	 * @return bool
 	 */
 	public function create( $oBankAccountVo, $nTimestamp, $nValue, $sDescription ) {
-		return ( new Upload() )->setFreeagentApi( $this->getFreeagentApi() )
-							   ->addStatementLine_Csv( $nTimestamp, $nValue, $sDescription )
-							   ->upload( $oBankAccountVo );
+		$oStatement = ( new StatementVO() )->addLine( $nTimestamp, $nValue, $sDescription );
+		return ( new UploadStatement() )
+			->setStatement( $oStatement )
+			->setBankAccount( $oBankAccountVo )
+			->upload();
 	}
 }

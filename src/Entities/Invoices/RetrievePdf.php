@@ -22,7 +22,6 @@ class RetrievePdf extends Retrieve {
 	}
 
 	/**
-	 * Chops off the trailing 's' from the data package key. So far no exceptions found.
 	 * @return string
 	 */
 	protected function getDataPackageKey() {

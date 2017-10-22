@@ -33,10 +33,11 @@ class AddNote extends Base {
 	}
 
 	/**
+	 * @param bool     $bPrefixTimestamp
 	 * @param string[] $aNoteLines
 	 * @return $this
 	 */
-	public function setNoteLines( $aNoteLines ) {
+	public function setNoteLines( $aNoteLines, $bPrefixTimestamp = true ) {
 
 		if ( empty( $aNoteLines ) ) {
 			$aNoteLines = [];
@@ -45,9 +46,9 @@ class AddNote extends Base {
 			$aNoteLines = [ $aNoteLines ];
 		}
 
-		array_unshift( $aNoteLines,
-			sprintf( 'Date: %s', gmdate( 'Y-m-d H:i:s' ) )
-		);
+		if ( $bPrefixTimestamp ) {
+			array_unshift( $aNoteLines, sprintf( 'Date: %s', gmdate( 'Y-m-d H:i:s' ) ) );
+		}
 		return $this->setRequestDataItem( 'note', implode( "\n", $aNoteLines ) );
 	}
 }

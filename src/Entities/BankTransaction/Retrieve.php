@@ -2,8 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
-
 /**
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction

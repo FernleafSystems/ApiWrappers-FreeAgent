@@ -6,29 +6,36 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\FindBase;
 
 /**
- * Class Find
+ * Class RetrieveBulk
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
  */
-class Find extends FindBase {
+class RetrieveBulk extends FindBase {
+
+	const REQUEST_ENDPOINT = 'bank_transactions';
 
 	/**
 	 * @return BankTransactionVO[]
 	 */
 	public function find() {
 		$aBills = array();
-		$oResult = $this->getFreeagentApi()
-						->getBankTransactionsAlt();
 
-		if ( $oResult->success && !empty( $oResult->array ) ) {
+		if ( $this->send()->isLastRequestSuccess() ) {
 			$aBills = array_map(
 				function ( $aBill ) {
 					return ( new BankTransactionVO() )->applyFromArray( $aBill );
 				},
-				$oResult->array
+				$this->getCoreResponseData()
 			);
 		}
 
 		return $aBills;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getDataPackageKey() {
+		return 'bank_transactions';
 	}
 
 	/**
