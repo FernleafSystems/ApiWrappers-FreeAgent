@@ -85,7 +85,8 @@ class Api extends BaseApi {
 	public function getCoreResponseData() {
 		$aData = null;
 		if ( $this->isLastRequestSuccess() ) {
-			$aData = $this->getDecodedResponseBody()[ $this->getDataPackageKey() ];
+			$sKey = $this->getDataPackageKey();
+			$aData = empty( $sKey ) ? $this->getDecodedResponseBody() : $this->getDecodedResponseBody()[ $this->getDataPackageKey() ];
 		}
 		return $aData;
 	}
