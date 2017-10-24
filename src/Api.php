@@ -9,7 +9,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
-use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 
 /**
  * Class Api
@@ -23,25 +22,6 @@ class Api extends BaseApi {
 	 * @var string
 	 */
 	protected $sRequestEndpoint = '';
-	/**
-	 * @var Freeagent
-	 */
-	private $oAuthProvider;
-
-	/**
-	 * @return Freeagent
-	 */
-	public function getOAuthProvider() {
-		if ( empty( $this->oAuthProvider ) ) {
-			$this->oAuthProvider = new Freeagent();
-		}
-
-		/** @var Connection $oCon */
-		$oCon = $this->getConnection();
-		return $this->oAuthProvider
-			->setBaseUrl( $this->getBaseUrl() )
-			->setIsSandbox( $oCon->isSandbox() );
-	}
 
 	/**
 	 * @return array

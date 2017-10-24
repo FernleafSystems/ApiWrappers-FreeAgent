@@ -36,7 +36,7 @@ class Freeagent extends AbstractProvider {
 	 */
 	public function getBaseUrl() {
 		$bFallback = $this->isSandbox() ? self::URL_SANDBOX : self::URL_LIVE;
-		return empty( $this->sBaseUrl ) ? $bFallback : $this->sBaseUrl;
+		return empty( $this->sBaseUrl ) ? $bFallback : rtrim( $this->sBaseUrl, '/' );
 	}
 
 	/**

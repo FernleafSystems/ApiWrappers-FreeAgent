@@ -17,7 +17,7 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return string
 	 */
 	public function getBaseUrl() {
-		return 'https://api.freeagent.com/v2';
+		return $this->getStringParam( 'base_url_override', '' );
 	}
 
 	/**
@@ -32,6 +32,21 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 */
 	public function getAccessToken() {
 		return $this->getStringParam( 'access_token' );
+	}
+
+	/**
+	 * @return Freeagent
+	 */
+	public function getOAuthProvider() {
+		$oProvider = $this->getParam( 'oauth_provider' );
+		if ( !( $oProvider instanceof Freeagent ) ) {
+			$oProvider = new Freeagent();
+			$this->setOAuthProvider( $oProvider );
+		}
+
+		return $oProvider
+			->setBaseUrl( $this->getBaseUrl() )
+			->setIsSandbox( $this->isSandbox() );
 	}
 
 	/**
@@ -73,6 +88,22 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @param string $sVal
 	 * @return $this
 	 */
+	public function setAccessToken( $sVal ) {
+		return $this->setParam( 'access_token', $sVal );
+	}
+
+	/**
+	 * @param string $sUrl
+	 * @return $this
+	 */
+	public function setBaseUrl( $sUrl ) {
+		return $this->setParam( 'base_url_override', $sUrl );
+	}
+
+	/**
+	 * @param string $sVal
+	 * @return $this
+	 */
 	public function setClientId( $sVal ) {
 		return $this->setParam( 'client_id', $sVal );
 	}
@@ -86,19 +117,19 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	}
 
 	/**
-	 * @param string $sVal
-	 * @return $this
-	 */
-	public function setAccessToken( $sVal ) {
-		return $this->setParam( 'access_token', $sVal );
-	}
-
-	/**
 	 * @param bool $bIsSandbox
 	 * @return $this
 	 */
 	public function setIsSandbox( $bIsSandbox ) {
 		return $this->setParam( 'sandbox', $bIsSandbox );
+	}
+
+	/**
+	 * @param Freeagent $oProvider
+	 * @return $this
+	 */
+	public function setOAuthProvider( $oProvider ) {
+		return $this->setParam( 'oauth_provider', $oProvider );
 	}
 
 	/**
