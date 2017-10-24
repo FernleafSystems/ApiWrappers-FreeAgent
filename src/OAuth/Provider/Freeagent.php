@@ -32,6 +32,24 @@ class Freeagent extends AbstractProvider {
 	}
 
 	/**
+	 * Very important points to note about Freeagent Request Options. Ignore at peril to your sanity:
+	 * - request_uri must be provided and be identical (IDENTICAL) to the value sent on the Authorization Code request
+	 * - Instead of Basic Authorization, ensure client_id and client_secret are included in the params
+	 *
+	 * @param  array $aParams
+	 * @return array
+	 */
+//	protected function getAccessTokenOptions( array $aParams ) {
+//		return array(
+//			'headers' => [
+//				'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
+//				'Accept'       => 'application/json',
+//			],
+//			'body'    => $this->getAccessTokenBody( $aParams )
+//		);
+//	}
+
+	/**
 	 * @return string
 	 */
 	public function getBaseUrl() {
