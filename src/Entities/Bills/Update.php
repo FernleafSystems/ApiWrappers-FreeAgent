@@ -27,4 +27,11 @@ class Update extends Create {
 			throw new \Exception( 'Attempting to make "update" API request without an Entity ID' );
 		}
 	}
+
+	/**
+	 * @return array
+	 */
+	protected function getCriticalRequestItems() {
+		return [];
+	}
 }
