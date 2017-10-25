@@ -72,6 +72,14 @@ class Api extends BaseApi {
 	}
 
 	/**
+	 * TODO: Push to BaseApi
+	 * @return array
+	 */
+	protected function getCriticalRequestItems() {
+		return array();
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getEntityId() {
@@ -105,6 +113,22 @@ class Api extends BaseApi {
 	 */
 	public function hasEntityId() {
 		return !is_null( $this->getEntityId() );
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	protected function preSendVerification() {
+		parent::preSendVerification();
+
+		array_map(
+			function ( $sItemKey ) {
+				if ( !$this->hasRequestDataItem( $sItemKey ) ) {
+					throw new \Exception( sprintf( 'Key "%s" must be provided', $sItemKey ) );
+				}
+			},
+			$this->getCriticalRequestItems()
+		);
 	}
 
 	/**

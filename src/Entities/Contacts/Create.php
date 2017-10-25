@@ -18,4 +18,11 @@ class Create extends Base {
 		return $this->setRequestData( $aData, true )
 					->sendRequestWithVoResponse();
 	}
+
+	/**
+	 * @return array
+	 */
+	protected function getCriticalRequestItems() {
+		return array( 'first_name', 'last_name' );
+	}
 }
