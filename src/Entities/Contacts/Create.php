@@ -20,6 +20,22 @@ class Create extends Base {
 	}
 
 	/**
+	 * @param string $sName
+	 * @return $this
+	 */
+	public function setFirstName( $sName ) {
+		return $this->setRequestDataItem( 'first_name', $sName );
+	}
+
+	/**
+	 * @param string $sName
+	 * @return $this
+	 */
+	public function setLastName( $sName ) {
+		return $this->setRequestDataItem( 'last_name', $sName );
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function getCriticalRequestItems() {

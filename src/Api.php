@@ -76,7 +76,7 @@ class Api extends BaseApi {
 	 * @return array
 	 */
 	protected function getCriticalRequestItems() {
-		return array();
+		return [];
 	}
 
 	/**
