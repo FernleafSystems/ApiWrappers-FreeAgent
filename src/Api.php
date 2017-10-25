@@ -113,6 +113,9 @@ class Api extends BaseApi {
 	protected function preSendVerification() {
 		parent::preSendVerification();
 
+		if ( strlen( $this->getRequestEndpoint() ) == 0 ) {
+			throw new \Exception( 'Request Endpoint has not been provided' );
+		}
 		if ( in_array( $this->getHttpRequestMethod(), array( 'post', 'put' ) )
 			 && count( $this->getRequestData() ) == 0 ) {
 			throw new \Exception( 'Sending a "post/put" request with empty request data' );
