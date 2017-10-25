@@ -72,14 +72,6 @@ class Api extends BaseApi {
 	}
 
 	/**
-	 * TODO: Push to BaseApi
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
-		return [];
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getEntityId() {
@@ -121,14 +113,10 @@ class Api extends BaseApi {
 	protected function preSendVerification() {
 		parent::preSendVerification();
 
-		array_map(
-			function ( $sItemKey ) {
-				if ( !$this->hasRequestDataItem( $sItemKey ) ) {
-					throw new \Exception( sprintf( 'Key "%s" must be provided', $sItemKey ) );
-				}
-			},
-			$this->getCriticalRequestItems()
-		);
+		if ( in_array( $this->getHttpRequestMethod(), array( 'post', 'put' ) )
+			 && count( $this->getRequestData() ) == 0 ) {
+			throw new \Exception( 'Sending a "post/put" request with empty request data' );
+		}
 	}
 
 	/**
