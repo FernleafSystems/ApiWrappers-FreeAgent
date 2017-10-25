@@ -36,6 +36,14 @@ class Create extends Base {
 	}
 
 	/**
+	 * @param string $sStatus
+	 * @return $this
+	 */
+	public function setStatus( $sStatus ) {
+		return $this->setRequestDataItem( 'status', ucfirst( strtolower( $sStatus ) ) );
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function getCriticalRequestItems() {

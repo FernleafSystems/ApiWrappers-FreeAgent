@@ -7,10 +7,12 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  */
 class Hide extends Update {
+
 	/**
 	 * @return ContactVO|null
 	 */
 	public function hide() {
-		return $this->update( [ 'status' => 'Hidden' ] );
+		return $this->setStatus( 'Hidden' )
+					->update();
 	}
 }
