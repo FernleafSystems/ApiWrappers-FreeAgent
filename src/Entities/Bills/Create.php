@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Category\CategoryVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
 /**
@@ -22,11 +23,20 @@ class Create extends Base {
 	}
 
 	/**
+	 * @param CategoryVO $oCategory
+	 * @return $this
+	 */
+	public function setCategory( $oCategory ) {
+		return $this->setRequestDataItem( 'category', $oCategory->getUri() );
+	}
+
+	/**
+	 * Will attempt to construct the URI for this category from the Base ID
 	 * @param int $nId
 	 * @return $this
 	 */
 	public function setCategoryId( $nId ) {
-		return $this->setRequestDataItem( 'category', '[categories]:' . $nId );
+		return $this->setRequestDataItem( 'category', $this->getCategoryUrl( $nId ) );
 	}
 
 	/**
@@ -83,5 +93,20 @@ class Create extends Base {
 	 */
 	public function setTotalValue( $nTotal ) {
 		return $this->setRequestDataItem( 'total_value', (string)round( $nTotal, 2 ) );
+	}
+
+	/**
+	 * @param int $nId
+	 * @return string
+	 */
+	protected function getCategoryUrl( $nId ) {
+		return sprintf( '%scategories/%s', $this->getBaseUrl(), $nId );
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getCriticalRequestItems() {
+		return array( 'contact', 'dated_on', 'due_on', 'reference', 'total_value', 'category' );
 	}
 }
