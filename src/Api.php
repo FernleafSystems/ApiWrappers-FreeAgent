@@ -89,15 +89,15 @@ class Api extends BaseApi {
 	 * @return string
 	 */
 	protected function getRequestEndpoint() {
-		$sBase = strtolower( static::REQUEST_ENDPOINT );
-		return $this->hasEntityId() ? sprintf( '%s/%s', $sBase, $this->getEntityId() ) : $sBase;
+		return strtolower( static::REQUEST_ENDPOINT );
 	}
 
 	/**
 	 * @return string
 	 */
 	protected function getUrlEndpoint() {
-		return $this->getRequestEndpoint();
+		$sBase = $this->getRequestEndpoint();
+		return $this->hasEntityId() ? sprintf( '%s/%s', $sBase, $this->getEntityId() ) : $sBase;
 	}
 
 	/**
