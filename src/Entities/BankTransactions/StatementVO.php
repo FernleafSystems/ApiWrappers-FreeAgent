@@ -1,12 +1,12 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
 
 /**
  * Class StatementVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
+ * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
  */
 class StatementVO {
 

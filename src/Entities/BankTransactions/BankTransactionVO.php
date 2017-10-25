@@ -1,12 +1,12 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * Class BankTransactionVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
+ * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
  */
 class BankTransactionVO extends EntityVO {
 

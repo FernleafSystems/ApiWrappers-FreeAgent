@@ -1,6 +1,6 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\ApiWrappers\Freeagent\Api;
 

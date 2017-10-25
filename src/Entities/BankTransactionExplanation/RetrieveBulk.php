@@ -2,7 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 
 /**
  * Class RetrieveBulk

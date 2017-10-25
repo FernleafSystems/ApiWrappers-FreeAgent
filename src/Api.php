@@ -3,7 +3,7 @@
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
 use FernleafSystems\ApiWrappers\Base\BaseApi;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction\BankTransactionVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions\BankTransactionVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation\BankTransactionExplanationVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
