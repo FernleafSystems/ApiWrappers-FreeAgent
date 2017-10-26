@@ -13,7 +13,7 @@ class RetrieveBulkBase extends Api {
 	/**
 	 * @param int $nStartPage
 	 * @param int $nPerPage
-	 * @return EntityVO[]
+	 * @return EntityVO[]|EntityVO
 	 */
 	public function run( $nStartPage = 1, $nPerPage = 100 ) {
 
@@ -23,23 +23,46 @@ class RetrieveBulkBase extends Api {
 		$aMergedResults = array();
 
 		do {
-			$nCurrentResultsCount = count( $aMergedResults );
+			$aResultsData = $this->send()->getCoreResponseData();
 
-			$aMergedResults = array_merge(
-				$aMergedResults,
-				array_map(
-					function ( $aResultItem ) {
-						return $this->getNewEntityResourceVO()
-									->applyFromArray( $aResultItem );
-					},
-					$this->send()->getCoreResponseData()
-				)
-			);
+			if ( $this->isSearch() ) {
+				// This allows us to run custom FIND operations on the individual
+				// result sets from each page, without having to build the entire
+				// population first, within which to then run a search.
+				$mExtractedItem = $this->extractItemFromResults( $aResultsData );
+				if ( !is_null( $mExtractedItem ) ) {
+					return $mExtractedItem;
+				}
+			}
+			else {
+				$aMergedResults = array_merge(
+					$aMergedResults,
+					array_map(
+						function ( $aResultItem ) {
+							return $this->getNewEntityResourceVO()
+										->applyFromArray( $aResultItem );
+						},
+						$aResultsData
+					)
+				);
+			}
+
 			$this->setNextPage();
 
-		} while ( $nCurrentResultsCount != count( $aMergedResults ) );
+		} while ( count( $aResultsData ) == $nPerPage );
 
 		return $aMergedResults;
+	}
+
+	/**
+	 * By default we return null as this is a retrieval service, not a search
+	 * Override this with search/find parameters and return an item if found,
+	 * null otherwise.
+	 * @param array[] $aResultSet
+	 * @return EntityVO|null
+	 */
+	protected function extractItemFromResults( $aResultSet ) {
+		return null;
 	}
 
 	/**
@@ -54,6 +77,21 @@ class RetrieveBulkBase extends Api {
 	}
 
 	/**
+	 * @return bool
+	 */
+	protected function isSearch() {
+		return (bool)$this->getParam( 'is_search', false );
+	}
+
+	/**
+	 * @param bool $bIsSearch
+	 * @return $this
+	 */
+	protected function setIsSearch( $bIsSearch ) {
+		return $this->setParam( 'is_search', $bIsSearch );
+	}
+
+	/**
 	 * @return $this
 	 */
 	protected function setNextPage() {
@@ -61,6 +99,10 @@ class RetrieveBulkBase extends Api {
 		return $this->setPage( $nNext );
 	}
 
+	/**
+	 * @param int $nPage
+	 * @return $this
+	 */
 	protected function setPage( $nPage = 1 ) {
 		if ( $nPage < 1 ) {
 			$nPage = 1;
