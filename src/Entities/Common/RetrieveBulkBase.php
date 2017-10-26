@@ -26,21 +26,13 @@ class RetrieveBulkBase extends Api {
 			$aResultsData = $this->send()->getCoreResponseData();
 			$nCountResult = count( $aResultsData );
 
-			if ( $this->isCustomFiltered() ) {
-				// This allows us to run custom FIND operations on the individual
-				// result sets from each page, without having to build the entire
-				// population first, within which to then run a search.
-				$aResultsData = $this->filterItemsFromResults( $aResultsData );
-			}
-			else {
-				$aResultsData = array_map(
-					function ( $aResultItem ) {
-						return $this->getNewEntityResourceVO()
-									->applyFromArray( $aResultItem );
-					},
-					$aResultsData
-				);
-			}
+			$aResultsData = array_map(
+				function ( $aResultItem ) {
+					return $this->getNewEntityResourceVO()
+								->applyFromArray( $aResultItem );
+				},
+				$this->filterItemsFromResults( $aResultsData )
+			);
 
 			if ( !empty( $aResultsData ) ) {
 				$aMergedResults = array_merge( $aMergedResults, $aResultsData );
@@ -60,14 +52,15 @@ class RetrieveBulkBase extends Api {
 	}
 
 	/**
-	 * By default we return null as this is a retrieval service, not a search
-	 * Override this with search/find parameters and return an item if found,
-	 * null otherwise.
+	 * By default we return as-is
+	 * Override this with search/find parameters and return items that match the filter.
+	 *
+	 * This can be used to search for an individual record with a results limit of 1.
 	 * @param array[] $aResultSet
-	 * @return EntityVO[]
+	 * @return array[]
 	 */
 	protected function filterItemsFromResults( $aResultSet ) {
-		return []; // TODO: Should this be empty??????
+		return $aResultSet;
 	}
 
 	/**
@@ -92,22 +85,7 @@ class RetrieveBulkBase extends Api {
 	 * @return bool
 	 */
 	protected function hasResultsLimit() {
-		return $this->getResultsLimit() > 0;
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function isCustomFiltered() {
-		return (bool)$this->getParam( 'is_custom_filtered', false );
-	}
-
-	/**
-	 * @param bool $bIsSearch
-	 * @return $this
-	 */
-	protected function setIsCustomFiltered( $bIsSearch ) {
-		return $this->setParam( 'is_custom_filtered', $bIsSearch );
+		return ( $this->getResultsLimit() > 0 );
 	}
 
 	/**

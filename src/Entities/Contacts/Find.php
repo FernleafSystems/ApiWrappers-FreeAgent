@@ -15,25 +15,25 @@ class Find extends RetrieveBulk {
 	public function byEmailAddress( $sEmailAddressToFind ) {
 		/** @var ContactVO|null $oContact */
 		$oContact = $this
-			->setIsCustomFiltered( true )
+			->setResultsLimit( 1 )
 			->setParam( 'email_address_to_find', $sEmailAddressToFind )
-			->run( 1 );
+			->run();
 		return $oContact;
 	}
 
 	/**
 	 * @param array[] $aResultSet
-	 * @return null
+	 * @return array[]
 	 */
 	protected function filterItemsFromResults( $aResultSet ) {
+		$aFiltered = array();
+
 		$sEmail = $this->getParam( 'email_address_to_find' );
-		$oContact = null;
 		foreach ( $aResultSet as $aContact ) {
 			if ( isset( $aContact[ 'email' ] ) && ( $aContact[ 'email' ] == $sEmail ) ) {
-				$oContact = $this->getNewEntityResourceVO()
-								 ->applyFromArray( $aContact );
+				$aFiltered[] = $aContact;
 			}
 		}
-		return $oContact;
+		return $aFiltered;
 	}
 }
