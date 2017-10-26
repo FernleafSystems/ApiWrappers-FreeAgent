@@ -13,12 +13,12 @@ class Find extends RetrieveBulk {
 	 * @return ContactVO|null
 	 */
 	public function byEmailAddress( $sEmailAddressToFind ) {
-		/** @var ContactVO|null $oContact */
-		$oContact = $this
+		/** @var ContactVO[] $oContact */
+		$aContacts = $this
 			->setResultsLimit( 1 )
 			->setParam( 'email_address_to_find', $sEmailAddressToFind )
 			->run();
-		return $oContact;
+		return count( $aContacts ) ? $aContacts[ 0 ] : null;
 	}
 
 	/**
