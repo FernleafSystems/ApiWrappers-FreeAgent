@@ -14,13 +14,21 @@ class RetrieveBulkBase extends Api {
 	const PER_PAGE_LIMIT_UPPER = 100;
 
 	/**
-	 * Clear all filters and retrieve all records
+	 * Retrieve all records that match any provided filters
 	 * @return EntityVO[]
 	 */
 	public function all() {
 		return $this->setResultsLimit( 0 )
-					->setFilterItems( null )
 					->run();
+	}
+
+	/**
+	 * Retrieve all records without any filters
+	 * @return EntityVO[]
+	 */
+	public function allNoFilters() {
+		return $this->clearFilters()
+					->all();
 	}
 
 	/**
@@ -115,6 +123,13 @@ class RetrieveBulkBase extends Api {
 		}
 
 		return $aResultSet;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearFilters() {
+		return $this->setFilterItems( null );
 	}
 
 	/**
