@@ -27,12 +27,39 @@ class Create extends Base {
 	 * @return $this
 	 */
 	public function addInvoiceItem( $oItem ) {
+		return $this->addInvoiceItemVOs( [ $oItem ] );
+	}
+
+	/**
+	 * @param array[] $aNewItems
+	 * @return $this
+	 */
+	public function addInvoiceItems( $aNewItems ) {
 		$aItems = $this->getRequestDataItem( 'invoice_items' );
 		if ( !is_array( $aItems ) ) {
 			$aItems = array();
 		}
-		$aItems[] = $oItem->getRawDataAsArray();
+		$aItems = array_merge(
+			$aItems,
+			$aNewItems
+		);
 		return $this->setRequestDataItem( 'invoice_items', $aItems );
+	}
+
+	/**
+	 * @param InvoiceItemVO[] $aNewItems
+	 * @return $this
+	 */
+	public function addInvoiceItemVOs( $aNewItems ) {
+		return $this->addInvoiceItems(
+			array_map(
+				function ( $oNewItem ) {
+					/** @var InvoiceItemVO $oNewItem */
+					return $oNewItem->getRawDataAsArray();
+				},
+				$aNewItems
+			)
+		);
 	}
 
 	/**
