@@ -15,13 +15,12 @@ class RetrieveBulkBase extends Api {
 
 	/**
 	 * Clear all filters and retrieve all records
-	 * @return EntityVO|null
+	 * @return EntityVO[]
 	 */
 	public function all() {
-		$aResults = $this->setResultsLimit( 0 )
-						 ->setFilterItems( null )
-						 ->run();
-		return count( $aResults ) ? $aResults[ 0 ] : null;
+		return $this->setResultsLimit( 0 )
+					->setFilterItems( null )
+					->run();
 	}
 
 	/**
