@@ -13,27 +13,13 @@ class Find extends RetrieveBulk {
 	 * @return ContactVO|null
 	 */
 	public function byEmailAddress( $sEmailAddressToFind ) {
+
+		$this->getFilterItems()
+			 ->addEqualityFilterItem( 'email', $sEmailAddressToFind );
+
 		/** @var ContactVO[] $oContact */
-		$aContacts = $this
-			->setResultsLimit( 1 )
-			->setParam( 'email_address_to_find', $sEmailAddressToFind )
-			->run();
+		$aContacts = $this->setResultsLimit( 1 )
+						  ->run();
 		return count( $aContacts ) ? $aContacts[ 0 ] : null;
-	}
-
-	/**
-	 * @param array[] $aResultSet
-	 * @return array[]
-	 */
-	protected function filterItemsFromResults( $aResultSet ) {
-		$aFiltered = array();
-
-		$sEmail = $this->getParam( 'email_address_to_find' );
-		foreach ( $aResultSet as $aContact ) {
-			if ( isset( $aContact[ 'email' ] ) && ( $aContact[ 'email' ] == $sEmail ) ) {
-				$aFiltered[] = $aContact;
-			}
-		}
-		return $aFiltered;
 	}
 }

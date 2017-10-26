@@ -10,6 +10,9 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  */
 class RetrieveBulkBase extends Api {
 
+	const PER_PAGE_LIMIT_LOWER = 1;
+	const PER_PAGE_LIMIT_UPPER = 100;
+
 	/**
 	 * @param int $nStartPage
 	 * @param int $nPerPage
@@ -30,8 +33,8 @@ class RetrieveBulkBase extends Api {
 				function ( $aResultItem ) {
 					return $this->getNewEntityResourceVO()
 								->applyFromArray( $aResultItem );
-				},
-				$this->filterItemsFromResults( $aResultsData )
+				}, // first filter using equality filters, then with other custom filters.
+				$this->filterResults( $this->filterResultsWithEqualityFilters( $aResultsData ) )
 			);
 
 			if ( !empty( $aResultsData ) ) {
@@ -45,7 +48,6 @@ class RetrieveBulkBase extends Api {
 			}
 
 			$this->setNextPage();
-
 		} while ( $nCountResult == $nPerPage );
 
 		return $aMergedResults;
@@ -54,13 +56,82 @@ class RetrieveBulkBase extends Api {
 	/**
 	 * By default we return as-is
 	 * Override this with search/find parameters and return items that match the filter.
-	 *
 	 * This can be used to search for an individual record with a results limit of 1.
 	 * @param array[] $aResultSet
 	 * @return array[]
 	 */
-	protected function filterItemsFromResults( $aResultSet ) {
+	protected function filterResults( $aResultSet ) {
+		$oFilterItems = $this->getFilterItems();
+		if ( $oFilterItems->hasEqualityFilterItems() ) {
+
+			$aFilters = $oFilterItems->getEqualityFilterItems();
+
+			$aFiltered = array();
+
+			foreach ( $aResultSet as $aRes ) {
+
+				$bMatched = true;
+				foreach ( $aFilters as $sKey => $mValueToMatch ) {
+					$bMatched = $bMatched && isset( $aRes[ $sKey ] ) && ( $aRes[ $sKey ] == $mValueToMatch );
+				}
+				if ( $bMatched ) {
+					$aFiltered[] = $aRes;
+				}
+
+				if ( $this->hasResultsLimit() && count( $aFiltered ) == $this->getResultsLimit() ) {
+					break;
+				}
+			}
+
+			$aResultSet = $aFiltered;
+		}
+
 		return $aResultSet;
+	}
+
+	/**
+	 * @param array[] $aResultSet
+	 * @return array
+	 */
+	protected function filterResultsWithEqualityFilters( $aResultSet ) {
+
+		$oFilterItems = $this->getFilterItems();
+		if ( $oFilterItems->hasEqualityFilterItems() ) {
+
+			$aFiltered = array();
+
+			$aFilters = $oFilterItems->getEqualityFilterItems();
+			foreach ( $aResultSet as $aRes ) {
+
+				$bMatched = true;
+				foreach ( $aFilters as $sKey => $mValueToMatch ) {
+					$bMatched = $bMatched && isset( $aRes[ $sKey ] ) && ( $aRes[ $sKey ] == $mValueToMatch );
+				}
+				if ( $bMatched ) {
+					$aFiltered[] = $aRes;
+				}
+
+				if ( $this->hasResultsLimit() && count( $aFiltered ) == $this->getResultsLimit() ) {
+					break;
+				}
+			}
+
+			$aResultSet = $aFiltered;
+		}
+
+		return $aResultSet;
+	}
+
+	/**
+	 * @return RetrievalFilterItems|null
+	 */
+	public function getFilterItems() {
+		$oFilterItems = $this->getParam( 'retrieval_filter_items' );
+		if ( !( $oFilterItems instanceof RetrievalFilterItems ) ) {
+			$oFilterItems = new RetrievalFilterItems();
+			$this->setFilterItems( $oFilterItems );
+		}
+		return $oFilterItems;
 	}
 
 	/**
@@ -120,10 +191,18 @@ class RetrieveBulkBase extends Api {
 	 * @return $this
 	 */
 	protected function setPerPage( $nPerPage = 25 ) {
-		if ( $nPerPage > 100 || $nPerPage < 1 ) {
+		if ( $nPerPage > self::PER_PAGE_LIMIT_UPPER || $nPerPage < self::PER_PAGE_LIMIT_LOWER ) {
 			$nPerPage = 25;
 		}
 		return $this->setRequestDataItem( 'per_page', $nPerPage );
+	}
+
+	/**
+	 * @param RetrievalFilterItems $oFilterItems
+	 * @return $this
+	 */
+	public function setFilterItems( $oFilterItems ) {
+		return $this->setParam( 'retrieval_filter_items', $oFilterItems );
 	}
 
 	/**
