@@ -9,17 +9,30 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 class Find extends RetrieveBulk {
 
 	/**
-	 * @param string $sEmailAddressToFind
-	 * @return ContactVO|null
+	 * @return $this
 	 */
-	public function byEmailAddress( $sEmailAddressToFind ) {
-
+	public function filterByActive() {
 		$this->getFilterItems()
-			 ->addEqualityFilterItem( 'email', $sEmailAddressToFind );
+			 ->setEqualityFilterItem( 'status', 'Active' );
+		return $this;
+	}
 
-		/** @var ContactVO[] $oContact */
-		$aContacts = $this->setResultsLimit( 1 )
-						  ->run();
-		return count( $aContacts ) ? $aContacts[ 0 ] : null;
+	/**
+	 * @param string $sEmail
+	 * @return $this
+	 */
+	public function filterByEmail( $sEmail ) {
+		$this->getFilterItems()
+			 ->setEqualityFilterItem( 'email', $sEmail );
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function filterByHidden() {
+		$this->getFilterItems()
+			 ->setEqualityFilterItem( 'status', 'Hidden' );
+		return $this;
 	}
 }

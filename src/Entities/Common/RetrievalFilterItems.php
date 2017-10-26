@@ -17,7 +17,7 @@ class RetrievalFilterItems {
 	 * @param mixed $mValue
 	 * @return $this
 	 */
-	public function addEqualityFilterItem( $sKey, $mValue ) {
+	public function setEqualityFilterItem( $sKey, $mValue ) {
 		$aItems = $this->getEqualityFilterItems();
 		$aItems[ $sKey ] = $mValue;
 		return $this->setEqualityFilterItems( $aItems );

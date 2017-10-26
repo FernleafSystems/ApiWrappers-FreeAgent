@@ -14,9 +14,30 @@ class RetrieveBulkBase extends Api {
 	const PER_PAGE_LIMIT_UPPER = 100;
 
 	/**
+	 * Clear all filters and retrieve all records
+	 * @return EntityVO|null
+	 */
+	public function all() {
+		$aResults = $this->setResultsLimit( 0 )
+						 ->setFilterItems( null )
+						 ->run();
+		return count( $aResults ) ? $aResults[ 0 ] : null;
+	}
+
+	/**
+	 * Run the Retrieval but returns the first result that matches any filters
+	 * @return EntityVO|null
+	 */
+	public function first() {
+		$aResults = $this->setResultsLimit( 1 )
+						 ->run();
+		return count( $aResults ) ? $aResults[ 0 ] : null;
+	}
+
+	/**
 	 * @param int $nStartPage
 	 * @param int $nPerPage
-	 * @return EntityVO[]|EntityVO
+	 * @return EntityVO[]
 	 */
 	public function run( $nStartPage = 1, $nPerPage = 100 ) {
 
@@ -34,7 +55,7 @@ class RetrieveBulkBase extends Api {
 					return $this->getNewEntityResourceVO()
 								->applyFromArray( $aResultItem );
 				}, // first filter using equality filters, then with other custom filters.
-				$this->filterResults( $this->filterResultsWithEqualityFilters( $aResultsData ) )
+				$this->customFilterResults( $this->filterResultsWithEqualityFilters( $aResultsData ) )
 			);
 
 			if ( !empty( $aResultsData ) ) {
@@ -60,32 +81,7 @@ class RetrieveBulkBase extends Api {
 	 * @param array[] $aResultSet
 	 * @return array[]
 	 */
-	protected function filterResults( $aResultSet ) {
-		$oFilterItems = $this->getFilterItems();
-		if ( $oFilterItems->hasEqualityFilterItems() ) {
-
-			$aFilters = $oFilterItems->getEqualityFilterItems();
-
-			$aFiltered = array();
-
-			foreach ( $aResultSet as $aRes ) {
-
-				$bMatched = true;
-				foreach ( $aFilters as $sKey => $mValueToMatch ) {
-					$bMatched = $bMatched && isset( $aRes[ $sKey ] ) && ( $aRes[ $sKey ] == $mValueToMatch );
-				}
-				if ( $bMatched ) {
-					$aFiltered[] = $aRes;
-				}
-
-				if ( $this->hasResultsLimit() && count( $aFiltered ) == $this->getResultsLimit() ) {
-					break;
-				}
-			}
-
-			$aResultSet = $aFiltered;
-		}
-
+	protected function customFilterResults( $aResultSet ) {
 		return $aResultSet;
 	}
 
