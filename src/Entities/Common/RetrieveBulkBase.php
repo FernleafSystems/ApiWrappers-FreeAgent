@@ -24,32 +24,37 @@ class RetrieveBulkBase extends Api {
 
 		do {
 			$aResultsData = $this->send()->getCoreResponseData();
+			$nCountResult = count( $aResultsData );
 
-			if ( $this->isSearch() ) {
+			if ( $this->isCustomFiltered() ) {
 				// This allows us to run custom FIND operations on the individual
 				// result sets from each page, without having to build the entire
 				// population first, within which to then run a search.
-				$mExtractedItem = $this->extractItemFromResults( $aResultsData );
-				if ( !is_null( $mExtractedItem ) ) {
-					return $mExtractedItem;
-				}
+				$aResultsData = $this->filterItemsFromResults( $aResultsData );
 			}
 			else {
-				$aMergedResults = array_merge(
-					$aMergedResults,
-					array_map(
-						function ( $aResultItem ) {
-							return $this->getNewEntityResourceVO()
-										->applyFromArray( $aResultItem );
-						},
-						$aResultsData
-					)
+				$aResultsData = array_map(
+					function ( $aResultItem ) {
+						return $this->getNewEntityResourceVO()
+									->applyFromArray( $aResultItem );
+					},
+					$aResultsData
 				);
+			}
+
+			if ( !empty( $aResultsData ) ) {
+				$aMergedResults = array_merge( $aMergedResults, $aResultsData );
+			}
+
+			// Allows us to search for 1 item, or multiple items
+			$nCountCurrentResults = count( $aMergedResults );
+			if ( $this->hasResultsLimit() && $nCountCurrentResults >= $this->getResultsLimit() ) {
+				break;
 			}
 
 			$this->setNextPage();
 
-		} while ( count( $aResultsData ) == $nPerPage );
+		} while ( $nCountResult == $nPerPage );
 
 		return $aMergedResults;
 	}
@@ -59,10 +64,10 @@ class RetrieveBulkBase extends Api {
 	 * Override this with search/find parameters and return an item if found,
 	 * null otherwise.
 	 * @param array[] $aResultSet
-	 * @return EntityVO|null
+	 * @return EntityVO[]
 	 */
-	protected function extractItemFromResults( $aResultSet ) {
-		return null;
+	protected function filterItemsFromResults( $aResultSet ) {
+		return []; // TODO: Should this be empty??????
 	}
 
 	/**
@@ -77,18 +82,32 @@ class RetrieveBulkBase extends Api {
 	}
 
 	/**
+	 * @return int
+	 */
+	protected function getResultsLimit() {
+		return (int)$this->getNumericParam( 'retrieve_results_limit', 0 );
+	}
+
+	/**
 	 * @return bool
 	 */
-	protected function isSearch() {
-		return (bool)$this->getParam( 'is_search', false );
+	protected function hasResultsLimit() {
+		return $this->getResultsLimit() > 0;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isCustomFiltered() {
+		return (bool)$this->getParam( 'is_custom_filtered', false );
 	}
 
 	/**
 	 * @param bool $bIsSearch
 	 * @return $this
 	 */
-	protected function setIsSearch( $bIsSearch ) {
-		return $this->setParam( 'is_search', $bIsSearch );
+	protected function setIsCustomFiltered( $bIsSearch ) {
+		return $this->setParam( 'is_custom_filtered', $bIsSearch );
 	}
 
 	/**
@@ -97,6 +116,14 @@ class RetrieveBulkBase extends Api {
 	protected function setNextPage() {
 		$nNext = $this->getPage() + 1;
 		return $this->setPage( $nNext );
+	}
+
+	/**
+	 * @var int $nLimit 0 == no limit
+	 * @return $this
+	 */
+	public function setResultsLimit( $nLimit = 0 ) {
+		return $this->setParam( 'retrieve_results_limit', $nLimit );
 	}
 
 	/**

@@ -15,7 +15,7 @@ class Find extends RetrieveBulk {
 	public function byEmailAddress( $sEmailAddressToFind ) {
 		/** @var ContactVO|null $oContact */
 		$oContact = $this
-			->setIsSearch( true )
+			->setIsCustomFiltered( true )
 			->setParam( 'email_address_to_find', $sEmailAddressToFind )
 			->run( 1 );
 		return $oContact;
@@ -25,7 +25,7 @@ class Find extends RetrieveBulk {
 	 * @param array[] $aResultSet
 	 * @return null
 	 */
-	protected function extractItemFromResults( $aResultSet ) {
+	protected function filterItemsFromResults( $aResultSet ) {
 		$sEmail = $this->getParam( 'email_address_to_find' );
 		$oContact = null;
 		foreach ( $aResultSet as $aContact ) {
