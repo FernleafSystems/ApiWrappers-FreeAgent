@@ -1,13 +1,13 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\FindBase;
 
 /**
  * Class RetrieveBulk
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction
+ * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
  */
 class RetrieveBulk extends FindBase {
 

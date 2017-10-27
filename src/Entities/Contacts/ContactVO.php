@@ -55,9 +55,23 @@ class ContactVO extends EntityVO {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getSalesTaxRegistrationNumber() {
+		return $this->getStringParam( 'sales_tax_registration_number' );
+	}
+
+	/**
 	 * @return string 'Active', 'Hidden'
 	 */
 	public function getStatus() {
 		return $this->getStringParam( 'status' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasSalesTaxRegistrationNumber() {
+		return ( strlen( $this->getSalesTaxRegistrationNumber() ) > 0 );
 	}
 }

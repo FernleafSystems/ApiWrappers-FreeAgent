@@ -1,10 +1,10 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts;
 
 /**
  * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount
+ * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts
  */
 class Retrieve extends Base {
 

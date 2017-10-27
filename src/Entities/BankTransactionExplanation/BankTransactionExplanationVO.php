@@ -53,7 +53,7 @@ class BankTransactionExplanationVO extends EntityVO {
 	}
 
 	/**
-	 * @return string URI for BankAccount
+	 * @return string URI for BankAccounts
 	 */
 	public function getLinkedTransferAccount() {
 		return $this->getStringParam( 'linked_transfer_account' );

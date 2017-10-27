@@ -2,8 +2,8 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccount\BankAccountVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransaction\BankTransactionVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions\BankTransactionVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
 
