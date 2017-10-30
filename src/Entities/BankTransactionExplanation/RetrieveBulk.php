@@ -3,37 +3,21 @@
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
 
 /**
  * Class RetrieveBulk
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  */
-class RetrieveBulk extends Base {
+class RetrieveBulk extends RetrieveBulkBase {
+
+	const REQUEST_ENDPOINT = 'bank_transaction_explanations';
 
 	/**
-	 * @return BankTransactionExplanationVO[]|null
+	 * @return BankTransactionExplanationVO
 	 */
-	public function retrieve() {
-		$aExplanations = null;
-		$aData = $this->send()
-					  ->getCoreResponseData();
-		if ( $aData ) {
-			$aExplanations = array_map(
-				function ( $aExplanation ) {
-					return $this->getNewEntityResourceVO()
-								->applyFromArray( $aExplanation );
-				},
-				$aData
-			);
-		}
-		return $aExplanations;
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getDataPackageKey() {
-		return $this->getRequestEndpoint();
+	public function getNewEntityResourceVO() {
+		return new BankTransactionExplanationVO();
 	}
 
 	/**

@@ -2,55 +2,20 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\FindBase;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
 
 /**
  * Class RetrieveBulk
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
  */
-class RetrieveBulk extends FindBase {
+class RetrieveBulk extends RetrieveBulkBase {
 
 	const REQUEST_ENDPOINT = 'bank_transactions';
 
 	/**
-	 * @return BankTransactionVO[]
+	 * @return BankTransactionVO
 	 */
-	public function find() {
-		$aBills = array();
-
-		if ( $this->send()->isLastRequestSuccess() ) {
-			$aBills = array_map(
-				function ( $aBill ) {
-					return ( new BankTransactionVO() )->applyFromArray( $aBill );
-				},
-				$this->getCoreResponseData()
-			);
-		}
-
-		return $aBills;
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getDataPackageKey() {
-		return 'bank_transactions';
-	}
-
-	/**
-	 * @param BankAccountVO $oBankAccount
-	 * @return $this
-	 */
-	public function setBankAccount( $oBankAccount ) {
-		return $this->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
-	}
-
-	/**
-	 * @param string $sView all, unexplained, manual, imported, explained
-	 * @return $this
-	 */
-	public function setView( $sView = 'all' ) {
-		return $this->setRequestDataItem( 'view', $sView );
+	public function getNewEntityResourceVO() {
+		return new BankTransactionVO();
 	}
 }
