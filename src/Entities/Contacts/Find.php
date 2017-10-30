@@ -28,6 +28,16 @@ class Find extends RetrieveBulk {
 	}
 
 	/**
+	 * @param string $sName
+	 * @return $this
+	 */
+	public function filterByOrganisationName( $sName ) {
+		$this->getFilterItems()
+			 ->setEqualityFilterItem( 'organisation_name', $sName );
+		return $this;
+	}
+
+	/**
 	 * @return $this
 	 */
 	public function filterByHidden() {

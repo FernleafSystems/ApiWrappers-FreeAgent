@@ -46,7 +46,7 @@ class RetrieveBulkBase extends Api {
 	 * @param int $nPerPage
 	 * @return EntityVO[]
 	 */
-	public function run( $nStartPage = 1, $nPerPage = 100 ) {
+	public function run( $nStartPage = null, $nPerPage = null ) {
 
 		$this->setPage( $nStartPage )
 			 ->setPerPage( $nPerPage );
@@ -189,8 +189,8 @@ class RetrieveBulkBase extends Api {
 	 * @param int $nPage
 	 * @return $this
 	 */
-	protected function setPage( $nPage = 1 ) {
-		if ( $nPage < 1 ) {
+	public function setPage( $nPage = 1 ) {
+		if ( empty( $nPage ) || $nPage < 1 ) {
 			$nPage = 1;
 		}
 		return $this->setRequestDataItem( 'page', $nPage );
@@ -200,8 +200,8 @@ class RetrieveBulkBase extends Api {
 	 * @param int $nPerPage
 	 * @return $this
 	 */
-	protected function setPerPage( $nPerPage = 25 ) {
-		if ( $nPerPage > self::PER_PAGE_LIMIT_UPPER || $nPerPage < self::PER_PAGE_LIMIT_LOWER ) {
+	public function setPerPage( $nPerPage = 25 ) {
+		if ( empty( $nPerPage ) || $nPerPage > self::PER_PAGE_LIMIT_UPPER || $nPerPage < self::PER_PAGE_LIMIT_LOWER ) {
 			$nPerPage = 25;
 		}
 		return $this->setRequestDataItem( 'per_page', $nPerPage );
@@ -219,15 +219,50 @@ class RetrieveBulkBase extends Api {
 	 * @param string $sViewFilter
 	 * @return $this
 	 */
-	protected function setViewFilter( $sViewFilter ) {
+	public function setViewFilter( $sViewFilter ) {
 		return $this->setRequestDataItem( 'view', $sViewFilter );
 	}
 
 	/**
 	 * @return $this
 	 */
-	protected function setViewFilterAll() {
+	public function setViewFilterAll() {
 		return $this->setViewFilter( 'all' );
+	}
+
+	/**
+	 * @param int $nTimestamp Unix Timestamp
+	 * @return $this
+	 */
+	public function filterByDateFrom( $nTimestamp ) {
+		return $this->setRequestDataItem( 'from_date', gmdate( 'Y-m-d', $nTimestamp ) );
+	}
+
+	/**
+	 * @param int $nTimestamp Unix Timestamp
+	 * @return $this
+	 */
+	public function filterByDateTo( $nTimestamp ) {
+		return $this->setRequestDataItem( 'to_date', gmdate( 'Y-m-d', $nTimestamp ) );
+	}
+
+	/**
+	 * @param int $nTimestamp Unix Timestamp
+	 * @return $this
+	 */
+	public function filterByDateUpdatedSince( $nTimestamp ) {
+		return $this->setRequestDataItem( 'updated_since', gmdate( 'Y-m-d', $nTimestamp ) );
+	}
+
+	/**
+	 * @param int $nDate
+	 * @param int $nRadius
+	 * @return $this
+	 */
+	public function filterByDateRange( $nDate, $nRadius = 5 ) {
+		$nDaysRadius = 86400*$nRadius;
+		return $this->filterByDateFrom( $nDate - $nDaysRadius )
+					->filterByDateTo( $nDate + $nDaysRadius );
 	}
 
 	/**
