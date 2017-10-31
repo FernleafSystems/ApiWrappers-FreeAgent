@@ -20,13 +20,6 @@ class BankAccountVO extends EntityVO {
 	/**
 	 * @return string
 	 */
-	public function getIban() {
-		return $this->getNumericParam( 'iban' );
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getCurrency() {
 		return $this->getStringParam( 'currency' );
 	}
@@ -36,6 +29,13 @@ class BankAccountVO extends EntityVO {
 	 */
 	public function getCurrentBalance() {
 		return $this->getStringParam( 'current_balance' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIban() {
+		return $this->getNumericParam( 'iban' );
 	}
 
 	/**

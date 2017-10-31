@@ -28,7 +28,7 @@ class BankTransactionExplanationVO extends EntityVO {
 	 * @return string YYYY-MM-DD
 	 */
 	public function getDatedOn() {
-		return $this->getParam( 'dated_on' );
+		return $this->getStringParam( 'dated_on' );
 	}
 
 	/**

@@ -20,6 +20,13 @@ class InvoiceVO extends EntityVO {
 	}
 
 	/**
+	 * @return string YYYY-MM-DD
+	 */
+	public function getDatedOn() {
+		return $this->getStringParam( 'dated_on' );
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getEcStatus() {
