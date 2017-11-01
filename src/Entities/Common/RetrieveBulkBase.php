@@ -53,6 +53,7 @@ class RetrieveBulkBase extends Api {
 
 		$aMergedResults = array();
 
+		$nPerPage = $this->getPerPage(); // used in the loop so getting real value is critical
 		do {
 			$aResultsData = $this->send()->getCoreResponseData();
 			$nCountResult = count( $aResultsData );
@@ -153,6 +154,13 @@ class RetrieveBulkBase extends Api {
 			$nPage = 1;
 		}
 		return $nPage;
+	}
+
+	/**
+	 * @return int
+	 */
+	protected function getPerPage() {
+		return $this->getRequestDataItem( 'per_page' );
 	}
 
 	/**
