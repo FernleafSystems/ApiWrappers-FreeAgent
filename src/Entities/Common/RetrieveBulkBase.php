@@ -77,7 +77,7 @@ class RetrieveBulkBase extends Api {
 			}
 
 			$this->setNextPage();
-		} while ( $nCountResult == $nPerPage );
+		} while ( $nCountResult > 0 && $nCountResult == $nPerPage );
 
 		return $aMergedResults;
 	}
