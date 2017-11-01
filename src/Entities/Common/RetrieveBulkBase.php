@@ -158,6 +158,13 @@ class RetrieveBulkBase extends Api {
 	/**
 	 * @return int
 	 */
+	protected function getPerPage() {
+		return $this->getRequestDataItem( 'per_page' );
+	}
+
+	/**
+	 * @return int
+	 */
 	protected function getResultsLimit() {
 		return (int)$this->getNumericParam( 'retrieve_results_limit', 0 );
 	}
