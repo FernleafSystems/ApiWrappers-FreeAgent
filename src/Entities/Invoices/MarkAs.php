@@ -43,7 +43,7 @@ class MarkAs extends Base {
 	 * @return bool
 	 */
 	protected function markAs( $sAs ) {
-		return $this->setParam( 'mark_as', $sAs )
+		return $this->setParam( 'mark_as', strtolower( $sAs ) )
 					->send()
 					->isLastRequestSuccess();
 	}
@@ -63,7 +63,7 @@ class MarkAs extends Base {
 	protected function preSendVerification() {
 		parent::preSendVerification();
 		if ( !$this->hasEntityId() ) {
-			throw new \Exception( 'Attempting to make "retrieve" API request without an Entity ID' );
+			throw new \Exception( 'Attempting to make an API request without an Entity ID' );
 		}
 	}
 }
