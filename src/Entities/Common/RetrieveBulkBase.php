@@ -276,7 +276,7 @@ class RetrieveBulkBase extends Api {
 	/**
 	 * @return string
 	 */
-	protected function getDataPackageKey() {
+	protected function getRequestDataPayloadKey() {
 		return $this->getRequestEndpoint(); // we don't truncate 's'
 	}
 }

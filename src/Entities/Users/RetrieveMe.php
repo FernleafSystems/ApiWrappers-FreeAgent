@@ -19,7 +19,7 @@ class RetrieveMe extends RetrieveBulk {
 	/**
 	 * @return string
 	 */
-	protected function getDataPackageKey() {
+	protected function getRequestDataPayloadKey() {
 		return $this->getRequestEndpoint(); // we don't truncate 's'
 	}
 }
