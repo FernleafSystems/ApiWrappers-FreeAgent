@@ -59,7 +59,7 @@ class Find extends RetrieveBulk {
 	 */
 	public function filterByReference( $sReference ) {
 		$this->getFilterItems()
-			 ->setEqualityFilterItem( 'bill_reference', $sReference );
+			 ->setEqualityFilterItem( 'reference', $sReference );
 		return $this;
 	}
 }
