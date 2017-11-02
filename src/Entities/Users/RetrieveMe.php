@@ -9,11 +9,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
 class RetrieveMe extends RetrieveBulk {
 
 	/**
-	 * @throws \Exception
+	 * @return UserVO
 	 */
-	protected function preSendVerification() {
-		parent::preSendVerification();
-		$this->setEntityId( 'me' ); // TODO: there needs to be a pre-send process.
+	public function retrieve() {
+		return $this->setEntityId( 'me' )
+					->first();
 	}
 
 	/**
