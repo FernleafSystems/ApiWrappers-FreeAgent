@@ -33,7 +33,7 @@ class RetrieveBulkBase extends Api {
 
 	/**
 	 * Run the Retrieval but returns the first result that matches any filters
-	 * @return EntityVO|null
+	 * @return EntityVO|mixed|null
 	 */
 	public function first() {
 		$aResults = $this->setResultsLimit( 1 )
