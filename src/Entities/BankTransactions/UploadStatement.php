@@ -59,7 +59,7 @@ class UploadStatement extends Base {
 	 * @return string
 	 */
 	protected function getUrlEndpoint() {
-		return sprintf( 'bank_transactions/statement', $this->getEntityId() );
+		return 'bank_transactions/statement';
 	}
 
 	/**
@@ -75,6 +75,6 @@ class UploadStatement extends Base {
 	 * @return $this
 	 */
 	public function setStatement( $oStatement ) {
-		return $this->setParam( 'statement', $oStatement );
+		return $this->setRequestDataItem( 'statement', $oStatement->getLinesAsString() );
 	}
 }
