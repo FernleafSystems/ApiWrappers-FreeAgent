@@ -18,17 +18,14 @@ class UploadStatement extends Base {
 	protected function preSendVerification() {
 		parent::preSendVerification();
 
-		$oStatement = $this->getStatement();
-		if ( !( $oStatement instanceof StatementVO ) ) {
-			throw new \Exception( 'Attempting to make upload a statement without a valid Statement object' );
-		}
-		if ( !$oStatement->hasLines() ) {
-			throw new \Exception( 'Attempting to make upload an empty statement' );
+		$sStatement = $this->getStatement();
+		if ( empty( $sStatement ) ) {
+			throw new \Exception( 'Attempting to upload an empty statement' );
 		}
 
 		$aQuery = $this->getRequestQueryData();
 		if ( empty( $aQuery[ 'bank_account' ] ) ) {
-			throw new \Exception( 'Attempting to upload an empty statement without a bank account specified' );
+			throw new \Exception( 'Attempting to upload a statement without a bank account specified' );
 		}
 	}
 
@@ -36,8 +33,7 @@ class UploadStatement extends Base {
 	 * @return bool
 	 */
 	public function upload() {
-		return $this->setRequestDataItem( 'statement', $this->getStatement()->getLinesAsString() )
-					->send()
+		return $this->send()
 					->isLastRequestSuccess();
 	}
 
@@ -49,10 +45,10 @@ class UploadStatement extends Base {
 	}
 
 	/**
-	 * @return StatementVO
+	 * @return string
 	 */
 	protected function getStatement() {
-		return $this->getParam( 'statement' );
+		return $this->getStringParam( 'statement' );
 	}
 
 	/**
