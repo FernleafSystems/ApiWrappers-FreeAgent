@@ -123,7 +123,7 @@ class Api extends BaseApi {
 	}
 
 	/**
-	 * @return EntityVO|BillVO|BankTransactionExplanationVO|BankTransactionVO|ContactVO|InvoiceVO|null
+	 * @return EntityVO|mixed|null
 	 */
 	public function sendRequestWithVoResponse() {
 		$aData = $this->send()

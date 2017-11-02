@@ -21,6 +21,7 @@ class Create extends Base {
 		$oStatement = ( new StatementVO() )
 			->addLine( $nTimestamp, $nValue, $sDescription );
 		return ( new UploadStatement() )
+			->setConnection( $this->getConnection() )
 			->setStatement( $oStatement )
 			->setBankAccount( $oBankAccountVo )
 			->upload();
