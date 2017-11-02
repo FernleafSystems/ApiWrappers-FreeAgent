@@ -30,7 +30,10 @@ class Api extends BaseApi {
 
 		$sChannel = $this->getDataChannel();
 		if ( in_array( $this->getHttpRequestMethod(), [ 'post', 'put' ] ) ) {
-			$aFinal[ $sChannel ] = [ $this->getDataPackageKey() => $aFinal[ $sChannel ] ];
+			$sDataPayloadKey = $this->getRequestDataPayloadKey();
+			if ( !empty( $sDataPayloadKey ) ) {
+				$aFinal[ $sChannel ] = [ $sDataPayloadKey => $aFinal[ $sChannel ] ];
+			}
 		}
 
 		return $aFinal;
@@ -50,8 +53,15 @@ class Api extends BaseApi {
 	 * Chops off the trailing 's' from the data package key. So far no exceptions found.
 	 * @return string
 	 */
-	protected function getDataPackageKey() {
+	protected function getRequestDataPayloadKey() {
 		return rtrim( $this->getRequestEndpoint(), 's' );
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getResponseDataPayloadKey() {
+		return $this->getRequestDataPayloadKey();
 	}
 
 	/**
@@ -60,9 +70,9 @@ class Api extends BaseApi {
 	public function getCoreResponseData() {
 		$aData = null;
 		if ( $this->isLastRequestSuccess() ) {
-			$sKey = $this->getDataPackageKey();
+			$sKey = $this->getResponseDataPayloadKey();
 			$aDecoded = $this->getDecodedResponseBody();
-			$aData = empty( $sKey ) ? $aDecoded : $aDecoded[ $this->getDataPackageKey() ];
+			$aData = empty( $sKey ) ? $aDecoded : $aDecoded[ $sKey ];
 		}
 		return $aData;
 	}

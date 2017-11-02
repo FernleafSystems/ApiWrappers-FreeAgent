@@ -24,7 +24,7 @@ class RetrievePdf extends Retrieve {
 	/**
 	 * @return string
 	 */
-	protected function getDataPackageKey() {
+	protected function getRequestDataPayloadKey() {
 		return 'pdf';
 	}
 

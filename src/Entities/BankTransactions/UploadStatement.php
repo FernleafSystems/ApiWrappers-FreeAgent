@@ -38,17 +38,19 @@ class UploadStatement extends Base {
 	}
 
 	/**
+	 * It's empty because the "statement" is the only value and it's top-level
+	 * i.e. not within an array alongside other items
 	 * @return string
 	 */
-	protected function getDataPackageKey() {
-		return 'statement';
+	protected function getRequestDataPayloadKey() {
+		return '';
 	}
 
 	/**
 	 * @return string
 	 */
 	protected function getStatement() {
-		return $this->getStringParam( 'statement' );
+		return $this->getRequestDataItem( 'statement' );
 	}
 
 	/**
