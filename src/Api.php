@@ -3,12 +3,7 @@
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
 use FernleafSystems\ApiWrappers\Base\BaseApi;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions\BankTransactionVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation\BankTransactionExplanationVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
 
 /**
  * Class Api
@@ -66,7 +61,8 @@ class Api extends BaseApi {
 		$aData = null;
 		if ( $this->isLastRequestSuccess() ) {
 			$sKey = $this->getDataPackageKey();
-			$aData = empty( $sKey ) ? $this->getDecodedResponseBody() : $this->getDecodedResponseBody()[ $this->getDataPackageKey() ];
+			$aDecoded = $this->getDecodedResponseBody();
+			$aData = empty( $sKey ) ? $aDecoded : $aDecoded[ $this->getDataPackageKey() ];
 		}
 		return $aData;
 	}
@@ -159,7 +155,7 @@ class Api extends BaseApi {
 	 * @return $this
 	 */
 	public function setEntityId( $nId ) {
-		return $this->setParam( 'entity_id', (int)$nId );
+		return $this->setParam( 'entity_id', is_numeric( $nId ) ? (int)$nId : $nId );
 	}
 
 	/**
