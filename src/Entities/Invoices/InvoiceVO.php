@@ -27,6 +27,13 @@ class InvoiceVO extends EntityVO {
 	}
 
 	/**
+	 * @return string YYYY-MM-DD
+	 */
+	public function getPaidOn() {
+		return $this->getStringParam( 'paid_on' );
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getEcStatus() {
@@ -52,6 +59,20 @@ class InvoiceVO extends EntityVO {
 	 */
 	public function getStatus() {
 		return $this->getStringParam( 'status' );
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getValueDue() {
+		return $this->getParam( 'due_value' );
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getValuePaid() {
+		return $this->getParam( 'paid_value' );
 	}
 
 	/**
