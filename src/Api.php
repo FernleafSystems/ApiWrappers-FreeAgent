@@ -78,10 +78,10 @@ class Api extends BaseApi {
 	}
 
 	/**
-	 * @return int
+	 * @return int|string
 	 */
 	public function getEntityId() {
-		return $this->getNumericParam( 'entity_id' );
+		return $this->getParam( 'entity_id' );
 	}
 
 	/**
