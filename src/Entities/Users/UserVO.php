@@ -51,7 +51,7 @@ class UserVO extends EntityVO {
 	 * @return string
 	 */
 	public function getPermissionLevel() {
-		return $this->getStringParam( 'permission_level' );
+		return $this->getNumericParam( 'permission_level' );
 	}
 
 	/**
