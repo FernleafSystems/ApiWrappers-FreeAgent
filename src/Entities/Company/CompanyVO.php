@@ -15,6 +15,13 @@ class CompanyVO extends EntityVO {
 	/**
 	 * @return string
 	 */
+	public function getCountry() {
+		return $this->getStringParam( 'country' );
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getCurrency() {
 		return $this->getStringParam( 'currency' );
 	}
