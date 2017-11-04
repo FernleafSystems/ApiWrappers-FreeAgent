@@ -2,7 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Category\CategoryVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Categories\CategoryVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
 /**

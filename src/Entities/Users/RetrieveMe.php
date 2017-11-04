@@ -6,20 +6,12 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
  * Class RetrieveMe
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
  */
-class RetrieveMe extends RetrieveBulk {
-
+class RetrieveMe extends Retrieve {
 	/**
 	 * @return UserVO
 	 */
 	public function retrieve() {
 		return $this->setEntityId( 'me' )
-					->first();
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getRequestDataPayloadKey() {
-		return $this->getRequestEndpoint(); // we don't truncate 's'
+					->sendRequestWithVoResponse();
 	}
 }
