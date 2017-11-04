@@ -9,6 +9,20 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 class Retrieve extends Base {
 
 	/**
+	 * @return bool
+	 */
+	public function exists() {
+		return !is_null( $this->retrieve() );
+	}
+
+	/**
+	 * @return InvoiceVO
+	 */
+	public function retrieve() {
+		return $this->sendRequestWithVoResponse();
+	}
+
+	/**
 	 * @throws \Exception
 	 */
 	protected function preSendVerification() {

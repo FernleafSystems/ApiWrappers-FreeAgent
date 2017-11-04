@@ -11,7 +11,7 @@ class RetrieveMe extends Retrieve {
 	 * @return UserVO
 	 */
 	public function retrieve() {
-		return $this->setEntityId( 'me' )
-					->sendRequestWithVoResponse();
+		$this->setEntityId( 'me' );
+		return parent::retrieve();
 	}
 }
