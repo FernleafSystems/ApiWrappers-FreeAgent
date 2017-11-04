@@ -9,6 +9,20 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 class Retrieve extends Base {
 
 	/**
+	 * @return bool
+	 */
+	public function exists() {
+		return !is_null( $this->retrieve() );
+	}
+
+	/**
+	 * @return BankTransactionVO
+	 */
+	public function retrieve() {
+		return $this->sendRequestWithVoResponse();
+	}
+
+	/**
 	 * @throws \Exception
 	 */
 	protected function preSendVerification() {

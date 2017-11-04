@@ -1,10 +1,10 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Categories;
 
 /**
  * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
+ * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Categories
  */
 class Retrieve extends Base {
 
@@ -16,10 +16,18 @@ class Retrieve extends Base {
 	}
 
 	/**
-	 * @return BillVO
+	 * @return CategoryVO
 	 */
 	public function retrieve() {
 		return $this->sendRequestWithVoResponse();
+	}
+
+	/**
+	 * @param int $nId
+	 * @return $this
+	 */
+	public function setEntityId( $nId ) {
+		return $this->setParam( 'entity_id', str_pad( $nId, 3, '0', STR_PAD_LEFT ) );
 	}
 
 	/**
