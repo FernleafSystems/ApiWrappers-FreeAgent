@@ -1,9 +1,8 @@
-# Currency Rates
+# FreeAgent API Wrapper - PHP
 
 A PHP Wrapper for the FreeAgent accounting APIs.
 
-Current version 0.0.x is beta. Please include in your libraries using strict Composer
-versions.
+Current version 0.1.x is beta. Please include using strict Composer versions.
 
 ## Installation
 
@@ -11,8 +10,7 @@ To get started, add the package to your project by issuing the following command
 
     composer require fernleafsystems/apiwrappers-freeagent
 
-Current version 0.1.x is beta. Please include in your libraries using strict Composer
-versions.
+Current version 0.1.x is beta. Please include using strict Composer versions.
 
 ## Getting Started
 
