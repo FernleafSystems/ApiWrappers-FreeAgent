@@ -32,10 +32,12 @@ class Retrieve extends Base {
 					  ->getCoreResponseData();
 
 		$oNew = null;
-		foreach ( $this->send()->getCoreResponseData() as $sCatType => $aCategory ) {
-			if ( $aCategory[ 'nominal_code' ] == $this->getEntityId() ) {
-				$oNew = $this->getNewEntityResourceVO()
-							 ->applyFromArray( $aData );
+		if ( is_array( $aData ) ) {
+			foreach ( $aData as $sCatType => $aCategory ) {
+				if ( $aCategory[ 'nominal_code' ] == $this->getEntityId() ) {
+					$oNew = $this->getNewEntityResourceVO()
+								 ->applyFromArray( $aData );
+				}
 			}
 		}
 		return $oNew;
