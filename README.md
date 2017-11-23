@@ -41,7 +41,7 @@ basics on how to achieve it with this package are as follows.
     	'redirect_uri'  => 'https://www.theUrlForMyApp.com/To/Receive/Redirection/From/OAuth',
     	'client_id'     => $sFreeagentAppClientId,
     	'response_type' => 'code'
-    );
+	);
     
 	$sAuthorizationUrl = $sRedirectUrlBase.'?'.http_build_query( $aAuthUrlParams );
 	
