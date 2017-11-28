@@ -100,7 +100,7 @@ class Create extends Base {
 	 * @return string
 	 */
 	protected function getCategoryUrl( $nId ) {
-		return sprintf( '%scategories/%s', $this->getBaseUrl(), $nId );
+		return sprintf( '%scategories/%s', $this->getBaseUrl(), str_pad( $nId, 3, '0', STR_PAD_LEFT ) );
 	}
 
 	/**

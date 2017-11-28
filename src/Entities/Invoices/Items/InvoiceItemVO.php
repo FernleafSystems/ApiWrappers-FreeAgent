@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Categories\CategoryVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
@@ -18,12 +19,21 @@ class InvoiceItemVO extends EntityVO {
 	}
 
 	/**
-	 * TODO: remove hardcoded URL
-	 * @param string $nCatId
+	 * @param CategoryVO $oCategory
 	 * @return $this
 	 */
-	public function setCategoryId( $nCatId ) {
-		return $this->setParam( 'category', 'https://api.freeagent.com/v2/categories/'.$nCatId );
+	public function setCategory( $oCategory ) {
+		return $this->setParam( 'category', $oCategory->getUri() );
+	}
+
+	/**
+	 * TODO: remove hardcoded URL
+	 * @param string $nId
+	 * @return $this
+	 */
+	public function setCategoryId( $nId ) {
+		$nId = str_pad( $nId, 3, '0', STR_PAD_LEFT );
+		return $this->setParam( 'category', 'https://api.freeagent.com/v2/categories/'.$nId );
 	}
 
 	/**
