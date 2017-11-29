@@ -26,6 +26,23 @@ class Find extends RetrieveBulk {
 	}
 
 	/**
+	 * @param string $sStatus
+	 * @return $this
+	 */
+	public function filterByEcStatus( $sStatus ) {
+		$this->getFilterItems()
+			 ->setEqualityFilterItem( 'ec_status', $sStatus );
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function filterByEcStatusVatMoss() {
+		return $this->filterByEcStatus( 'EC VAT MOSS' );
+	}
+
+	/**
 	 * @param int $nMonths
 	 * @return $this
 	 */
