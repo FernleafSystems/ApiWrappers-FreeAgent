@@ -13,6 +13,14 @@ class AddNote extends Base {
 	const REQUEST_METHOD = 'post';
 
 	/**
+	 * @return $this
+	 * @throws \Exception
+	 */
+	public function add() {
+		return $this->send();
+	}
+
+	/**
 	 * @throws \Exception
 	 */
 	protected function preSendVerification() {

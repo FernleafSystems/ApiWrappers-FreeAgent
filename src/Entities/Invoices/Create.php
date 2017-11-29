@@ -83,7 +83,7 @@ class Create extends Base {
 	 * @return $this
 	 */
 	public function setCurrency( $sCurrency ) {
-		return $this->setRequestDataItem( 'currency', $sCurrency );
+		return $this->setRequestDataItem( 'currency', strtoupper( $sCurrency ) );
 	}
 
 	/**
