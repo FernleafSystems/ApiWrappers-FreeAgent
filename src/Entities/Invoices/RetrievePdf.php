@@ -11,6 +11,7 @@ class RetrievePdf extends Retrieve {
 	/**
 	 * @param string $sToFile
 	 * @return bool|string base64 encoded string
+	 * @throws \Exception
 	 */
 	public function asPdf( $sToFile = '' ) {
 		$aData = $this->send()
