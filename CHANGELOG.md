@@ -1,8 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.4] - 2017-12-02
+### Added
+- Added pre-send verification checks on first and last names for contacts since the Freeagent
+API insists upon having them to the point of throwing 422 errors.  Obviously.
+
 ## [0.1.3] - 2017-11-29
-### Fixed
+### Added
 - Adds support for filtering Invoice searching by EC Status. This is a post-request filter
 i.e. we must filter the response items since we can't systematically do this through the
 API itself.

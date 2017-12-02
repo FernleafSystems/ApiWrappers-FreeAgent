@@ -20,6 +20,25 @@ class Create extends Base {
 	}
 
 	/**
+	 * @throws \Exception
+	 */
+	protected function preSendVerification() {
+		parent::preSendVerification();
+
+		$sOrganisationName = $this->getRequestDataItem( 'organisation_name' );
+		if ( empty( $sOrganisationName ) ) {
+			$sFirstName = $this->getRequestDataItem( 'first_name' );
+			if ( empty( $sFirstName ) ) {
+				throw new \Exception( sprintf( 'Field "%s" cannot be empty.', 'first_name' ) );
+			}
+			$sLastName = $this->getRequestDataItem( 'last_name' );
+			if ( empty( $sLastName ) ) {
+				throw new \Exception( sprintf( 'Field "%s" cannot be empty.', 'last_name' ) );
+			}
+		}
+	}
+
+	/**
 	 * @param string $sValue
 	 * @return $this
 	 */
