@@ -42,7 +42,7 @@ class BankTransactionVO extends EntityVO {
 	 * @return int
 	 */
 	public function getUploadedAt() {
-		return $this->getParam( 'uploaded_at' );
+		return strtotime( $this->getParam( 'uploaded_at' ) );
 	}
 
 	/**
