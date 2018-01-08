@@ -37,4 +37,25 @@ class BankTransactionVO extends EntityVO {
 	public function getDatedOn() {
 		return $this->getParam( 'dated_on' );
 	}
+
+	/**
+	 * @return int
+	 */
+	public function getUploadedAt() {
+		return $this->getParam( 'uploaded_at' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->getStringParam( 'description' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isManual() {
+		return (bool)$this->getParam( 'is_manual' );
+	}
 }
