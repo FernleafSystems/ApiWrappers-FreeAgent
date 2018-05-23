@@ -15,8 +15,18 @@ class Create extends Base {
 	 * @return ContactVO|null
 	 */
 	public function create( $aData = array() ) {
-		return $this->setRequestData( $aData, true )
-					->sendRequestWithVoResponse();
+		/** @var ContactVO $oContact */
+		$oContact = $this->setRequestData( $aData, true )
+						 ->sendRequestWithVoResponse();
+
+		// fix for 'Czechia' not supported.
+		if ( $this->getRequestDataItem( 'country' ) == 'Czechia'
+			 && !empty( $oContact ) && $oContact->getCountry() != 'Czechia' ) {
+
+			$oContact = $this->setAddress_Country( 'Czech Republic' )
+							 ->sendRequestWithVoResponse();
+		}
+		return $oContact;
 	}
 
 	/**
@@ -48,7 +58,7 @@ class Create extends Base {
 
 	/**
 	 * @param string $sValue
-	 * @param int $nLine
+	 * @param int    $nLine
 	 * @return $this
 	 */
 	public function setAddress_Line( $sValue, $nLine = 1 ) {

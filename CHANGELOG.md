@@ -1,7 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [0.1.5] - 2018-08-01
+## [0.1.6] - 2018-05-23
+### Added
+- Fix broken support for "Czechia", aka "Czech Republic".
+
+## [0.1.5] - 2018-01-08
 ### Added
 - Added some extra Bank Transaction VO accessor methods.
 
