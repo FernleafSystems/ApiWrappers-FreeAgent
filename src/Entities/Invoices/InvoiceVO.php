@@ -6,7 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/invoices
- *
  * Class InvoiceVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  */
@@ -94,5 +93,82 @@ class InvoiceVO extends EntityVO {
 	 */
 	public function getValueSalesTax() {
 		return $this->getParam( 'sales_tax_value' );
+
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEcStatusUkNonEc() {
+		return $this->isEcStatus( 'UK/Non-EC' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEcStatusGoods() {
+		return $this->isEcStatus( 'EC Goods' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEcStatusServices() {
+		return $this->isEcStatus( 'EC Services' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEcStatusVatMoss() {
+		return $this->isEcStatus( 'EC VAT MOSS' );
+	}
+
+	/**
+	 * @param string $sStatus - case insensitive status to compare
+	 * @return bool
+	 */
+	public function isEcStatus( $sStatus ) {
+		return ( strcasecmp( $this->getEcStatus(), $sStatus ) === 0 );
+	}
+
+	/**
+	 * One of:
+	 *	Draft
+		Scheduled To Email
+		Open
+		Zero Value
+		Overdue
+		Paid
+		Overpaid
+		Refunded
+		Written-off
+		Part written-off
+	 * @param string $sStatus - case insensitive status to compare
+	 * @return bool
+	 */
+	public function isStatus( $sStatus ) {
+		return ( strcasecmp( $this->getStatus(), $sStatus ) === 0 );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isStatusDraft() {
+		return $this->isStatus( 'Draft' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isStatusOpen() {
+		return $this->isStatus( 'Open' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isStatusPaid() {
+		return $this->isStatus( 'Paid' );
 	}
 }
