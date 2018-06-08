@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.7] - 2018-06-08
+### Added
+- Add some helper functions to InvoiceVO so we don't have to remember the status strings.
+
 ## [0.1.6] - 2018-05-23
 ### Added
 - Fix broken support for "Czechia", aka "Czech Republic".
