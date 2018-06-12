@@ -31,7 +31,7 @@ class Api extends BaseApi {
 		$sChannel = $this->getDataChannel();
 		if ( in_array( $this->getHttpRequestMethod(), [ 'post', 'put' ] ) ) {
 			$sDataPayloadKey = $this->getRequestDataPayloadKey();
-			if ( !empty( $sDataPayloadKey ) ) {
+			if ( !empty( $sDataPayloadKey ) && !empty( $aFinal[ $sChannel ] ) ) {
 				$aFinal[ $sChannel ] = [ $sDataPayloadKey => $aFinal[ $sChannel ] ];
 			}
 		}
