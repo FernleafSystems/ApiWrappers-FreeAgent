@@ -1,12 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2018-06-12
+### Fixed
+- Try to prevent the sending of empty arrays in the request as it was suddenly breaking
+certain requests that needed no data parameters.
+
 ## [0.1.7] - 2018-06-08
 ### Added
 - Add some helper functions to InvoiceVO so we don't have to remember the status strings.
 
 ## [0.1.6] - 2018-05-23
-### Added
+### FIXED
 - Fix broken support for "Czechia", aka "Czech Republic".
 
 ## [0.1.5] - 2018-01-08
