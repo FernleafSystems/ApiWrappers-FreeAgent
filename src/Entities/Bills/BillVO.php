@@ -36,6 +36,20 @@ class BillVO extends EntityVO {
 	/**
 	 * @return string
 	 */
+	public function getCategoryUri() {
+		return $this->getStringParam( 'category' );
+	}
+
+	/**
+	 * @return string - date
+	 */
+	public function getDueOn() {
+		return $this->getStringParam( 'due_on' );
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getContactId() {
 		return basename( $this->getStringParam( 'contact' ) );
 	}

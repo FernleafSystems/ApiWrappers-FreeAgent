@@ -3,6 +3,7 @@
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 
 use FernleafSystems\ApiWrappers\Freeagent\Api;
+use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
 /**
  * Class RetrieveBulkBase
@@ -216,10 +217,24 @@ class RetrieveBulkBase extends Api {
 	}
 
 	/**
+	 * IMPORTANT: merges with existing filter items
 	 * @param RetrievalFilterItems $oFilterItems
 	 * @return $this
 	 */
-	public function setFilterItems( $oFilterItems ) {
+	public function addFilterItems( RetrievalFilterItems $oFilterItems ) {
+		$oExisting = $this->getFilterItems();
+		foreach ( $oExisting->getEqualityFilterItems() as $sItemKey => $mItemValue ) {
+			$oFilterItems->setEqualityFilterItem( $sItemKey, $mItemValue );
+		}
+		return $this->setFilterItems( $oFilterItems );
+	}
+
+	/**
+	 * IMPORTANT: Replaces all existing filter items
+	 * @param RetrievalFilterItems $oFilterItems
+	 * @return $this
+	 */
+	public function setFilterItems( RetrievalFilterItems $oFilterItems ) {
 		return $this->setParam( 'retrieval_filter_items', $oFilterItems );
 	}
 
@@ -236,6 +251,26 @@ class RetrieveBulkBase extends Api {
 	 */
 	public function setViewFilterAll() {
 		return $this->setViewFilter( 'all' );
+	}
+
+	/**
+	 * @param Entities\Contacts\ContactVO $oContact
+	 * @return $this
+	 */
+	public function filterByContact( $oContact ) {
+		$oItem = ( new Entities\Common\RetrievalFilterItems() )
+			->setEqualityFilterItem( 'contact', $oContact->getUri() );
+		return $this->addFilterItems( $oItem );
+	}
+
+	/**
+	 * @param Entities\Categories\CategoryVO $oCat
+	 * @return $this
+	 */
+	public function filterByCategory( $oCat ) {
+		$oItem = ( new Entities\Common\RetrievalFilterItems() )
+			->setEqualityFilterItem( 'category', $oCat->getUri() );
+		return $this->addFilterItems( $oItem );
 	}
 
 	/**
