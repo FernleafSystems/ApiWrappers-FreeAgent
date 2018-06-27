@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.9] - 2018-06-27
+### Added
+- add helpful filtering options on Contact and Category to the Search/Retrieval Base class.
+
 ## [0.1.8] - 2018-06-12
 ### Fixed
 - Try to prevent the sending of empty arrays in the request as it was suddenly breaking
