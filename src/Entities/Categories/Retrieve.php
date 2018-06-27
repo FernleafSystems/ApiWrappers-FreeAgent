@@ -25,18 +25,22 @@ class Retrieve extends Base {
 	}
 
 	/**
-	 * @return EntityVO|mixed|null
+	 * @return CategoryVO|mixed|null
 	 */
 	public function sendRequestWithVoResponse() {
-		$aData = $this->send()
-					  ->getCoreResponseData();
+		try {
+			$aData = $this->send()
+						  ->getCoreResponseData();
+		}
+		catch ( \Exception $oE ) {
+		}
 
 		$oNew = null;
-		if ( is_array( $aData ) ) {
+		if ( !empty( $aData ) && is_array( $aData ) ) {
 			foreach ( $aData as $sCatType => $aCategory ) {
 				if ( $aCategory[ 'nominal_code' ] == $this->getEntityId() ) {
 					$oNew = $this->getNewEntityResourceVO()
-								 ->applyFromArray( $aData );
+								 ->applyFromArray( $aCategory );
 				}
 			}
 		}
