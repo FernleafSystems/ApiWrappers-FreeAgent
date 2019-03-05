@@ -2,13 +2,13 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Company;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
+use FernleafSystems\ApiWrappers\Freeagent;
 
 /**
  * Class Base
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Company
  */
-class Base extends Api {
+class Base extends Freeagent\Api {
 
 	const REQUEST_ENDPOINT = 'company';
 

@@ -2,29 +2,29 @@
   "name":         "fernleafsystems/apiwrappers-freeagent",
   "description":  "PHP Wrapper For The FreeAgent API",
   "authors":      [
-	{
-	  "name":     "Paul Goodchild",
-	  "email":    "paul@paulgoodchild.me",
-	  "homepage": "https://paulgoodchild.me"
-	}
+    {
+      "name":     "Paul Goodchild",
+      "email":    "paul@paulgoodchild.me",
+      "homepage": "https://paulgoodchild.me"
+    }
   ],
   "license":      "MIT",
   "keywords":     [
-	"API Wrapper",
-	"FreeAgent"
+    "API Wrapper",
+    "FreeAgent"
   ],
   "repositories": [
   ],
   "require":      {
-	"php":                              ">=5.6.0",
-	"fernleafsystems/apiwrappers-base": "^1.0.0",
-	"league/oauth2-client":             "^2.0"
+    "php":                              ">=5.6.0",
+    "fernleafsystems/apiwrappers-base": "^1.0.0",
+    "league/oauth2-client":             "^2.0"
   },
   "require-dev":  {
   },
   "autoload":     {
-	"psr-4": {
-	  "FernleafSystems\\ApiWrappers\\Freeagent\\": "src"
-	}
+    "psr-4": {
+      "FernleafSystems\\ApiWrappers\\Freeagent\\": "src"
+    }
   }
 }

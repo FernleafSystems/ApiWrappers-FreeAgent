@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.11] - 2019-03-05
+### Updated
+- Ensure alignment with base API wrapper changes.
+
 ## [0.1.10] - 2018-06-27
 ### Fixed
 - CategoryVO Retrieval bug.
