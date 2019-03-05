@@ -2,6 +2,8 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
+
 /**
  * Class Create
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
@@ -19,14 +21,31 @@ class Create extends Base {
 		$oContact = $this->setRequestData( $aData, true )
 						 ->sendRequestWithVoResponse();
 
-		// fix for 'Czechia' not supported.
-		if ( $this->getRequestDataItem( 'country' ) == 'Czechia'
-			 && !empty( $oContact ) && $oContact->getCountry() != 'Czechia' ) {
-
-			$oContact = $this->setAddress_Country( 'Czech Republic' )
-							 ->sendRequestWithVoResponse();
+		{ // Fix for FreeAgent API broken country names.
+			$aMap = $this->getBrokenCountriesMap();
+			$sRequestedCo = $this->getRequestDataItem( 'country' );
+			if ( $oContact instanceof EntityVO && in_array( $sRequestedCo, $aMap )
+				 && !in_array( $oContact->getCountry(), [ $sRequestedCo, $aMap[ $sRequestedCo ] ] ) ) {
+				$oContact = $this->setAddress_Country( $aMap[ $sRequestedCo ] )
+								 ->sendRequestWithVoResponse();
+			}
 		}
+
 		return $oContact;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getBrokenCountriesMap() {
+		$aCountryMap = [
+			'Czechia'         => 'Czech Republic',
+			'Slovak Republic' => 'Slovakia',
+		];
+		return array_merge(
+			$aCountryMap,
+			array_flip( $aCountryMap )
+		);
 	}
 
 	/**
