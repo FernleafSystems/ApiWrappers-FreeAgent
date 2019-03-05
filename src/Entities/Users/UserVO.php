@@ -72,7 +72,7 @@ class UserVO extends EntityVO {
 	 * @return array
 	 */
 	protected function getPermissionsMap() {
-		return array(
+		return [
 			'No Access',
 			'Time',
 			'My Money',
@@ -82,6 +82,6 @@ class UserVO extends EntityVO {
 			'Banking',
 			'Tax, Accounting & Users',
 			'Full',
-		);
+		];
 	}
 }

@@ -2,15 +2,13 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 
-use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
+use FernleafSystems\ApiWrappers\Base\BaseVO;
 
 /**
  * Class EntityVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
  */
-class EntityVO {
-
-	use StdClassAdapter;
+class EntityVO extends BaseVO {
 
 	/**
 	 * @return string

@@ -24,7 +24,7 @@ class Api extends BaseApi {
 	protected function prepFinalRequestData() {
 		/** @var Connection $oCon */
 		$oCon = $this->getConnection();
-		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->getAccessToken() ) );
+		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->access_token ) );
 
 		$aFinal = parent::prepFinalRequestData();
 
@@ -37,16 +37,6 @@ class Api extends BaseApi {
 		}
 
 		return $aFinal;
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getBaseUrl() {
-		/** @var Connection $oCon */
-		$oCon = $this->getConnection();
-		$sBase = sprintf( $oCon->getBaseUrl() );
-		return rtrim( $sBase, '/' ).'/';
 	}
 
 	/**
@@ -127,7 +117,7 @@ class Api extends BaseApi {
 	 * @return EntityVO|mixed|null
 	 */
 	public function sendRequestWithVoResponse() {
-		$aData = $this->send()
+		$aData = $this->req()
 					  ->getCoreResponseData();
 
 		$oNew = null;

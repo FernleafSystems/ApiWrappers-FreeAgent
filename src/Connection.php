@@ -3,17 +3,24 @@
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
 use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
-use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
 
 /**
  * Class Connection
  * @package FernleafSystems\ApiWrappers\Freeagent
+ * @property string $access_token
+ * @property string $base_url_override
+ * @property string $client_id
+ * @property string $uri_auth
+ * @property string $uri_redirect
+ * @property string $uri_resource
+ * @property int    $expiration
+ * @property bool   $sandbox
+ *
  */
 class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
-	use StdClassAdapter;
-
 	/**
+	 * @deprecated
 	 * @return string
 	 */
 	public function getAccessToken() {
@@ -29,6 +36,7 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	}
 
 	/**
+	 * @deprecated
 	 * @return string
 	 */
 	public function getBaseUrlOverride() {
@@ -59,8 +67,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 			$this->setOAuthProvider( $oProvider );
 		}
 		return $oProvider
-			->setBaseUrl( $this->getBaseUrlOverride() )
-			->setIsSandbox( $this->isSandbox() );
+			->setBaseUrl( $this->base_url_override )
+			->setIsSandbox( $this->sandbox );
 	}
 
 	/**
@@ -96,7 +104,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setAccessToken( $sVal ) {
-		return $this->setParam( 'access_token', $sVal );
+		$this->access_token = $sVal;
+		return $this;
 	}
 
 	/**
@@ -104,7 +113,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setBaseUrlOverride( $sUrl ) {
-		return $this->setParam( 'base_url_override', $sUrl );
+		$this->base_url_override = $sUrl;
+		return $this;
 	}
 
 	/**
@@ -112,7 +122,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setClientId( $sVal ) {
-		return $this->setParam( 'client_id', $sVal );
+		$this->client_id = $sVal;
+		return $this;
 	}
 
 	/**
@@ -120,7 +131,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setExpiration( $nVal ) {
-		return $this->setParam( 'expiration', $nVal );
+		$this->expiration = $nVal;
+		return $this;
 	}
 
 	/**
@@ -128,7 +140,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setIsSandbox( $bIsSandbox ) {
-		return $this->setParam( 'sandbox', $bIsSandbox );
+		$this->sandbox = $bIsSandbox;
+		return $this;
 	}
 
 	/**
@@ -144,7 +157,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setUrlAccessToken( $sVal ) {
-		return $this->setParam( 'uri_redirect', $sVal );
+		$this->uri_redirect = $sVal;
+		return $this;
 	}
 
 	/**
@@ -152,7 +166,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setUrlAuthorize( $sVal ) {
-		return $this->setParam( 'uri_auth', $sVal );
+		$this->uri_auth = $sVal;
+		return $this;
 	}
 
 	/**
@@ -160,6 +175,7 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return $this
 	 */
 	public function setUrlResourceDetails( $sVal ) {
-		return $this->setParam( 'uri_resource', $sVal );
+		$this->uri_resource = $sVal;
+		return $this;
 	}
 }
