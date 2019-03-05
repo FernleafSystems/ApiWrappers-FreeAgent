@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.12] - 2019-03-06
+### Updated
+- Fix broken FreeAgent API for "Slovak Republic", aka "Slovakia" (automatically corrects contact country).
+
 ## [0.1.11] - 2019-03-05
 ### Updated
 - Ensure alignment with base API wrapper changes.
@@ -24,7 +28,7 @@ certain requests that needed no data parameters.
 
 ## [0.1.6] - 2018-05-23
 ### FIXED
-- Fix broken support for "Czechia", aka "Czech Republic".
+- Fix broken FreeAgent API for "Czechia", aka "Czech Republic" (automatically corrects contact country).
 
 ## [0.1.5] - 2018-01-08
 ### Added
