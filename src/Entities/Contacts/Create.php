@@ -109,6 +109,23 @@ class Create extends Base {
 	}
 
 	/**
+	 * @param string $sEmail - will set both account email and billing email
+	 * @return $this
+	 */
+	public function setEmail( $sEmail ) {
+		return $this->setRequestDataItem( 'email', $sEmail )
+					->setEmailForBilling( $sEmail );
+	}
+
+	/**
+	 * @param string $sEmail
+	 * @return $this
+	 */
+	public function setEmailForBilling( $sEmail ) {
+		return $this->setRequestDataItem( 'billing_email', $sEmail );
+	}
+
+	/**
 	 * @param string $sName
 	 * @return $this
 	 */
