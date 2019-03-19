@@ -1,11 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [0.1.12] - 2019-03-06
+## [0.2.2] - 2019-03-19
+### Added
+- ability to set contact email.
+
+## [0.2.1] - 2019-03-06
 ### Updated
 - Fix broken FreeAgent API for "Slovak Republic", aka "Slovakia" (automatically corrects contact country).
 
-## [0.1.11] - 2019-03-05
+## [0.2.0] - 2019-03-05
 ### Updated
 - Ensure alignment with base API wrapper changes.
 
