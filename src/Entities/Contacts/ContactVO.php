@@ -9,69 +9,77 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  *
  * Class ContactVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
+ * @property string $email
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $organisation_name
+ * @property string $country
+ * @property string $sales_tax_registration_number
+ * @property string $charge_sales_tax - 'Auto', 'Always', 'Never'
+ * @property string $status
  */
 class ContactVO extends EntityVO {
 
 	/**
-	 * @return string 'Auto', 'Always', 'Never'
+	 * @return string
 	 */
 	public function getChargeSalesTax() {
-		return $this->getStringParam( 'charge_sales_tax' );
+		return $this->charge_sales_tax;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getCountry() {
-		return $this->getStringParam( 'country' );
+		return $this->country;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getEmail() {
-		return $this->getStringParam( 'email' );
+		return $this->email;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getFirstName() {
-		return $this->getStringParam( 'first_name' );
+		return $this->first_name;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getLastName() {
-		return $this->getStringParam( 'last_name' );
+		return $this->last_name;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getOrganisationName() {
-		return $this->getStringParam( 'organisation_name' );
+		return $this->organisation_name;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getSalesTaxRegistrationNumber() {
-		return $this->getStringParam( 'sales_tax_registration_number' );
+		return $this->sales_tax_registration_number;
 	}
 
 	/**
 	 * @return string 'Active', 'Hidden'
 	 */
 	public function getStatus() {
-		return $this->getStringParam( 'status' );
+		return $this->status;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function hasSalesTaxRegistrationNumber() {
-		return ( strlen( $this->getSalesTaxRegistrationNumber() ) > 0 );
+		return !empty( $this->sales_tax_registration_number );
 	}
 }

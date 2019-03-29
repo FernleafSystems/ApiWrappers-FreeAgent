@@ -7,6 +7,7 @@ use FernleafSystems\ApiWrappers\Base\BaseVO;
 /**
  * Class EntityVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
+ * @property string $url
  */
 class EntityVO extends BaseVO {
 
@@ -25,6 +26,6 @@ class EntityVO extends BaseVO {
 	 * @return string
 	 */
 	public function getUri() {
-		return $this->getStringParam( 'url' );
+		return $this->url;
 	}
 }

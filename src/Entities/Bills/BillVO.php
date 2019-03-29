@@ -9,6 +9,15 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  *
  * Class BillVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
+ * @property string $reference
+ * @property string $ec_status
+ * @property string $status
+ * @property string $dated_on - YYYY-MM-DD
+ * @property string $due_on   - YYYY-MM-DD
+ * @property float  $due_value
+ * @property float  $paid_value
+ * @property float  $total_value
+ * @property float  $sales_tax_value
  */
 class BillVO extends EntityVO {
 
@@ -16,21 +25,21 @@ class BillVO extends EntityVO {
 	 * @return float
 	 */
 	public function getAmountDue() {
-		return $this->getNumericParam( 'due_value' );
+		return $this->due_value;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getAmountPaid() {
-		return $this->getNumericParam( 'paid_value' );
+		return $this->paid_value;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getAmountTotal() {
-		return $this->getParam( 'total_value' );
+		return $this->total_value;
 	}
 
 	/**
@@ -44,7 +53,7 @@ class BillVO extends EntityVO {
 	 * @return string - date
 	 */
 	public function getDueOn() {
-		return $this->getStringParam( 'due_on' );
+		return $this->due_on;
 	}
 
 	/**
@@ -58,34 +67,34 @@ class BillVO extends EntityVO {
 	 * @return string
 	 */
 	public function getDatedOn() {
-		return $this->getStringParam( 'dated_on' );
+		return $this->dated_on;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getEcStatus() {
-		return $this->getStringParam( 'ec_status' );
+		return $this->ec_status;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getReference() {
-		return $this->getStringParam( 'reference' );
+		return $this->reference;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getStatus() {
-		return $this->getStringParam( 'status' );
+		return $this->status;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getValueSalesTax() {
-		return $this->getParam( 'sales_tax_value' );
+		return $this->sales_tax_value;
 	}
 }

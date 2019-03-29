@@ -10,15 +10,15 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  * @property string $contact - URI
  * @property int    $created_at
- * @property string $dated_on
- * @property string $due_on
- * @property string $paid_on
+ * @property string $dated_on - YYYY-MM-DD
+ * @property string $due_on - YYYY-MM-DD
+ * @property string $paid_on - YYYY-MM-DD
  * @property string $reference
  * @property string $place_of_supply
  * @property string $status
  * @property string $ec_status
  * @property float  $exchange_rate
- * @property float  $$due_value
+ * @property float  $due_value
  * @property float  $net_value
  * @property float  $paid_value
  * @property float  $total_value
@@ -37,21 +37,21 @@ class InvoiceVO extends EntityVO {
 	 * @return string YYYY-MM-DD
 	 */
 	public function getDatedOn() {
-		return $this->getStringParam( 'dated_on' );
+		return $this->dated_on;
 	}
 
 	/**
 	 * @return string YYYY-MM-DD
 	 */
 	public function getPaidOn() {
-		return $this->getStringParam( 'paid_on' );
+		return $this->paid_on;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getEcStatus() {
-		return $this->getStringParam( 'ec_status' );
+		return $this->ec_status;
 	}
 
 	/**
@@ -65,49 +65,49 @@ class InvoiceVO extends EntityVO {
 	 * @return string
 	 */
 	public function getPlaceOfSupply() {
-		return $this->getParam( 'place_of_supply' );
+		return $this->place_of_supply;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getStatus() {
-		return $this->getStringParam( 'status' );
+		return $this->status;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getValueDue() {
-		return $this->getParam( 'due_value' );
+		return $this->due_value;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getValuePaid() {
-		return $this->getParam( 'paid_value' );
+		return $this->paid_value;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getValueGross() {
-		return $this->getParam( 'total_value' );
+		return $this->total_value;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getValueNet() {
-		return $this->getParam( 'net_value' );
+		return $this->net_value;
 	}
 
 	/**
 	 * @return float
 	 */
 	public function getValueSalesTax() {
-		return $this->getParam( 'sales_tax_value' );
+		return $this->sales_tax_value;
 	}
 
 	/**
@@ -143,7 +143,7 @@ class InvoiceVO extends EntityVO {
 	 * @return bool
 	 */
 	public function isEcStatus( $sStatus ) {
-		return ( strcasecmp( $this->getEcStatus(), $sStatus ) === 0 );
+		return ( strcasecmp( $this->ec_status, $sStatus ) === 0 );
 	}
 
 	/**
@@ -162,7 +162,7 @@ class InvoiceVO extends EntityVO {
 	 * @return bool
 	 */
 	public function isStatus( $sStatus ) {
-		return ( strcasecmp( $this->getStatus(), $sStatus ) === 0 );
+		return ( strcasecmp( $this->status, $sStatus ) === 0 );
 	}
 
 	/**
