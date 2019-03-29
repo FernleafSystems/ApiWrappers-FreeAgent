@@ -8,6 +8,21 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  * https://dev.freeagent.com/docs/invoices
  * Class InvoiceVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
+ * @property string $contact - URI
+ * @property int    $created_at
+ * @property string $dated_on
+ * @property string $due_on
+ * @property string $paid_on
+ * @property string $reference
+ * @property string $place_of_supply
+ * @property string $status
+ * @property string $ec_status
+ * @property float  $exchange_rate
+ * @property float  $$due_value
+ * @property float  $net_value
+ * @property float  $paid_value
+ * @property float  $total_value
+ * @property float  $sales_tax_value
  */
 class InvoiceVO extends EntityVO {
 
@@ -93,7 +108,6 @@ class InvoiceVO extends EntityVO {
 	 */
 	public function getValueSalesTax() {
 		return $this->getParam( 'sales_tax_value' );
-
 	}
 
 	/**
@@ -134,16 +148,16 @@ class InvoiceVO extends EntityVO {
 
 	/**
 	 * One of:
-	 *	Draft
-		Scheduled To Email
-		Open
-		Zero Value
-		Overdue
-		Paid
-		Overpaid
-		Refunded
-		Written-off
-		Part written-off
+	 *    Draft
+	 * Scheduled To Email
+	 * Open
+	 * Zero Value
+	 * Overdue
+	 * Paid
+	 * Overpaid
+	 * Refunded
+	 * Written-off
+	 * Part written-off
 	 * @param string $sStatus - case insensitive status to compare
 	 * @return bool
 	 */
