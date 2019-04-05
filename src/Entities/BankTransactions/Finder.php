@@ -11,13 +11,13 @@ class Finder extends BankTransactionsIterator {
 	/**
 	 * Ideally you would set other filter params on this if you're looking for a specific
 	 * transaction - i.e. unexplained, within a date range
-	 * @param string $sNetValue
+	 * @param string $nAmount
 	 * @return BankTransactionVO|null
 	 */
-	public function byNetValue( $sNetValue ) {
+	public function byAmount( $nAmount ) {
 		$oTheOne = null;
 		foreach ( $this as $oBankTxn ) {
-			if ( (string)$oBankTxn == (string)$sNetValue ) {
+			if ( (string)$oBankTxn->amount == (string)$nAmount ) {
 				$oTheOne = $oBankTxn;
 				break;
 			}
