@@ -10,12 +10,5 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
  */
 class RetrieveBulk extends RetrieveBulkBase {
 
-	const REQUEST_ENDPOINT = 'contacts';
-
-	/**
-	 * @return ContactVO
-	 */
-	public function getNewEntityResourceVO() {
-		return new ContactVO();
-	}
+	use ContactsTrait;
 }

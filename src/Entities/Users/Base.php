@@ -10,12 +10,5 @@ use FernleafSystems\ApiWrappers\Freeagent;
  */
 class Base extends Freeagent\Api {
 
-	const REQUEST_ENDPOINT = 'users';
-
-	/**
-	 * @return UserVO
-	 */
-	public function getNewEntityResourceVO() {
-		return new UserVO();
-	}
+	use UsersTrait;
 }

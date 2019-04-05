@@ -2,13 +2,13 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrievePageBase;
 
 /**
- * Class Base
+ * Class RetrievePage
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts
  */
-class Base extends Api {
+class RetrievePage extends RetrievePageBase {
 
 	use BankAccountsTrait;
 }

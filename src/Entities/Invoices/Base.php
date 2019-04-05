@@ -10,12 +10,5 @@ use FernleafSystems\ApiWrappers\Freeagent;
  */
 class Base extends Freeagent\Api {
 
-	const REQUEST_ENDPOINT = 'invoices';
-
-	/**
-	 * @return InvoiceVO
-	 */
-	public function getNewEntityResourceVO() {
-		return new InvoiceVO();
-	}
+	use InvoicesTrait;
 }

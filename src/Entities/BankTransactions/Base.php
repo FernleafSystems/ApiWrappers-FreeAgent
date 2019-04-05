@@ -10,12 +10,5 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  */
 class Base extends Api {
 
-	const REQUEST_ENDPOINT = 'bank_transactions';
-
-	/**
-	 * @return BankTransactionVO
-	 */
-	public function getNewEntityResourceVO() {
-		return new BankTransactionVO();
-	}
+	use BankTransactionsTrait;
 }

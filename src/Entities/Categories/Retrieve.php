@@ -2,8 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Categories;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
-
 /**
  * Class Retrieve
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Categories
@@ -39,7 +37,7 @@ class Retrieve extends Base {
 		if ( !empty( $aData ) && is_array( $aData ) ) {
 			foreach ( $aData as $sCatType => $aCategory ) {
 				if ( $aCategory[ 'nominal_code' ] == $this->getEntityId() ) {
-					$oNew = $this->getNewEntityResourceVO()
+					$oNew = $this->getVO()
 								 ->applyFromArray( $aCategory );
 				}
 			}

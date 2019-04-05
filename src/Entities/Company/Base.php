@@ -10,12 +10,15 @@ use FernleafSystems\ApiWrappers\Freeagent;
  */
 class Base extends Freeagent\Api {
 
-	const REQUEST_ENDPOINT = 'company';
+	/**
+	 * @var string
+	 */
+	protected $aApiEndpoint = 'company';
 
 	/**
 	 * @return CompanyVO
 	 */
-	public function getNewEntityResourceVO() {
+	public function getVO() {
 		return new CompanyVO();
 	}
 }

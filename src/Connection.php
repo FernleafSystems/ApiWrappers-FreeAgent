@@ -24,7 +24,7 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return string
 	 */
 	public function getAccessToken() {
-		return $this->getStringParam( 'access_token' );
+		return $this->access_token;
 	}
 
 	/**
@@ -40,21 +40,21 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return string
 	 */
 	public function getBaseUrlOverride() {
-		return $this->getStringParam( 'base_url_override', '' );
+		return $this->base_url_override;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getClientId() {
-		return $this->getStringParam( 'client_id' );
+		return $this->client_id;
 	}
 
 	/**
-	 * @return string
+	 * @return int
 	 */
 	public function getExpiration() {
-		return $this->getNumericParam( 'expiration' );
+		return $this->expiration;
 	}
 
 	/**
@@ -75,28 +75,28 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return string
 	 */
 	public function getUrlAccessToken() {
-		return $this->getStringParam( 'uri_redirect' );
+		return $this->uri_redirect;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getUrlAuthorize() {
-		return $this->getStringParam( 'uri_redirect' );
+		return $this->uri_redirect;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getUrlResourceDetails() {
-		return $this->getStringParam( 'uri_resource' );
+		return $this->uri_resource;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isSandbox() {
-		return (bool)$this->getParam( 'sandbox' );
+		return (bool)$this->sandbox;
 	}
 
 	/**

@@ -12,19 +12,16 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 class Api extends BaseApi {
 
 	const REQUEST_METHOD = 'get';
-	const REQUEST_ENDPOINT = '';
+
 	/**
 	 * @var string
 	 */
-	protected $sRequestEndpoint = '';
+	protected $aApiEndpoint = '';
 
 	/**
 	 * @return array
 	 */
 	protected function prepFinalRequestData() {
-		/** @var Connection $oCon */
-		$oCon = $this->getConnection();
-		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->access_token ) );
 
 		$aFinal = parent::prepFinalRequestData();
 
@@ -39,12 +36,18 @@ class Api extends BaseApi {
 		return $aFinal;
 	}
 
+	protected function preFlight() {
+		/** @var Connection $oCon */
+		$oCon = $this->getConnection();
+		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->access_token ) );
+	}
+
 	/**
-	 * Chops off the trailing 's' from the data package key. So far no exceptions found.
+	 * Chops off the trailing 's' from the data package key. Only exceptions are paged results.
 	 * @return string
 	 */
 	protected function getRequestDataPayloadKey() {
-		return rtrim( $this->getRequestEndpoint(), 's' );
+		return rtrim( $this->getApiEndpoint(), 's' );
 	}
 
 	/**
@@ -77,22 +80,22 @@ class Api extends BaseApi {
 	/**
 	 * @return EntityVO
 	 */
-	public function getNewEntityResourceVO() {
+	public function getVO() {
 		return new EntityVO();
 	}
 
 	/**
 	 * @return string
 	 */
-	protected function getRequestEndpoint() {
-		return strtolower( static::REQUEST_ENDPOINT );
+	protected function getApiEndpoint() {
+		return $this->aApiEndpoint;
 	}
 
 	/**
 	 * @return string
 	 */
 	protected function getUrlEndpoint() {
-		$sBase = $this->getRequestEndpoint();
+		$sBase = $this->getApiEndpoint();
 		return $this->hasEntityId() ? sprintf( '%s/%s', $sBase, $this->getEntityId() ) : $sBase;
 	}
 
@@ -108,7 +111,7 @@ class Api extends BaseApi {
 	 */
 	protected function preSendVerification() {
 		parent::preSendVerification();
-		if ( strlen( $this->getRequestEndpoint() ) == 0 ) {
+		if ( strlen( $this->getApiEndpoint() ) == 0 ) {
 			throw new \Exception( 'Request Endpoint has not been provided' );
 		}
 	}
@@ -122,8 +125,7 @@ class Api extends BaseApi {
 
 		$oNew = null;
 		if ( !empty( $aData ) ) {
-			$oNew = $this->getNewEntityResourceVO()
-						 ->applyFromArray( $aData );
+			$oNew = $this->getVO()->applyFromArray( $aData );
 		}
 		return $oNew;
 	}
@@ -159,5 +161,21 @@ class Api extends BaseApi {
 	 */
 	protected function filterDateValue( $mDate ) {
 		return preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $mDate ) ? $mDate : gmdate( 'Y-m-d', $mDate );
+	}
+
+	/**
+	 * @deprecated
+	 * @return EntityVO
+	 */
+	public function getNewEntityResourceVO() {
+		return $this->getVO();
+	}
+
+	/**
+	 * @deprecated
+	 * @return string
+	 */
+	protected function getRequestEndpoint() {
+		return $this->getApiEndpoint();
 	}
 }
