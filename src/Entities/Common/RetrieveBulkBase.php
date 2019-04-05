@@ -9,7 +9,7 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities;
  * Class RetrieveBulkBase
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
  */
-class RetrieveBulkBase extends Api {
+abstract class RetrieveBulkBase extends Api {
 
 	const PER_PAGE_LIMIT_LOWER = 1;
 	const PER_PAGE_LIMIT_UPPER = 100;
@@ -57,11 +57,12 @@ class RetrieveBulkBase extends Api {
 		$nPerPage = $this->getPerPage(); // used in the loop so getting real value is critical
 		do {
 			$aResultsData = $this->send()->getCoreResponseData();
+
 			$nCountResult = count( $aResultsData );
 
 			$aResultsData = array_map(
 				function ( $aResultItem ) {
-					return $this->getNewEntityResourceVO()
+					return $this->getVO()
 								->applyFromArray( $aResultItem );
 				}, // first filter using equality filters, then with other custom filters.
 				$this->customFilterResults( $this->filterResultsWithEqualityFilters( $aResultsData ) )
@@ -312,6 +313,6 @@ class RetrieveBulkBase extends Api {
 	 * @return string
 	 */
 	protected function getRequestDataPayloadKey() {
-		return $this->getRequestEndpoint(); // we don't truncate 's'
+		return $this->getApiEndpoint(); // we don't truncate 's'
 	}
 }

@@ -11,14 +11,7 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
  */
 class RetrieveBulk extends RetrieveBulkBase {
 
-	const REQUEST_ENDPOINT = 'bank_transaction_explanations';
-
-	/**
-	 * @return BankTransactionExplanationVO
-	 */
-	public function getNewEntityResourceVO() {
-		return new BankTransactionExplanationVO();
-	}
+	use BankTransactionExplanationTrait;
 
 	/**
 	 * @param BankAccountVO $oBankAccount

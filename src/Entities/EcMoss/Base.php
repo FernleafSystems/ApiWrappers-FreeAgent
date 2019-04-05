@@ -9,5 +9,8 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\EcMoss
  */
 class Base extends Api {
-	const REQUEST_ENDPOINT = 'ec_moss';
+	/**
+	 * @var string
+	 */
+	protected $aApiEndpoint = 'ec_moss';
 }

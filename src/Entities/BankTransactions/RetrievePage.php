@@ -2,13 +2,13 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrievePageBase;
 
 /**
- * Class RetrieveBulk
+ * Class RetrievePage
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
  */
-class RetrieveBulk extends RetrieveBulkBase {
+class RetrievePage extends RetrievePageBase {
 
 	use BankTransactionsTrait;
 }

@@ -9,13 +9,5 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  */
 class Base extends Api {
-
-	const REQUEST_ENDPOINT = 'contacts';
-
-	/**
-	 * @return ContactVO
-	 */
-	public function getNewEntityResourceVO() {
-		return new ContactVO();
-	}
+	use ContactsTrait;
 }

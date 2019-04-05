@@ -8,11 +8,10 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  * https://dev.freeagent.com/docs/invoices
  * Class InvoiceVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
- * @property string $contact - URI
- * @property int    $created_at
+ * @property string $contact  - URI
  * @property string $dated_on - YYYY-MM-DD
- * @property string $due_on - YYYY-MM-DD
- * @property string $paid_on - YYYY-MM-DD
+ * @property string $due_on   - YYYY-MM-DD
+ * @property string $paid_on  - YYYY-MM-DD
  * @property string $reference
  * @property string $place_of_supply
  * @property string $status
