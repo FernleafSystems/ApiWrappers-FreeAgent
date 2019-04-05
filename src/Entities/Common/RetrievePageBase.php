@@ -44,9 +44,6 @@ abstract class RetrievePageBase extends Api {
 	 * @return $this
 	 */
 	public function setPage( $nPage = 1 ) {
-		if ( empty( $nPage ) || $nPage < 1 ) {
-			$nPage = 1;
-		}
 		return $this->setRequestDataItem( 'page', max( 1, (int)$nPage ) );
 	}
 
@@ -55,7 +52,7 @@ abstract class RetrievePageBase extends Api {
 	 * @return $this
 	 */
 	public function setPerPage( $nPerPage = 25 ) {
-		$nPerPage = min( max( (int)$nPerPage, self::PER_PAGE_LIMIT_LOWER ), self::PER_PAGE_LIMIT_LOWER );
+		$nPerPage = min( max( (int)$nPerPage, self::PER_PAGE_LIMIT_LOWER ), self::PER_PAGE_LIMIT_UPPER );
 		return $this->setRequestDataItem( 'per_page', $nPerPage );
 	}
 

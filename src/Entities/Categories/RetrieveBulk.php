@@ -11,9 +11,11 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
 class RetrieveBulk extends RetrieveBulkBase {
 
 	/**
-	 * @var string
+	 * @return string
 	 */
-	protected $aApiEndpoint = 'categories';
+	protected function getApiEndpoint() {
+		return 'categories';
+	}
 
 	/**
 	 * @return CategoryVO
