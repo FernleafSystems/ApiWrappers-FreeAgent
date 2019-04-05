@@ -74,6 +74,16 @@ abstract class CommonIterator extends AbstractPagedIterator {
 	}
 
 	/**
+	 * @param bool $bDescendingOrder
+	 * @return $this
+	 */
+	public function orderBy( $sField, $bDescendingOrder = false ) {
+		$sPrefix = $bDescendingOrder ? '-' : '';
+		$this->getRetriever()->setRequestDataItem( 'sort', $sPrefix.$sField );
+		return $this;
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getTotalSize() {

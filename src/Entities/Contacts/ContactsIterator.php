@@ -1,10 +1,10 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
-class InvoicesIterator extends Entities\Common\CommonIterator {
+class ContactsIterator extends Entities\Common\CommonIterator {
 
 	/**
 	 * @param Entities\Contacts\ContactVO $oContact
@@ -19,44 +19,44 @@ class InvoicesIterator extends Entities\Common\CommonIterator {
 	/**
 	 * @return $this
 	 */
-	public function filterByDraft() {
-		return $this->filterByView( 'draft' );
-	}
-
-	/**
-	 * @param int $nMonths
-	 * @return $this
-	 */
-	public function filterByLastXMonths( $nMonths = 1 ) {
-		return $this->filterByView( sprintf( 'last_%s_months', $nMonths ) );
+	public function filterByActive() {
+		return $this->filterByView( 'active' );
 	}
 
 	/**
 	 * @return $this
 	 */
-	public function filterByOpen() {
-		return $this->filterByView( 'open' );
+	public function filterByClients() {
+		return $this->filterByView( 'clients' );
 	}
 
 	/**
 	 * @return $this
 	 */
-	public function filterByOverdue() {
-		return $this->filterByView( 'overdue' );
+	public function filterByClientsWithOpenInvoices() {
+		return $this->filterByView( 'open_clients' );
 	}
 
 	/**
 	 * @return $this
 	 */
-	public function filterByOpenOverdue() {
-		return $this->filterByView( 'open_or_overdue' );
+	public function filterByHidden() {
+		return $this->filterByView( 'hidden' );
 	}
 
 	/**
 	 * @return $this
 	 */
-	public function filterByRecentOpenOverdue() {
-		return $this->filterByView( 'recent_open_or_overdue' );
+	public function filterBySuppliers() {
+		return $this->filterByView( 'suppliers' );
+	}
+
+	/**
+	 * @param bool $bDescendingOrder
+	 * @return $this
+	 */
+	public function orderByName( $bDescendingOrder = false ) {
+		return $this->orderBy( 'name', $bDescendingOrder );
 	}
 
 	/**
@@ -76,7 +76,7 @@ class InvoicesIterator extends Entities\Common\CommonIterator {
 	}
 
 	/**
-	 * @return InvoiceVO
+	 * @return BillVO
 	 */
 	public function current() {
 		return parent::current();
