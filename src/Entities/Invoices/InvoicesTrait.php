@@ -9,9 +9,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 trait InvoicesTrait {
 
 	/**
-	 * @var string
+	 * @return string
 	 */
-	protected $aApiEndpoint = 'invoices';
+	protected function getApiEndpoint() {
+		return 'invoices';
+	}
 
 	/**
 	 * @return InvoiceVO

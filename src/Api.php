@@ -14,11 +14,6 @@ class Api extends BaseApi {
 	const REQUEST_METHOD = 'get';
 
 	/**
-	 * @var string
-	 */
-	protected $aApiEndpoint = '';
-
-	/**
 	 * @return array
 	 */
 	protected function prepFinalRequestData() {
@@ -88,7 +83,7 @@ class Api extends BaseApi {
 	 * @return string
 	 */
 	protected function getApiEndpoint() {
-		return $this->aApiEndpoint;
+		return '';
 	}
 
 	/**

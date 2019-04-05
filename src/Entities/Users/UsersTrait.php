@@ -9,9 +9,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
 trait UsersTrait {
 
 	/**
-	 * @var string
+	 * @return string
 	 */
-	protected $aApiEndpoint = 'users';
+	protected function getApiEndpoint() {
+		return 'users';
+	}
 
 	/**
 	 * @return UserVO

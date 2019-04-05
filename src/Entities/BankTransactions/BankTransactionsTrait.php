@@ -9,9 +9,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 trait BankTransactionsTrait {
 
 	/**
-	 * @var string
+	 * @return string
 	 */
-	protected $aApiEndpoint = 'bank_transactions';
+	protected function getApiEndpoint() {
+		return 'bank_transactions';
+	}
 
 	/**
 	 * @return BankTransactionVO

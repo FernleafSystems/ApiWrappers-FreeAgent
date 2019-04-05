@@ -11,9 +11,11 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
 class Base extends Api {
 
 	/**
-	 * @var string
+	 * @return string
 	 */
-	protected $aApiEndpoint = 'categories';
+	protected function getApiEndpoint() {
+		return 'categories';
+	}
 
 	/**
 	 * @return CategoryVO

@@ -9,9 +9,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 trait ContactsTrait {
 
 	/**
-	 * @var string
+	 * @return string
 	 */
-	protected $aApiEndpoint = 'contacts';
+	protected function getApiEndpoint() {
+		return 'contacts';
+	}
 
 	/**
 	 * @return ContactVO
