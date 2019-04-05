@@ -1,6 +1,6 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
@@ -76,7 +76,7 @@ class ContactsIterator extends Entities\Common\CommonIterator {
 	}
 
 	/**
-	 * @return BillVO
+	 * @return ContactVO
 	 */
 	public function current() {
 		return parent::current();
