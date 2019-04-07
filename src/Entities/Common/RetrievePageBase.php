@@ -44,7 +44,7 @@ abstract class RetrievePageBase extends Api {
 	 * @return $this
 	 */
 	public function setPage( $nPage = 1 ) {
-		return $this->setRequestDataItem( 'page', max( 1, (int)$nPage ) );
+		return $this->setRequestDataItem( 'page', max( 1, $nPage + 1 ) ); //because pages start at 0
 	}
 
 	/**
