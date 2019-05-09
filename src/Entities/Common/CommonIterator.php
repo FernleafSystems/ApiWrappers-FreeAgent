@@ -45,14 +45,14 @@ abstract class CommonIterator extends AbstractPagedIterator {
 	}
 
 	/**
-	 * @param int $nDate
+	 * @param int $nDateTs
 	 * @param int $nRadius
 	 * @return $this
 	 */
-	public function filterByDateRange( $nDate, $nRadius = 5 ) {
+	public function filterByDateRange( $nDateTs, $nRadius = 5 ) {
 		$nDaysRadius = 86400*$nRadius;
-		return $this->filterByDateFrom( $nDate - $nDaysRadius )
-					->filterByDateTo( $nDate + $nDaysRadius );
+		return $this->filterByDateFrom( $nDateTs - $nDaysRadius )
+					->filterByDateTo( $nDateTs + $nDaysRadius );
 	}
 
 	/**
