@@ -7,4 +7,5 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanat
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  */
 class Find extends RetrieveBulk {
+
 }

@@ -16,8 +16,8 @@ class FindBase extends Api {
 	 * @return $this
 	 */
 	public function setDateRange( $nDate, $nRadius = 5 ) {
-		$nDaysRadius = 86400*$nRadius;
-		return $this->setRequestDataItem( 'from_date', gmdate( 'Y-m-d', $nDate - $nDaysRadius ) )
-					->setRequestDataItem( 'to_date', gmdate( 'Y-m-d', $nDate + $nDaysRadius ) );
+		$nDaysRad = 86400*$nRadius;
+		return $this->setRequestDataItem( 'from_date', $this->convertToStdDateFormat( $nDate - $nDaysRad ) )
+					->setRequestDataItem( 'to_date', $this->convertToStdDateFormat( $nDate + $nDaysRad ) );
 	}
 }

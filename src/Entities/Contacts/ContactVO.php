@@ -22,6 +22,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getChargeSalesTax() {
 		return $this->charge_sales_tax;
@@ -29,6 +30,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getCountry() {
 		return $this->country;
@@ -36,6 +38,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getEmail() {
 		return $this->email;
@@ -43,6 +46,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getFirstName() {
 		return $this->first_name;
@@ -50,6 +54,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getLastName() {
 		return $this->last_name;
@@ -57,6 +62,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getOrganisationName() {
 		return $this->organisation_name;
@@ -64,6 +70,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getSalesTaxRegistrationNumber() {
 		return $this->sales_tax_registration_number;
@@ -71,6 +78,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return string 'Active', 'Hidden'
+	 * @deprecated
 	 */
 	public function getStatus() {
 		return $this->status;
@@ -78,6 +86,7 @@ class ContactVO extends EntityVO {
 
 	/**
 	 * @return bool
+	 * @deprecated
 	 */
 	public function hasSalesTaxRegistrationNumber() {
 		return !empty( $this->sales_tax_registration_number );

@@ -14,15 +14,16 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  * @property string $iban
  * @property string $name
  * @property string $sort_code
- * @property string $status - active or hidden
+ * @property string $status               - active or hidden
  * @property bool   $is_primary
- * @property string $type - StandardBankAccount, PaypalAccount, CreditCardAccount
+ * @property string $type                 - StandardBankAccount, PaypalAccount, CreditCardAccount
  * @property string $latest_activity_date - YYYY-MM-DD
  */
 class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getAccountNumber() {
 		return $this->account_number;
@@ -30,6 +31,7 @@ class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getCurrency() {
 		return $this->currency;
@@ -37,6 +39,7 @@ class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getCurrentBalance() {
 		return $this->current_balance;
@@ -44,6 +47,7 @@ class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getIban() {
 		return $this->iban;
@@ -51,6 +55,7 @@ class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getName() {
 		return $this->name;
@@ -58,13 +63,15 @@ class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getSortCode() {
 		return $this->sort_code;
 	}
 
 	/**
-	 * @return string active / hidden
+	 * @return string
+	 * @deprecated
 	 */
 	public function getStatus() {
 		return $this->status;
@@ -72,6 +79,7 @@ class BankAccountVO extends EntityVO {
 
 	/**
 	 * @return bool
+	 * @deprecated
 	 */
 	public function isPrimary() {
 		return (bool)$this->is_primary;

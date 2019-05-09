@@ -9,11 +9,17 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  *
  * Class BillVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
+ * @property string $contact            - URL
+ * @property string $category           - URL
+ * @property string $project            - URL
+ * @property bool   $rerecurring
+ * @property string $recurring_end_date - YYYY-MM-DD
+ * @property string $comments
  * @property string $reference
  * @property string $ec_status
  * @property string $status
- * @property string $dated_on - YYYY-MM-DD
- * @property string $due_on   - YYYY-MM-DD
+ * @property string $dated_on           - YYYY-MM-DD
+ * @property string $due_on             - YYYY-MM-DD
  * @property float  $due_value
  * @property float  $paid_value
  * @property float  $total_value
@@ -23,6 +29,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getAmountDue() {
 		return $this->due_value;
@@ -30,6 +37,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getAmountPaid() {
 		return $this->paid_value;
@@ -37,6 +45,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getAmountTotal() {
 		return $this->total_value;
@@ -44,13 +53,15 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getCategoryUri() {
-		return $this->getStringParam( 'category' );
+		return $this->category;
 	}
 
 	/**
 	 * @return string - date
+	 * @deprecated
 	 */
 	public function getDueOn() {
 		return $this->due_on;
@@ -60,11 +71,12 @@ class BillVO extends EntityVO {
 	 * @return string
 	 */
 	public function getContactId() {
-		return basename( $this->getStringParam( 'contact' ) );
+		return $this->getIdFromEntityUrl( $this->contact );
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getDatedOn() {
 		return $this->dated_on;
@@ -72,6 +84,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getEcStatus() {
 		return $this->ec_status;
@@ -79,6 +92,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getReference() {
 		return $this->reference;
@@ -86,6 +100,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getStatus() {
 		return $this->status;
@@ -93,6 +108,7 @@ class BillVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getValueSalesTax() {
 		return $this->sales_tax_value;

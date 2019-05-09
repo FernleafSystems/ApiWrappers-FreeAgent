@@ -24,7 +24,7 @@ class Update extends Create {
 	 * @param array $aUpdateData
 	 * @return InvoiceVO|null
 	 */
-	public function update( $aUpdateData = array() ) {
+	public function update( $aUpdateData = [] ) {
 		return $this->create( $aUpdateData );
 	}
 }

@@ -9,5 +9,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  */
 class Base extends Api {
+
 	use ContactsTrait;
 }

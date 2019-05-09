@@ -17,7 +17,7 @@ class Create extends Base {
 	 * @param array $aData
 	 * @return BillVO|null
 	 */
-	public function create( $aData = array() ) {
+	public function create( $aData = [] ) {
 		return $this->setRequestData( $aData, true )
 					->sendRequestWithVoResponse();
 	}
@@ -107,6 +107,6 @@ class Create extends Base {
 	 * @return array
 	 */
 	protected function getCriticalRequestItems() {
-		return array( 'contact', 'dated_on', 'due_on', 'reference', 'total_value', 'category' );
+		return [ 'contact', 'dated_on', 'due_on', 'reference', 'total_value', 'category' ];
 	}
 }

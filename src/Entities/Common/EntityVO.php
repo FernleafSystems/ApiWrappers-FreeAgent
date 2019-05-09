@@ -28,18 +28,23 @@ class EntityVO extends BaseVO {
 	}
 
 	/**
+	 * @param string $sUrl
 	 * @return string
 	 */
-	public function getId() {
-		$sId = $this->getParam( 'id' );
-		if ( empty( $sId ) ) {
-			$sId = basename( $this->getUri() );
-		}
-		return $sId;
+	public function getIdFromEntityUrl( $sUrl ) {
+		return basename( $sUrl );
 	}
 
 	/**
 	 * @return string
+	 */
+	public function getId() {
+		return empty( $this->id ) ? $this->getIdFromEntityUrl( $this->url ) : $this->id;
+	}
+
+	/**
+	 * @return string
+	 * @deprecated
 	 */
 	public function getUri() {
 		return $this->url;

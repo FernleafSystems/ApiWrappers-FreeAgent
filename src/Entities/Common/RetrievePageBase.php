@@ -76,7 +76,7 @@ abstract class RetrievePageBase extends Api {
 	 * @return $this
 	 */
 	public function filterByDateFrom( $nTimestamp ) {
-		return $this->setRequestDataItem( 'from_date', gmdate( 'Y-m-d', $nTimestamp ) );
+		return $this->setRequestDataItem( 'from_date', $this->convertToStdDateFormat( $nTimestamp ) );
 	}
 
 	/**
@@ -84,7 +84,7 @@ abstract class RetrievePageBase extends Api {
 	 * @return $this
 	 */
 	public function filterByDateTo( $nTimestamp ) {
-		return $this->setRequestDataItem( 'to_date', gmdate( 'Y-m-d', $nTimestamp ) );
+		return $this->setRequestDataItem( 'to_date', $this->convertToStdDateFormat( $nTimestamp ) );
 	}
 
 	/**
@@ -92,7 +92,7 @@ abstract class RetrievePageBase extends Api {
 	 * @return $this
 	 */
 	public function filterByDateUpdatedSince( $nTimestamp ) {
-		return $this->setRequestDataItem( 'updated_since', gmdate( 'Y-m-d', $nTimestamp ) );
+		return $this->setRequestDataItem( 'updated_since', $this->convertToStdDateFormat( $nTimestamp ) );
 	}
 
 	/**

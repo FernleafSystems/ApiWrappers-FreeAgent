@@ -17,7 +17,7 @@ class Create extends Base {
 	 * @param array $aData
 	 * @return InvoiceVO|null
 	 */
-	public function create( $aData = array() ) {
+	public function create( $aData = [] ) {
 		return $this->setRequestData( $aData, true )
 					->sendRequestWithVoResponse();
 	}
@@ -37,7 +37,7 @@ class Create extends Base {
 	public function addInvoiceItems( $aNewItems ) {
 		$aItems = $this->getRequestDataItem( 'invoice_items' );
 		if ( !is_array( $aItems ) ) {
-			$aItems = array();
+			$aItems = [];
 		}
 		$aItems = array_merge(
 			$aItems,

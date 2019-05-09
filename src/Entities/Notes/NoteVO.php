@@ -6,45 +6,51 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/notes
- *
  * Class NoteVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Notes
+ * @package    FernleafSystems\ApiWrappers\Freeagent\Entities\Notes
+ * @property string $author
+ * @property string $note
+ * @property string $parent_url
  */
 class NoteVO extends EntityVO {
 
-
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getAuthor() {
-		return $this->getStringParam( 'author' );
+		return $this->author;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getContent() {
-		return $this->getStringParam( 'note' );
+		return $this->note;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getParentUri() {
-		return $this->getStringParam( 'parent_url' );
+		return $this->parent_url;
 	}
 
 	/**
-	 * @return int UTC
+	 * @return string
+	 * @deprecated
 	 */
 	public function getCreatedAt() {
-		return $this->getStringParam( 'created_at' );
+		return $this->created_at;
 	}
 
 	/**
-	 * @return int UTC
+	 * @return string
+	 * @deprecated
 	 */
 	public function getUpdatedAt() {
-		return $this->getStringParam( 'updated_at' );
+		return $this->updated_at;
 	}
 }

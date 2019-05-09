@@ -14,6 +14,14 @@ class Api extends BaseApi {
 	const REQUEST_METHOD = 'get';
 
 	/**
+	 * @param int $nTimestamp
+	 * @return string
+	 */
+	static public function convertToStdDateFormat( $nTimestamp ) {
+		return gmdate( 'Y-m-d', $nTimestamp );
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function prepFinalRequestData() {
@@ -155,20 +163,20 @@ class Api extends BaseApi {
 	 * @return string
 	 */
 	protected function filterDateValue( $mDate ) {
-		return preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $mDate ) ? $mDate : gmdate( 'Y-m-d', $mDate );
+		return preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $mDate ) ? $mDate : $this->convertToStdDateFormat( $mDate );
 	}
 
 	/**
-	 * @deprecated
 	 * @return EntityVO
+	 * @deprecated
 	 */
 	public function getNewEntityResourceVO() {
 		return $this->getVO();
 	}
 
 	/**
-	 * @deprecated
 	 * @return string
+	 * @deprecated
 	 */
 	protected function getRequestEndpoint() {
 		return $this->getApiEndpoint();
