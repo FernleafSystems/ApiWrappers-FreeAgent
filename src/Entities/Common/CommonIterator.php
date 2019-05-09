@@ -85,7 +85,8 @@ abstract class CommonIterator extends AbstractPagedIterator {
 	}
 
 	/**
-	 * @param bool $bDescendingOrder
+	 * @param string $sField
+	 * @param bool   $bDescendingOrder
 	 * @return $this
 	 */
 	public function orderBy( $sField, $bDescendingOrder = false ) {
