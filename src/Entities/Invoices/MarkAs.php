@@ -43,9 +43,15 @@ class MarkAs extends Base {
 	 * @return bool
 	 */
 	protected function markAs( $sAs ) {
-		return $this->setParam( 'mark_as', strtolower( $sAs ) )
-					->send()
-					->isLastRequestSuccess();
+		try {
+			$bSuccess = $this->setParam( 'mark_as', strtolower( $sAs ) )
+							 ->send()
+							 ->isLastRequestSuccess();
+		}
+		catch ( \Exception $oE ) {
+			$bSuccess = false;
+		}
+		return $bSuccess;
 	}
 
 	/**

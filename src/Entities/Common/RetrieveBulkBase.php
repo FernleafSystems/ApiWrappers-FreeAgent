@@ -52,7 +52,7 @@ abstract class RetrieveBulkBase extends Api {
 		$this->setPage( $nStartPage )
 			 ->setPerPage( $nPerPage );
 
-		$aMergedResults = array();
+		$aMergedResults = [];
 
 		$nPerPage = $this->getPerPage(); // used in the loop so getting real value is critical
 		do {
@@ -104,7 +104,7 @@ abstract class RetrieveBulkBase extends Api {
 		$oFilterItems = $this->getFilterItems();
 		if ( $oFilterItems->hasEqualityFilterItems() ) {
 
-			$aFiltered = array();
+			$aFiltered = [];
 
 			$aFilters = $oFilterItems->getEqualityFilterItems();
 			foreach ( $aResultSet as $aRes ) {
@@ -188,8 +188,8 @@ abstract class RetrieveBulkBase extends Api {
 	}
 
 	/**
-	 * @var int $nLimit 0 == no limit
 	 * @return $this
+	 * @var int $nLimit 0 == no limit
 	 */
 	public function setResultsLimit( $nLimit = 0 ) {
 		return $this->setParam( 'retrieve_results_limit', $nLimit );
@@ -279,7 +279,7 @@ abstract class RetrieveBulkBase extends Api {
 	 * @return $this
 	 */
 	public function filterByDateFrom( $nTimestamp ) {
-		return $this->setRequestDataItem( 'from_date', $this->convertToStandardDateFormat( $nTimestamp ) );
+		return $this->setRequestDataItem( 'from_date', $this->convertToStdDateFormat( $nTimestamp ) );
 	}
 
 	/**
@@ -287,7 +287,7 @@ abstract class RetrieveBulkBase extends Api {
 	 * @return $this
 	 */
 	public function filterByDateTo( $nTimestamp ) {
-		return $this->setRequestDataItem( 'to_date', $this->convertToStandardDateFormat( $nTimestamp ) );
+		return $this->setRequestDataItem( 'to_date', $this->convertToStdDateFormat( $nTimestamp ) );
 	}
 
 	/**
@@ -295,7 +295,7 @@ abstract class RetrieveBulkBase extends Api {
 	 * @return $this
 	 */
 	public function filterByDateUpdatedSince( $nTimestamp ) {
-		return $this->setRequestDataItem( 'updated_since', $this->convertToStandardDateFormat( $nTimestamp ) );
+		return $this->setRequestDataItem( 'updated_since', $this->convertToStdDateFormat( $nTimestamp ) );
 	}
 
 	/**

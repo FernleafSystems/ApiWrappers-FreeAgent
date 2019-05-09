@@ -16,7 +16,7 @@ class Create extends Base {
 	 * @param array $aData
 	 * @return ContactVO|null
 	 */
-	public function create( $aData = array() ) {
+	public function create( $aData = [] ) {
 		/** @var ContactVO $oContact */
 		$oContact = $this->setRequestData( $aData, true )
 						 ->sendRequestWithVoResponse();
@@ -185,6 +185,6 @@ class Create extends Base {
 	 * @return array
 	 */
 	protected function getCriticalRequestItems() {
-		return array( 'first_name', 'last_name' );
+		return [ 'first_name', 'last_name' ];
 	}
 }

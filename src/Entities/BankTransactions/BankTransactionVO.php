@@ -8,10 +8,10 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 /**
  * Class BankTransactionVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- * @property float   $amount
+ * @property float   $amount                  - grand total
  * @property float   $unexplained_amount
- * @property string  $bank_account - URI
- * @property string  $dated_on     - YYYY-MM-DD
+ * @property string  $bank_account            - URI
+ * @property string  $dated_on                - YYYY-MM-DD
  * @property string  $description
  * @property string  $uploaded_at
  * @property bool    $is_manual
@@ -21,6 +21,7 @@ class BankTransactionVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getAmountTotal() {
 		return $this->amount;
@@ -28,6 +29,7 @@ class BankTransactionVO extends EntityVO {
 
 	/**
 	 * @return float
+	 * @deprecated
 	 */
 	public function getAmountUnexplained() {
 		return $this->unexplained_amount;
@@ -37,11 +39,12 @@ class BankTransactionVO extends EntityVO {
 	 * @return string
 	 */
 	public function getBankAccountId() {
-		return basename( $this->bank_account );
+		return $this->getIdFromEntityUrl( $this->bank_account );
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getDatedOn() {
 		return $this->dated_on;
@@ -56,6 +59,7 @@ class BankTransactionVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getDescription() {
 		return $this->description;
@@ -63,6 +67,7 @@ class BankTransactionVO extends EntityVO {
 
 	/**
 	 * @return bool
+	 * @deprecated
 	 */
 	public function isManual() {
 		return (bool)$this->is_manual;

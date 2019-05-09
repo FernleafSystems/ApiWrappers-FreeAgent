@@ -38,11 +38,11 @@ class Company {
 	 * @return array
 	 */
 	public function toArray() {
-		return array(
+		return [
 			'name'                        => $this->name,
 			'type'                        => $this->type,
 			'company_registration_number' => $this->company_registration_number
-		);
+		];
 	}
 
 	/**

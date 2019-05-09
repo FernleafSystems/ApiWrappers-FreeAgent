@@ -7,6 +7,7 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
  */
 class RetrieveMe extends Retrieve {
+
 	/**
 	 * @return UserVO
 	 */

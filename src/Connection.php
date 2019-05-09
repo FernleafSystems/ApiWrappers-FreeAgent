@@ -20,8 +20,8 @@ use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
 	/**
-	 * @deprecated
 	 * @return string
+	 * @deprecated
 	 */
 	public function getAccessToken() {
 		return $this->access_token;
@@ -36,8 +36,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	}
 
 	/**
-	 * @deprecated
 	 * @return string
+	 * @deprecated
 	 */
 	public function getBaseUrlOverride() {
 		return $this->base_url_override;

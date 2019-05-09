@@ -2,34 +2,43 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items;
 
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Categories\CategoryVO;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
+use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
 /**
  * Class InvoiceItemVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items
+ * @property float  $sales_tax_rate
+ * @property string $category        - url
+ * @property string $description
+ * @property int    $position        - starts at 1
+ * @property float  $price
+ * @property int    $quantity
+ * @property string $item_type
  */
-class InvoiceItemVO extends EntityVO {
+class InvoiceItemVO extends Entities\Common\EntityVO {
 
 	/**
 	 * @return float
 	 */
 	public function getValueSalesRate() {
-		return $this->getParam( 'sales_tax_rate' );
+		return $this->sales_tax_rate;
 	}
 
 	/**
-	 * @param CategoryVO $oCategory
+	 * @param Entities\Categories\CategoryVO $oCategory
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setCategory( $oCategory ) {
-		return $this->setParam( 'category', $oCategory->getUri() );
+		$this->category = $oCategory->url;
+		return $this;
 	}
 
 	/**
 	 * TODO: remove hardcoded URL
 	 * @param string $nId
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setCategoryId( $nId ) {
 		$nId = str_pad( $nId, 3, '0', STR_PAD_LEFT );
@@ -39,43 +48,53 @@ class InvoiceItemVO extends EntityVO {
 	/**
 	 * @param string $sDescription
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setDescription( $sDescription ) {
-		return $this->setParam( 'description', $sDescription );
+		$this->description = $sDescription;
+		return $this;
 	}
 
 	/**
 	 * @param int $nPos Starts at 1
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setPosition( $nPos ) {
-		return $this->setParam( 'position', $nPos );
+		$this->position = $nPos;
+		return $this;
 	}
 
 	/**
 	 * Only required if item_type is not time-based
-	 * @param float $nPrice Starts at 1
+	 * @param float $nPrice
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setPrice( $nPrice ) {
-		return $this->setParam( 'price', $nPrice );
+		$this->price = $nPrice;
+		return $this;
 	}
 
 	/**
 	 * Only required if item_type is not time-based
 	 * @param float $nRate Starts at 1
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setSalesTaxRate( $nRate ) {
-		return $this->setParam( 'sales_tax_rate', $nRate );
+		$this->sales_tax_rate = $nRate;
+		return $this;
 	}
 
 	/**
 	 * @param int $nQuantity the number of "item types"
 	 * @return $this
+	 * @deprecated
 	 */
 	public function setQuantity( $nQuantity ) {
-		return $this->setParam( 'quantity', $nQuantity );
+		$this->quantity = $nQuantity;
+		return $this;
 	}
 
 	/**
@@ -98,6 +117,7 @@ class InvoiceItemVO extends EntityVO {
 	 * @return $this
 	 */
 	public function setType( $sType ) {
-		return $this->setParam( 'item_type', ucfirst( strtolower( $sType ) ) );
+		$this->item_type = ucfirst( strtolower( $sType ) );
+		return $this;
 	}
 }

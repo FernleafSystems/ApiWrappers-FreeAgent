@@ -14,7 +14,7 @@ class RetrievalFilterItems {
 
 	/**
 	 * @param string $sKey
-	 * @param mixed $mValue
+	 * @param mixed  $mValue
 	 * @return $this
 	 */
 	public function setEqualityFilterItem( $sKey, $mValue ) {
@@ -29,7 +29,7 @@ class RetrievalFilterItems {
 	public function getEqualityFilterItems() {
 		$aItems = $this->getArrayParam( 'equality_filter_items' );
 		if ( !is_array( $aItems ) ) {
-			$aItems = array();
+			$aItems = [];
 		}
 		return $aItems;
 	}

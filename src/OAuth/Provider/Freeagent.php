@@ -14,10 +14,12 @@ class Freeagent extends AbstractProvider {
 
 	const URL_LIVE = 'https://api.freeagent.com/v2';
 	const URL_SANDBOX = 'https://api.sandbox.freeagent.com/v2';
+
 	/**
 	 * @var bool
 	 */
 	protected $bIsSandbox;
+
 	/**
 	 * @var bool
 	 */
@@ -36,7 +38,7 @@ class Freeagent extends AbstractProvider {
 	 * - request_uri must be provided and be identical (IDENTICAL) to the value sent on the Authorization Code request
 	 * - Instead of Basic Authorization, ensure client_id and client_secret are included in the params
 	 *
-	 * @param  array $aParams
+	 * @param array $aParams
 	 * @return array
 	 */
 //	protected function getAccessTokenOptions( array $aParams ) {
