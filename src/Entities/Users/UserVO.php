@@ -9,63 +9,21 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  *
  * Class UserVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
+ * @property string $email
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $ni_number
+ * @property string $unique_tax_reference
+ * @property int    $permission_level
+ * @property string $role
  */
 class UserVO extends EntityVO {
 
 	/**
 	 * @return string
 	 */
-	public function getEmail() {
-		return $this->getStringParam( 'email' );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getFirstName() {
-		return $this->getStringParam( 'first_name' );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLastName() {
-		return $this->getStringParam( 'last_name' );
-	}
-
-	/**
-	 * @return string National Insurance Number
-	 */
-	public function getNiNumber() {
-		return $this->getStringParam( 'unique_tax_reference' );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getUniqueTaxReference() {
-		return $this->getStringParam( 'unique_tax_reference' );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPermissionLevel() {
-		return $this->getNumericParam( 'permission_level' );
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getPermissionLevelAsString() {
-		return $this->getPermissionsMap()[ $this->getPermissionLevel() ];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getRole() {
-		return $this->getStringParam( 'role' );
+		return $this->getPermissionsMap()[ $this->permission_level ];
 	}
 
 	/**
@@ -83,5 +41,61 @@ class UserVO extends EntityVO {
 			'Tax, Accounting & Users',
 			'Full',
 		];
+	}
+
+	/**
+	 * @return string
+	 * @deprecated
+	 */
+	public function getEmail() {
+		return $this->email;
+	}
+
+	/**
+	 * @return string
+	 * @deprecated
+	 */
+	public function getFirstName() {
+		return $this->first_name;
+	}
+
+	/**
+	 * @return string
+	 * @deprecated
+	 */
+	public function getLastName() {
+		return $this->last_name;
+	}
+
+	/**
+	 * @return string National Insurance Number
+	 * @deprecated
+	 */
+	public function getNiNumber() {
+		return $this->ni_number;
+	}
+
+	/**
+	 * @return string
+	 * @deprecated
+	 */
+	public function getUniqueTaxReference() {
+		return $this->unique_tax_reference;
+	}
+
+	/**
+	 * @return int
+	 * @deprecated
+	 */
+	public function getPermissionLevel() {
+		return (int)$this->permission_level;
+	}
+
+	/**
+	 * @return string
+	 * @deprecated
+	 */
+	public function getRole() {
+		return $this->role;
 	}
 }

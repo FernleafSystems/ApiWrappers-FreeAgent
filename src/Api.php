@@ -17,7 +17,7 @@ class Api extends BaseApi {
 	 * @param int $nTimestamp
 	 * @return string
 	 */
-	static public function convertToStandardDateFormat( $nTimestamp ) {
+	static public function convertToStdDateFormat( $nTimestamp ) {
 		return gmdate( 'Y-m-d', $nTimestamp );
 	}
 
@@ -163,7 +163,7 @@ class Api extends BaseApi {
 	 * @return string
 	 */
 	protected function filterDateValue( $mDate ) {
-		return preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $mDate ) ? $mDate : $this->convertToStandardDateFormat( $mDate );
+		return preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $mDate ) ? $mDate : $this->convertToStdDateFormat( $mDate );
 	}
 
 	/**

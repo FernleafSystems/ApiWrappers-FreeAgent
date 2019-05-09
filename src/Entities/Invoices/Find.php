@@ -5,6 +5,7 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
 /**
+ * @deprecated - user iterator
  * Class Find
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  */
@@ -15,7 +16,7 @@ class Find extends RetrieveBulk {
 	 * @return $this
 	 */
 	public function filterByContact( $oContact ) {
-		return $this->setRequestDataItem( 'contact', $oContact->getUri() );
+		return $this->setRequestDataItem( 'contact', $oContact->url );
 	}
 
 	/**

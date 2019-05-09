@@ -31,7 +31,7 @@ class Create extends Base {
 	 * @param array $aData
 	 * @return UserVO|null
 	 */
-	public function create( $aData = array() ) {
+	public function create( $aData = [] ) {
 		return $this->setRequestData( $aData, true )
 					->sendRequestWithVoResponse();
 	}
@@ -80,6 +80,6 @@ class Create extends Base {
 	 * @return array
 	 */
 	protected function getPossibleRoles() {
-		return array( 'Owner', 'Director', 'Partner', 'Company Secretary', 'Employee', 'Shareholder', 'Accountant' );
+		return [ 'Owner', 'Director', 'Partner', 'Company Secretary', 'Employee', 'Shareholder', 'Accountant' ];
 	}
 }

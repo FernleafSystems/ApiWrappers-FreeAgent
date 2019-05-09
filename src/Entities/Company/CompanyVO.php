@@ -9,97 +9,136 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  *
  * Class CompanyVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Company
+ * @property string $name
+ * @property string $currency
+ * @property string $company_start_date        - YYYY-MM-DD
+ * @property string $first_accounting_year_end - YYYY-MM-DD
+ * @property string $freeagent_start_date      - YYYY-MM-DD
+ * @property string $mileage_units
+ * @property string $company_registration_number
+ * @property string $sales_tax_registration_status
+ * @property string $sales_tax_registration_number
+ * @property string $subdomain
+ * @property string $type
+ *            - UkLimitedCompany, UkSoleTrader, UkPartnership,
+ *           UkLimitedLiabilityPartnership, UsSoleProprietor, UsPartnership, UsLimitedLiabilityCompany, UsSCorp UsCCorp
+ *           UniversalCompany
+ * @property bool   $cis_enabled
+ * @property string $short_date_format         - dd mmm yy, dd-mm-yyyy, mm/dd/yyyy, yyyy-mm-dd
+ * @property string $website
+ * @property string $contact_email
+ * @property string $contact_phone
+ * @property string $address1
+ * @property string $address2
+ * @property string $address3
+ * @property string $town
+ * @property string $region
+ * @property string $postcode
+ * @property string $country
  */
 class CompanyVO extends EntityVO {
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getCountry() {
-		return $this->getStringParam( 'country' );
+		return $this->country;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getCurrency() {
-		return $this->getStringParam( 'currency' );
+		return $this->currency;
 	}
 
 	/**
 	 * @return string YYYY-MM-DD
+	 * @deprecated
 	 */
 	public function getDateCompanyStart() {
-		return $this->getStringParam( 'company_start_date' );
+		return $this->company_start_date;
 	}
 
 	/**
 	 * @return string YYYY-MM-DD
+	 * @deprecated
 	 */
 	public function getDateFirstAccountingYearEnd() {
-		return $this->getStringParam( 'first_accounting_year_end' );
+		return $this->first_accounting_year_end;
 	}
 
 	/**
 	 * @return string YYYY-MM-DD
+	 * @deprecated
 	 */
 	public function getDateFreeagentStart() {
-		return $this->getStringParam( 'freeagent_start_date' );
+		return $this->freeagent_start_date;
 	}
 
 	/**
 	 * @return string e.g. miles
+	 * @deprecated
 	 */
 	public function getMileageUnits() {
-		return $this->getStringParam( 'mileage_units' );
+		return $this->mileage_units;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getName() {
-		return $this->getStringParam( 'name' );
+		return $this->name;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getRegistrationNumber() {
-		return $this->getStringParam( 'company_registration_number' );
+		return $this->company_registration_number;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getSalesTaxRegistrationStatus() {
-		return $this->getStringParam( 'sales_tax_registration_status' );
+		return $this->sales_tax_registration_status;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getSalesTaxRegistrationNumber() {
-		return $this->getStringParam( 'sales_tax_registration_number' );
+		return $this->sales_tax_registration_number;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getSubdomain() {
-		return $this->getStringParam( 'subdomain' );
+		return $this->subdomain;
 	}
 
 	/**
 	 * @return string
+	 * @deprecated
 	 */
 	public function getType() {
-		return $this->getStringParam( 'Type' );
+		return $this->type;
 	}
 
 	/**
 	 * @return bool
+	 * @deprecated
 	 */
 	public function isCisEnabled() {
-		return $this->getParam( 'cis_enabled' );
+		return $this->cis_enabled;
 	}
 }

@@ -33,7 +33,7 @@ class Create extends Base {
 	 * @return $this
 	 */
 	public function setAssociatedPaidTo( $sAssociatedTo, $sAssociatedId ) {
-		return $this->setRequestDataItem( 'paid_' . $sAssociatedTo, $sAssociatedId );
+		return $this->setRequestDataItem( 'paid_'.$sAssociatedTo, $sAssociatedId );
 	}
 
 	/**
