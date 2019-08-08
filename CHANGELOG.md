@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.2.7] - 2019-08-08
+### Added
+- support for currencies on Bills.
+
+## [0.2.3-6] - 2019-05-09
+### Changed
+- uses our automatic paging iterator for retrieval of many entities.
+
 ## [0.2.2] - 2019-03-19
 ### Added
 - ability to set contact email.

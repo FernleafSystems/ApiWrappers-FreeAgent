@@ -56,6 +56,14 @@ class Create extends Base {
 	}
 
 	/**
+	 * @param string $sCurrency e.g. GBP, USD, EUR
+	 * @return $this
+	 */
+	public function setCurrency( $sCurrency ) {
+		return $this->setRequestDataItem( 'currency', strtoupper( $sCurrency ) );
+	}
+
+	/**
 	 * @param int|string $mDate
 	 * @return $this
 	 */
