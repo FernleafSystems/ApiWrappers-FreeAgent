@@ -16,7 +16,7 @@
   "repositories": [
   ],
   "require":      {
-    "php":                              ">=5.6.0",
+    "php":                              ">=7.4",
     "fernleafsystems/apiwrappers-base": "^1.1.6",
     "league/oauth2-client":             "^2.0"
   },

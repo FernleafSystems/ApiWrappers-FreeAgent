@@ -11,7 +11,7 @@ trait BankAccountsTrait {
 	/**
 	 * @return string
 	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'bank_accounts';
 	}
 

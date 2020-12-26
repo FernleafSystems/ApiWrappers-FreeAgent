@@ -13,7 +13,7 @@ class Base extends Freeagent\Api {
 	/**
 	 * @return string
 	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'company';
 	}
 

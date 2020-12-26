@@ -11,7 +11,7 @@ trait BillsTrait {
 	/**
 	 * @return string
 	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'bills';
 	}
 

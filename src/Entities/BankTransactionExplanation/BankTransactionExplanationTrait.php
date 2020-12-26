@@ -11,7 +11,7 @@ trait BankTransactionExplanationTrait {
 	/**
 	 * @return string
 	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'bank_transaction_explanations';
 	}
 

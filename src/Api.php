@@ -17,7 +17,7 @@ class Api extends BaseApi {
 	 * @param int $nTimestamp
 	 * @return string
 	 */
-	static public function convertToStdDateFormat( $nTimestamp ) {
+	public static function convertToStdDateFormat( $nTimestamp ) {
 		return gmdate( 'Y-m-d', $nTimestamp );
 	}
 
@@ -90,7 +90,7 @@ class Api extends BaseApi {
 	/**
 	 * @return string
 	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return '';
 	}
 
@@ -98,14 +98,13 @@ class Api extends BaseApi {
 	 * @return string
 	 */
 	protected function getUrlEndpoint() {
-		$sBase = $this->getApiEndpoint();
-		return $this->hasEntityId() ? sprintf( '%s/%s', $sBase, $this->getEntityId() ) : $sBase;
+		$base = $this->getApiEndpoint();
+		return $this->hasEntityId() ?
+			sprintf( '%s/%s', $base, $this->getEntityId() )
+			: $base;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasEntityId() {
+	public function hasEntityId() :bool {
 		return !is_null( $this->getEntityId() );
 	}
 
