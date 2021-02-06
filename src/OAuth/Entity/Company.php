@@ -1,6 +1,6 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider;
+namespace FernleafSystems\ApiWrappers\Freeagent\OAuth\Entity;
 
 use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
 
