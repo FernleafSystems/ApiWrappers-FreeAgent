@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.2.8] - 2021-02-06
+### Added
+- fix for incorrect namespace on Company OAUTH class.
+
 ## [0.2.7] - 2019-08-08
 ### Added
 - support for currencies on Bills.

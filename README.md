@@ -2,7 +2,7 @@
 
 A PHP Wrapper for the FreeAgent accounting APIs.
 
-Current version 0.1.x is beta. Please include using strict Composer versions.
+Current version 0.2.x is beta. Please include using strict Composer versions.
 
 ## Installation
 
@@ -10,7 +10,7 @@ To get started, add the package to your project by issuing the following command
 
     composer require fernleafsystems/apiwrappers-freeagent
 
-Current version 0.1.x is beta. Please include using strict Composer versions.
+Current version 0.2.x is beta. Please include using strict Composer versions.
 
 ## Getting Started
 
@@ -30,22 +30,22 @@ basics on how to achieve it with this package are as follows.
 **Stage 1 - "Pre-Auth": Build and Redirect User to Authorization URL**
 ```php
 
-	$oOauthProvider = ( new Connection() )
-    		->setClientId( $sFreeagentAppClientId )
-    		->setIsSandbox( $bIsSandbox )
+	$OauthProvider = ( new Connection() )
+    		->setClientId( $freeagentAppClientId )
+    		->setIsSandbox( $isSandbox )
     		->getOAuthProvider();
     		
-	$sRedirectUrlBase = $oOauthProvider->getBaseAuthorizationUrl();
+	$redirectUrlBase = $OauthProvider->getBaseAuthorizationUrl();
 	
-	$aAuthUrlParams = array(
+	$authUrlParams = array(
     	'redirect_uri'  => 'https://www.theUrlForMyApp.com/To/Receive/Redirection/From/OAuth',
-    	'client_id'     => $sFreeagentAppClientId,
+    	'client_id'     => $freeagentAppClientId,
     	'response_type' => 'code'
 	);
     
-	$sAuthorizationUrl = $sRedirectUrlBase.'?'.http_build_query( $aAuthUrlParams );
+	$authorizationUrl = $redirectUrlBase.'?'.http_build_query( $authUrlParams );
 	
-	header( 'Location: '. $sAuthorizationUrl );
+	header( 'Location: '. $authorizationUrl );
 ```
 
 Assuming this is built correctly, the user will authorize your integration and be
@@ -62,21 +62,21 @@ token and it will look like this:
 
 ```php
 
-	$aTokenRequestParameters = array(
-    	'code'          => $sOauthCodeFromThePreviousStage,
-    	'client_id'     => $sFreeagentAppClientId,
-    	'client_secret' => $sFreeagentAppClientSecret,
+	$tokenRequestParameters = array(
+    	'code'          => $OauthCodeFromThePreviousStage,
+    	'client_id'     => $freeagentAppClientId,
+    	'client_secret' => $freeagentAppClientSecret,
     	'redirect_uri'  => 'https://www.theUrlForMyApp.com/To/Receive/Redirection/From/OAuth'
 	);
 	
-	$oOauthProvider = ( new Connection() )
-    		->setClientId( $sFreeagentAppClientId )
-    		->setIsSandbox( $bIsSandbox )
+	$OauthProvider = ( new Connection() )
+    		->setClientId( $freeagentAppClientId )
+    		->setIsSandbox( $isSandbox )
     		->getOAuthProvider();
 	
-	$oAccessToken = $oOauthProvider->getAccessToken( 'authorization_code', $aTokenRequestParameters );
+	$accessToken = $OauthProvider->getAccessToken( 'authorization_code', $aTokenRequestParameters );
 	
-	// Store the Access Token $oAccessToken. 
+	// Store the Access Token $accessToken. 
 ```
 Several *critical* points to note here.
 
@@ -85,7 +85,7 @@ But YOU MUST INCLUDE IT. FreeAgent will cry very long and hard if the `redirect_
 value used in this stage does not equal exactly the same value used in the previous
 stage. Read this again - it must be included and be EXACTLY the same.
 
-The Access Token `$oAccessToken` is a `\League\OAuth2\Client\Token\AccessToken` and has all
+The Access Token `$accessToken` is a `\League\OAuth2\Client\Token\AccessToken` and has all
 the accessor methods you need. You should store the access token value for future use, its
 expiration time, and also the refresh token value - you'll use this after the token has
 expired to request a new access token
@@ -93,20 +93,20 @@ expired to request a new access token
 **Stage 3 - "Expired-Token": Request a new Access Token**
 
 ```php
-	$aTokenRequestParameters = array(
-    	'client_id'     => $sFreeagentAppClientId,
-    	'client_secret' => $sFreeagentAppClientSecret,
-    	'refresh_token' => $sOAuth2RefreshTokenStoredFromPreviousStage
+	$tokenRequestParameters = array(
+    	'client_id'     => $freeagentAppClientId,
+    	'client_secret' => $freeagentAppClientSecret,
+    	'refresh_token' => $OAuth2RefreshTokenStoredFromPreviousStage
 	);
 	
-	$oOauthProvider = ( new Connection() )
-    		->setClientId( $sFreeagentAppClientId )
-    		->setIsSandbox( $bIsSandbox )
+	$OauthProvider = ( new Connection() )
+    		->setClientId( $freeagentAppClientId )
+    		->setIsSandbox( $isSandbox )
     		->getOAuthProvider();
 	
-	$oAccessToken = $oOauthProvider->getAccessToken( 'refresh_token', $aTokenRequestParameters );
+	$accessToken = $OauthProvider->getAccessToken( 'refresh_token', $tokenRequestParameters );
 	
-	// Store the Access Token $oAccessToken. 
+	// Store the Access Token $accessToken. 
 ```
 
 ## 2) Querying the FreeAgent API
@@ -116,12 +116,12 @@ FreeAgent API with ease. Here's an example on how to request your Company inform
 ### Example: Simple Data Retrieval
 
 ```php
-	$oConnection = ( new Connection() )
-    	->setIsSandbox( $bIsSandbox )
-    	->setAccessToken( $sAccessTokenFromStage3 );
+	$connection = ( new Connection() )
+    	->setIsSandbox( $isSandbox )
+    	->setAccessToken( $accessTokenFromStage3 );
 	
 	$oCompany = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Company\Retrieve() )
-	    ->setConnection( $oConnection )
+	    ->setConnection( $connection )
 	    ->retrieve();
 ```
 
@@ -132,7 +132,7 @@ accessor methods on there for you to grab the particular piece of information yo
 
 ```php
 	$oCompany = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Company\Retrieve() )
-	    ->setConnection( $oConnection )
+	    ->setConnection( $connection )
 	    ->retrieve();
 	    
 	echo $oCompany->getName();
@@ -150,7 +150,7 @@ so you can exclude this flag if you're operating on live.
 
 ```php
 	$oContact = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\Retrieve() )
-	    ->setConnection( $oConnection )
+	    ->setConnection( $connection )
 	    ->setEntityId( 12345 )
 	    ->retrieve();
 ```
@@ -169,14 +169,14 @@ Taking the `ContactVO` object you've just retrieved, you could create a new Bill
 ### Example: Creating a new Bill
 
 ```php
-	$oConnection = ( new Connection() )->setAccessToken( $sAccessTokenFromStage3 );
+	$connection = ( new Connection() )->setAccessToken( $accessTokenFromStage3 );
 	
 	$oNewBill = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Create() )
-	    ->setConnection( $oConnection )
-	    ->setContact( $oFreeagentContact ) // a Freeagent ContactVO
+	    ->setConnection( $connection )
+	    ->setContact( $freeagentContact ) // a Freeagent ContactVO
 	    ->setReference( 'My Bill Reference' )
 	    ->setTotalValue( '12.34' )  // a float
-	    ->setCategory( $oFreeagentContegory ) // a Freeagent CategoryVO
+	    ->setCategory( $freeagentContegory ) // a Freeagent CategoryVO
 	    ->setDatedOn( '2018-12-18' ) // or unix timestamp
 	    ->setDueOn( '2018-12-25' )  // or unix timestamp
 	    ->create();
@@ -207,7 +207,7 @@ Here are some search examples.
 
 ```php
 	$oFoundBill = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Find() )
-	    ->setConnection( $oConnection )
+	    ->setConnection( $connection )
 	    ->filterByReference( 'My Bill Reference' )
 	    ->first();
 ```
@@ -221,7 +221,7 @@ Instead, you could limit it by date, and even use a range with a radius.
 
 ```php
 	$oFoundBill = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Find() )
-	    ->setConnection( $oConnection )
+	    ->setConnection( $connection )
 	    ->filterByDateRange( 123123123, 5 )
 	    ->filterByReference( 'My Bill Reference' )
 	    ->first();
@@ -241,7 +241,7 @@ all the bills within that time period.
 
 ```php
 	$aAllBills = ( new \FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Find() )
-	    ->setConnection( $oConnection )
+	    ->setConnection( $connection )
 	    ->filterByDateRange( 123123123, 5 )
 	    ->all();
 ```
