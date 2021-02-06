@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider;
 
+use FernleafSystems\ApiWrappers\Freeagent\OAuth\Entity\Company;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
@@ -116,7 +117,6 @@ class Freeagent extends AbstractProvider {
 	public function userDetails( $response, AccessToken $token ) {
 		$response = (array)( $response->company );
 		$company = new Company( $response );
-
 		return $company;
 	}
 }
