@@ -42,7 +42,7 @@ class UploadStatement extends Base {
 	 * i.e. not within an array alongside other items
 	 * @return string
 	 */
-	protected function getRequestDataPayloadKey() {
+	protected function getRequestDataPayloadKey() :string {
 		return '';
 	}
 
@@ -53,10 +53,7 @@ class UploadStatement extends Base {
 		return $this->getRequestDataItem( 'statement' );
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
+	protected function getUrlEndpoint() :string {
 		return 'bank_transactions/statement';
 	}
 

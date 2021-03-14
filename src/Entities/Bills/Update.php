@@ -28,10 +28,7 @@ class Update extends Create {
 		}
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [];
 	}
 }

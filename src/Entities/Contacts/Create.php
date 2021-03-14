@@ -181,10 +181,7 @@ class Create extends Base {
 		return $this->setRequestDataItem( 'uses_contact_invoice_sequence', $bContactLevel );
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [ 'first_name', 'last_name' ];
 	}
 }

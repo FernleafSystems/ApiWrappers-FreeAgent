@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
@@ -8,17 +8,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanat
  */
 trait BankTransactionExplanationTrait {
 
-	/**
-	 * @return string
-	 */
 	protected function getApiEndpoint() :string {
 		return 'bank_transaction_explanations';
 	}
 
-	/**
-	 * @return BankTransactionExplanationVO
-	 */
-	public function getVO() {
+	public function getVO() :BankTransactionExplanationVO {
 		return new BankTransactionExplanationVO();
 	}
 }

@@ -115,8 +115,6 @@ class Freeagent extends AbstractProvider {
 	}
 
 	public function userDetails( $response, AccessToken $token ) {
-		$response = (array)( $response->company );
-		$company = new Company( $response );
-		return $company;
+		return new Company( (array)$response->company );
 	}
 }

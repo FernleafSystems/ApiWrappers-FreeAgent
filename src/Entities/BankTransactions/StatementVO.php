@@ -2,15 +2,16 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
-use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
+use FernleafSystems\Utilities\Data\Adapter\DynProperties;
 
 /**
  * Class StatementVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
+ * @property array $lines
  */
 class StatementVO {
 
-	use StdClassAdapter;
+	use DynProperties;
 
 	/**
 	 * @param int    $nTimestamp
@@ -36,32 +37,24 @@ class StatementVO {
 		return $this->setLines( $aLines );
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getLines() {
-		return $this->getArrayParam( 'lines' );
+	public function getLines() :array {
+		return is_array( $this->lines ) ? $this->lines : [];
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getLinesAsString() {
+	public function getLinesAsString() :string {
 		return implode( "\n", $this->getLines() );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasLines() {
+	public function hasLines() :bool {
 		return count( $this->getLines() ) > 0;
 	}
 
 	/**
-	 * @param array $aLines
+	 * @param array $lines
 	 * @return $this
 	 */
-	public function setLines( $aLines ) {
-		return $this->setParam( 'lines', $aLines );
+	public function setLines( $lines ) {
+		$this->lines = $lines;
+		return $this;
 	}
 }

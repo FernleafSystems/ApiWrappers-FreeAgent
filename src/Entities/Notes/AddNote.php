@@ -50,7 +50,7 @@ class AddNote extends Base {
 		if ( empty( $aNoteLines ) ) {
 			$aNoteLines = [];
 		}
-		else if ( !is_array( $aNoteLines ) ) {
+		elseif ( !is_array( $aNoteLines ) ) {
 			$aNoteLines = [ $aNoteLines ];
 		}
 

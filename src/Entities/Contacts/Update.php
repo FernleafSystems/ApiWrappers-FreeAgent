@@ -28,10 +28,7 @@ class Update extends Create {
 		return $this->create( $aUpdateData );
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [];
 	}
 }

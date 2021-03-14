@@ -22,17 +22,11 @@ class RetrievePdf extends Retrieve {
 		return isset( $aData[ 'content' ] ) ? $aData[ 'content' ] : '';
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getRequestDataPayloadKey() {
+	protected function getRequestDataPayloadKey() :string {
 		return 'pdf';
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
-		return sprintf( 'invoices/%s/pdf', $this->getEntityId() );
+	protected function getUrlEndpoint() :string{
+		return sprintf( 'invoices/%s/pdf', $this->entity_id );
 	}
 }

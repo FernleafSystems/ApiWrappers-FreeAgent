@@ -30,34 +30,28 @@ class Retrieve extends Base {
 			$aData = $this->send()
 						  ->getCoreResponseData();
 		}
-		catch ( \Exception $oE ) {
+		catch ( \Exception $e ) {
 		}
 
-		$oNew = null;
+		$VO = null;
 		if ( !empty( $aData ) && is_array( $aData ) ) {
 			foreach ( $aData as $sCatType => $aCategory ) {
-				if ( $aCategory[ 'nominal_code' ] == $this->getEntityId() ) {
-					$oNew = $this->getVO()
-								 ->applyFromArray( $aCategory );
+				if ( $aCategory[ 'nominal_code' ] == $this->entity_id ) {
+					$VO = $this->getVO()
+							   ->applyFromArray( $aCategory );
 				}
 			}
 		}
-		return $oNew;
+		return $VO;
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getResponseDataPayloadKey() {
+	protected function getResponseDataPayloadKey() :string {
 		return '';
 	}
 
-	/**
-	 * @param int $nId
-	 * @return $this
-	 */
-	public function setEntityId( $nId ) {
-		return $this->setParam( 'entity_id', str_pad( $nId, 3, '0', STR_PAD_LEFT ) );
+	public function setEntityId( $id ) :self {
+		$this->entity_id = str_pad( $id, 3, '0', STR_PAD_LEFT );
+		return $this;
 	}
 
 	/**

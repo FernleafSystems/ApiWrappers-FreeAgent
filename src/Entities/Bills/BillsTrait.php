@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
@@ -8,17 +8,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
  */
 trait BillsTrait {
 
-	/**
-	 * @return string
-	 */
 	protected function getApiEndpoint() :string {
 		return 'bills';
 	}
 
-	/**
-	 * @return BillVO
-	 */
-	public function getVO() {
+	public function getVO() :BillVO{
 		return new BillVO();
 	}
 }

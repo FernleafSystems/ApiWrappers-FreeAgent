@@ -111,10 +111,7 @@ class Create extends Base {
 		return sprintf( '%scategories/%s', $this->getBaseUrl(), str_pad( $nId, 3, '0', STR_PAD_LEFT ) );
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [ 'contact', 'dated_on', 'due_on', 'reference', 'total_value', 'category' ];
 	}
 }

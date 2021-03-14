@@ -109,7 +109,7 @@ abstract class RetrievePageBase extends Api {
 	/**
 	 * @return string
 	 */
-	protected function getRequestDataPayloadKey() {
+	protected function getRequestDataPayloadKey() :string {
 		return $this->getApiEndpoint(); // we don't truncate 's'
 	}
 }

@@ -36,22 +36,22 @@ class InvoiceItemVO extends Entities\Common\EntityVO {
 
 	/**
 	 * TODO: remove hardcoded URL
-	 * @param string $nId
+	 * @param string $id
 	 * @return $this
 	 * @deprecated
 	 */
-	public function setCategoryId( $nId ) {
-		$nId = str_pad( $nId, 3, '0', STR_PAD_LEFT );
-		return $this->setParam( 'category', 'https://api.freeagent.com/v2/categories/'.$nId );
+	public function setCategoryId( $id ) {
+		$this->category = 'https://api.freeagent.com/v2/categories/'.str_pad( $id, 3, '0', STR_PAD_LEFT );
+		return $this;
 	}
 
 	/**
-	 * @param string $sDescription
+	 * @param string $description
 	 * @return $this
 	 * @deprecated
 	 */
-	public function setDescription( $sDescription ) {
-		$this->description = $sDescription;
+	public function setDescription( $description ) {
+		$this->description = $description;
 		return $this;
 	}
 
