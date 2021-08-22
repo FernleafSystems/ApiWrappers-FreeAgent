@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Items\BillItemVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
@@ -9,23 +10,46 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
  *
  * Class BillVO
  * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
- * @property string $contact            - URL
- * @property string $category           - URL
- * @property string $project            - URL
- * @property bool   $rerecurring
- * @property string $recurring_end_date - YYYY-MM-DD
- * @property string $comments
- * @property string $reference
- * @property string $ec_status
- * @property string $status
- * @property string $dated_on           - YYYY-MM-DD
- * @property string $due_on             - YYYY-MM-DD
- * @property float  $due_value
- * @property float  $paid_value
- * @property float  $total_value
- * @property float  $sales_tax_value
+ * @property string       $contact            - URL
+ * @property string       $project            - URL
+ * @property bool         $recurring
+ * @property string       $recurring_end_date - YYYY-MM-DD
+ * @property string       $comments
+ * @property string       $reference
+ * @property string       $ec_status
+ * @property string       $status
+ * @property string       $dated_on           - YYYY-MM-DD
+ * @property string       $due_on             - YYYY-MM-DD
+ * @property float        $due_value
+ * @property float        $paid_value
+ * @property float        $total_value
+ * @property float        $sales_tax_value
+ * @property BillItemVO[] $bill_items
  */
 class BillVO extends EntityVO {
+
+	/**
+	 * @param BillItemVO $item
+	 * @return $this
+	 */
+	public function addBillItem( BillItemVO $item ) {
+		$items = is_array( $this->bill_items ) ? $this->bill_items : [];
+		$items[] = $item->getRawDataAsArray();
+		$this->bill_items = $items;
+		return $this;
+	}
+
+	/**
+	 * @return BillItemVO[]
+	 */
+	public function getBillItems() {
+		return array_map(
+			function ( $raw ) {
+				return ( new BillItemVO() )->applyFromArray( $raw );
+			},
+			is_array( $this->bill_items ) ? $this->bill_items : []
+		);
+	}
 
 	/**
 	 * @return float
@@ -49,14 +73,6 @@ class BillVO extends EntityVO {
 	 */
 	public function getAmountTotal() {
 		return $this->total_value;
-	}
-
-	/**
-	 * @return string
-	 * @deprecated
-	 */
-	public function getCategoryUri() {
-		return $this->category;
 	}
 
 	/**
