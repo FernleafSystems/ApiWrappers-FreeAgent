@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2021-08-22
+### Added
+- Add support for new Bill Items update to the API.
+
 ## [0.2.8] - 2021-02-06
 ### Added
 - fix for incorrect namespace on Company OAUTH class.
