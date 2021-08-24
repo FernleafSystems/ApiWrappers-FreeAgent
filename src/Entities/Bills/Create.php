@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Items\BillItemVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Categories\CategoryVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
@@ -14,29 +15,42 @@ class Create extends Base {
 	const REQUEST_METHOD = 'post';
 
 	/**
-	 * @param array $aData
+	 * @param array $data
 	 * @return BillVO|null
 	 */
-	public function create( $aData = [] ) {
-		return $this->setRequestData( $aData, true )
+	public function create( array $data = [] ) {
+		return $this->setRequestData( $data, true )
 					->sendRequestWithVoResponse();
 	}
 
 	/**
-	 * @param CategoryVO $oCategory
+	 * @param BillItemVO $item
 	 * @return $this
 	 */
-	public function setCategory( $oCategory ) {
-		return $this->setRequestDataItem( 'category', $oCategory->getUri() );
+	public function addBillItem( BillItemVO $item, $merge = true ) {
+		$items = $this->getRequestDataItem( 'bill_items' );
+		if ( !$merge || !is_array( $items ) ) {
+			$items = [];
+		}
+		$items[] = $item->getRawDataAsArray();
+		return $this->setRequestDataItem( 'bill_items', $items );
+	}
+
+	/**
+	 * @param CategoryVO $category
+	 * @return $this
+	 */
+	public function setCategory( CategoryVO $category ) {
+		return $this->setRequestDataItem( 'category', $category->getUri() );
 	}
 
 	/**
 	 * Will attempt to construct the URI for this category from the Base ID
-	 * @param int $nId
+	 * @param int $id
 	 * @return $this
 	 */
-	public function setCategoryId( $nId ) {
-		return $this->setRequestDataItem( 'category', $this->getCategoryUrl( $nId ) );
+	public function setCategoryId( $id ) {
+		return $this->setRequestDataItem( 'category', $this->getCategoryUrl( $id ) );
 	}
 
 	/**
