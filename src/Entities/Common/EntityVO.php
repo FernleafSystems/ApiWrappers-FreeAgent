@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 use FernleafSystems\ApiWrappers\Base\BaseVO;
 
 /**
- * Class EntityVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
  * @property string $url
  * @property string $created_at - 2011-07-28T11:25:11Z
  * @property string $updated_at - 2011-07-28T11:25:11Z
@@ -28,11 +26,11 @@ class EntityVO extends BaseVO {
 	}
 
 	/**
-	 * @param string $sUrl
+	 * @param string $url
 	 * @return string
 	 */
-	public function getIdFromEntityUrl( $sUrl ) {
-		return basename( $sUrl );
+	public function getIdFromEntityUrl( $url ) {
+		return basename( $url );
 	}
 
 	/**

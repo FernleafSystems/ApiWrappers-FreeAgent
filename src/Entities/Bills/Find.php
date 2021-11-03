@@ -11,11 +11,11 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 class Find extends RetrieveBulk {
 
 	/**
-	 * @param ContactVO $oContact
+	 * @param ContactVO $contact
 	 * @return $this
 	 */
-	public function filterByContact( $oContact ) {
-		return $this->setRequestDataItem( 'contact', $oContact->getUri() );
+	public function filterByContact( $contact ) {
+		return $this->setRequestDataItem( 'contact', $contact->url );
 	}
 
 	/**

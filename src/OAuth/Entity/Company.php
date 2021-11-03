@@ -2,10 +2,9 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\OAuth\Entity;
 
-use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
+use FernleafSystems\Utilities\Data\Adapter\DynProperties;
 
 /**
- * Class Company
  * @property string url
  * @property string name
  * @property string subdomain
@@ -25,13 +24,13 @@ use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
  */
 class Company {
 
-	use StdClassAdapter;
+	use DynProperties;
 
 	/**
-	 * @param array $aAttributes
+	 * @param array $attributes
 	 */
-	public function __construct( array $aAttributes ) {
-		$this->applyFromArray( $aAttributes );
+	public function __construct( array $attributes ) {
+		$this->applyFromArray( $attributes );
 	}
 
 	/**

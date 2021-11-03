@@ -33,11 +33,11 @@ class AddNote extends Base {
 	}
 
 	/**
-	 * @param ContactVO $oContact
+	 * @param ContactVO $contact
 	 * @return $this
 	 */
-	public function setContact( $oContact ) {
-		return $this->setRequestQueryDataItem( 'contact', $oContact->getUri() );
+	public function setContact( $contact ) {
+		return $this->setRequestQueryDataItem( 'contact', $contact->url );
 	}
 
 	/**
