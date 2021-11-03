@@ -2,50 +2,46 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 
-use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
+use FernleafSystems\Utilities\Data\Adapter\DynProperties;
 
 /**
- * Class RetrievalFilterItems
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
+ * @property array $equality_filter_items
  */
 class RetrievalFilterItems {
 
-	use StdClassAdapter;
+	use DynProperties;
 
 	/**
-	 * @param string $sKey
-	 * @param mixed  $mValue
+	 * @param string $key
+	 * @param mixed  $value
 	 * @return $this
 	 */
-	public function setEqualityFilterItem( $sKey, $mValue ) {
-		$aItems = $this->getEqualityFilterItems();
-		$aItems[ $sKey ] = $mValue;
-		return $this->setEqualityFilterItems( $aItems );
+	public function setEqualityFilterItem( $key, $value ) {
+		$items = $this->getEqualityFilterItems();
+		$items[ $key ] = $value;
+		return $this->setEqualityFilterItems( $items );
 	}
 
 	/**
 	 * @return array
 	 */
 	public function getEqualityFilterItems() {
-		$aItems = $this->getArrayParam( 'equality_filter_items' );
-		if ( !is_array( $aItems ) ) {
-			$aItems = [];
-		}
-		return $aItems;
+		return is_array( $this->equality_filter_items ) ? $this->equality_filter_items : [];
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function hasEqualityFilterItems() {
-		return ( count( $this->getEqualityFilterItems() ) > 0 );
+		return count( $this->getEqualityFilterItems() ) > 0;
 	}
 
 	/**
-	 * @param array $aItems
+	 * @param array $items
 	 * @return $this
 	 */
-	public function setEqualityFilterItems( $aItems ) {
-		return $this->setParam( 'equality_filter_items', $aItems );
+	public function setEqualityFilterItems( $items ) {
+		$this->equality_filter_items = $items;
+		return $this;
 	}
 }
