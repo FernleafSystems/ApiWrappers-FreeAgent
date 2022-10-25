@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
-/**
- * Class Hide
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
- */
 class Hide extends Update {
 
 	/**

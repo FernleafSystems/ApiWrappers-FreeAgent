@@ -1,26 +1,16 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Categories;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
 
-/**
- * Class RetrieveBulk
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Categories
- */
 class RetrieveBulk extends RetrieveBulkBase {
 
-	/**
-	 * @return string
-	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string{
 		return 'categories';
 	}
 
-	/**
-	 * @return CategoryVO
-	 */
-	public function getVO() {
+	public function getVO():CategoryVO {
 		return new CategoryVO();
 	}
 }

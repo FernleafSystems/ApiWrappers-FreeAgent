@@ -7,10 +7,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions\BankTransact
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\BillVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
 
-/**
- * Class Create
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
- */
 class Create extends Base {
 
 	const REQUEST_METHOD = 'post';

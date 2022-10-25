@@ -1,24 +1,14 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
-/**
- * Trait BankTransactionsTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- */
 trait BankTransactionsTrait {
 
-	/**
-	 * @return string
-	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'bank_transactions';
 	}
 
-	/**
-	 * @return BankTransactionVO
-	 */
-	public function getVO() {
+	public function getVO():BankTransactionVO{
 		return new BankTransactionVO();
 	}
 }

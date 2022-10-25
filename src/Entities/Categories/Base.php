@@ -1,26 +1,16 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Categories;
 
 use FernleafSystems\ApiWrappers\Freeagent\Api;
 
-/**
- * Class Base
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Categories
- */
 class Base extends Api {
 
-	/**
-	 * @return string
-	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'categories';
 	}
 
-	/**
-	 * @return CategoryVO
-	 */
-	public function getVO() {
+	public function getVO() :CategoryVO{
 		return new CategoryVO();
 	}
 }

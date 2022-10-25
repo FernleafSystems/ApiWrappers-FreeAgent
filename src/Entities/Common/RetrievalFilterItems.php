@@ -22,17 +22,11 @@ class RetrievalFilterItems {
 		return $this->setEqualityFilterItems( $items );
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getEqualityFilterItems() {
+	public function getEqualityFilterItems() :array {
 		return is_array( $this->equality_filter_items ) ? $this->equality_filter_items : [];
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasEqualityFilterItems() {
+	public function hasEqualityFilterItems() :bool {
 		return count( $this->getEqualityFilterItems() ) > 0;
 	}
 

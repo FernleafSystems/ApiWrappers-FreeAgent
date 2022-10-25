@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
 
-/**
- * Class Update
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
- */
 class Update extends Create {
 
 	const REQUEST_METHOD = 'put';

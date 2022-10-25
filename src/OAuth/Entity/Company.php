@@ -33,10 +33,7 @@ class Company {
 		$this->applyFromArray( $attributes );
 	}
 
-	/**
-	 * @return array
-	 */
-	public function toArray() {
+	public function toArray() :array {
 		return [
 			'name'                        => $this->name,
 			'type'                        => $this->type,
@@ -44,10 +41,7 @@ class Company {
 		];
 	}
 
-	/**
-	 * @return string
-	 */
-	public function toString() {
+	public function toString() :string {
 		return $this->name;
 	}
 }

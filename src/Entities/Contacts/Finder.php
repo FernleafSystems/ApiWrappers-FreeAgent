@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
-/**
- * Class Finder
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
- */
 class Finder extends ContactsIterator {
 
 	/**

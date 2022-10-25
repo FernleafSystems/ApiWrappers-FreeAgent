@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 
-/**
- * Class Upload
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- */
 class UploadStatement extends Base {
 
 	const REQUEST_METHOD = 'post';
@@ -42,7 +38,7 @@ class UploadStatement extends Base {
 	 * i.e. not within an array alongside other items
 	 * @return string
 	 */
-	protected function getRequestDataPayloadKey() {
+	protected function getRequestDataPayloadKey() :string {
 		return '';
 	}
 
@@ -53,10 +49,7 @@ class UploadStatement extends Base {
 		return $this->getRequestDataItem( 'statement' );
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
+	protected function getUrlEndpoint() :string {
 		return 'bank_transactions/statement';
 	}
 

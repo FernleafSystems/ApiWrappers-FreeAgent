@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
-/**
- * Class BankTransactionsIterator
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- */
 class BankTransactionsIterator extends Entities\Common\CommonIterator {
 
 	/**

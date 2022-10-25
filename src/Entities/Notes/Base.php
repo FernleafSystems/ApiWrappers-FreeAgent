@@ -1,26 +1,14 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Notes;
 
-use FernleafSystems\ApiWrappers\Freeagent\Api;
+class Base extends \FernleafSystems\ApiWrappers\Freeagent\Api {
 
-/**
- * Class Base
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Notes
- */
-class Base extends Api {
-
-	/**
-	 * @return string
-	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'notes';
 	}
 
-	/**
-	 * @return NoteVO
-	 */
-	public function getVO() {
+	public function getVO() :NoteVO{
 		return new NoteVO();
 	}
 }

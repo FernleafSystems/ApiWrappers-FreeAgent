@@ -1,21 +1,19 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent;
 
 use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 
 /**
- * Class Connection
- * @package FernleafSystems\ApiWrappers\Freeagent
- * @property string $access_token
- * @property string $base_url_override
- * @property string $client_id
- * @property string $uri_auth
- * @property string $uri_redirect
- * @property string $uri_resource
- * @property int    $expiration
- * @property bool   $sandbox
- *
+ * @property Freeagent $oauth_provider
+ * @property string    $access_token
+ * @property string    $base_url_override
+ * @property string    $client_id
+ * @property string    $uri_auth
+ * @property string    $uri_redirect
+ * @property string    $uri_resource
+ * @property int       $expiration
+ * @property bool      $sandbox
  */
 class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
@@ -27,12 +25,8 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 		return $this->access_token;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getBaseUrl() {
-		return $this->getOAuthProvider()
-					->getBaseUrl();
+	public function getBaseUrl() :string {
+		return $this->getOAuthProvider()->getBaseUrl();
 	}
 
 	/**
@@ -61,12 +55,12 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @return Freeagent
 	 */
 	public function getOAuthProvider() {
-		$oProvider = $this->getParam( 'oauth_provider' );
-		if ( !( $oProvider instanceof Freeagent ) ) {
-			$oProvider = new Freeagent();
-			$this->setOAuthProvider( $oProvider );
+		$provider = $this->oauth_provider;
+		if ( !$provider instanceof Freeagent ) {
+			$provider = new Freeagent();
+			$this->setOAuthProvider( $provider );
 		}
-		return $oProvider
+		return $provider
 			->setBaseUrl( $this->base_url_override )
 			->setIsSandbox( $this->sandbox );
 	}
@@ -92,37 +86,22 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 		return $this->uri_resource;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function isSandbox() {
+	public function isSandbox() :bool {
 		return (bool)$this->sandbox;
 	}
 
-	/**
-	 * @param string $sVal
-	 * @return $this
-	 */
-	public function setAccessToken( $sVal ) {
-		$this->access_token = $sVal;
+	public function setAccessToken( string $token ) :self {
+		$this->access_token = $token;
 		return $this;
 	}
 
-	/**
-	 * @param string $sUrl
-	 * @return $this
-	 */
-	public function setBaseUrlOverride( $sUrl ) {
-		$this->base_url_override = $sUrl;
+	public function setBaseUrlOverride( string $url ) :self {
+		$this->base_url_override = $url;
 		return $this;
 	}
 
-	/**
-	 * @param string $sVal
-	 * @return $this
-	 */
-	public function setClientId( $sVal ) {
-		$this->client_id = $sVal;
+	public function setClientId( string $id ) :self {
+		$this->client_id = $id;
 		return $this;
 	}
 
@@ -130,26 +109,27 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	 * @param int $nVal
 	 * @return $this
 	 */
-	public function setExpiration( $nVal ) {
+	public function setExpiration( $nVal ) :self {
 		$this->expiration = $nVal;
 		return $this;
 	}
 
 	/**
-	 * @param bool $bIsSandbox
+	 * @param bool $isSandbox
 	 * @return $this
 	 */
-	public function setIsSandbox( $bIsSandbox ) {
-		$this->sandbox = $bIsSandbox;
+	public function setIsSandbox( $isSandbox ) :self {
+		$this->sandbox = $isSandbox;
 		return $this;
 	}
 
 	/**
-	 * @param Freeagent $oProvider
+	 * @param Freeagent $provider
 	 * @return $this
 	 */
-	public function setOAuthProvider( $oProvider ) {
-		return $this->setParam( 'oauth_provider', $oProvider );
+	public function setOAuthProvider( $provider ) :self {
+		$this->oauth_provider = $provider;
+		return $this;
 	}
 
 	/**

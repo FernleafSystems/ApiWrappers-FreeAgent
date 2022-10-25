@@ -5,13 +5,10 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 use Elliotchance\Iterator\AbstractPagedIterator;
 use FernleafSystems\ApiWrappers\Base\ConnectionConsumer;
 
-/**
- * Class CommonIterator
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
- */
 abstract class CommonIterator extends AbstractPagedIterator {
 
 	use ConnectionConsumer;
+
 	const PAGE_LIMIT = RetrievePageBase::PER_PAGE_LIMIT_UPPER;
 
 	/**
@@ -65,13 +62,9 @@ abstract class CommonIterator extends AbstractPagedIterator {
 		return $this;
 	}
 
-	/**
-	 * @param string $sView
-	 * @return $this;
-	 */
-	public function filterByView( $sView ) {
+	public function filterByView( string $view ) :self {
 		$this->getRetriever()
-			 ->filterByView( $sView );
+			 ->filterByView( $view );
 		return $this;
 	}
 
@@ -85,13 +78,13 @@ abstract class CommonIterator extends AbstractPagedIterator {
 	}
 
 	/**
-	 * @param string $sField
+	 * @param string $field
 	 * @param bool   $bDescendingOrder
 	 * @return $this
 	 */
-	public function orderBy( $sField, $bDescendingOrder = false ) {
+	public function orderBy( $field, $bDescendingOrder = false ) {
 		$sPrefix = $bDescendingOrder ? '-' : '';
-		$this->getRetriever()->setRequestDataItem( 'sort', $sPrefix.$sField );
+		$this->getRetriever()->setRequestDataItem( 'sort', $sPrefix.$field );
 		return $this;
 	}
 

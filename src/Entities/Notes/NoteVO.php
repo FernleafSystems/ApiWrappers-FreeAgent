@@ -6,8 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/notes
- * Class NoteVO
- * @package    FernleafSystems\ApiWrappers\Freeagent\Entities\Notes
  * @property string $author
  * @property string $note
  * @property string $parent_url

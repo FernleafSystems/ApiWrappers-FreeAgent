@@ -5,10 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
 
-/**
- * Class Create
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
- */
 class Create extends Base {
 
 	const REQUEST_METHOD = 'post';

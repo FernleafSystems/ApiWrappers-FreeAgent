@@ -1,20 +1,14 @@
 <?php
 
-namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
+namespace FernleafSystems\ApiWrappers\Freeagent\Entities\RecurringInvoices;
 
 class Retrieve extends Base {
 
-	/**
-	 * @return bool
-	 */
-	public function exists() {
+	public function exists() :bool {
 		return !is_null( $this->retrieve() );
 	}
 
-	/**
-	 * @return UserVO
-	 */
-	public function retrieve() {
+	public function retrieve() :RecurringInvoiceVO {
 		return $this->sendRequestWithVoResponse();
 	}
 

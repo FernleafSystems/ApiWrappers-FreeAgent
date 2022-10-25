@@ -3,64 +3,41 @@
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
 /**
- * Class MarkAs
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
+ * @property string $mark_as
  */
 class MarkAs extends Base {
 
 	const REQUEST_METHOD = 'put';
 
-	/**
-	 * @return bool
-	 */
-	public function cancelled() {
+	public function cancelled() :bool {
 		return $this->markAs( 'cancelled' );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function draft() {
+	public function draft() :bool {
 		return $this->markAs( 'draft' );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function scheduled() {
+	public function scheduled() :bool {
 		return $this->markAs( 'scheduled' );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function sent() {
+	public function sent() :bool {
 		return $this->markAs( 'sent' );
 	}
 
-	/**
-	 * @param string $sAs
-	 * @return bool
-	 */
-	protected function markAs( $sAs ) {
+	protected function markAs( string $as ) :bool {
 		try {
-			$bSuccess = $this->setParam( 'mark_as', strtolower( $sAs ) )
-							 ->send()
-							 ->isLastRequestSuccess();
+			$this->mark_as = strtolower( $as );
+			$success = $this->send()->isLastRequestSuccess();
 		}
-		catch ( \Exception $oE ) {
-			$bSuccess = false;
+		catch ( \Exception $e ) {
+			$success = false;
 		}
-		return $bSuccess;
+		return $success;
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
-		return sprintf( 'invoices/%s/transitions/mark_as_%s',
-			$this->getEntityId(), $this->getParam( 'mark_as' )
-		);
+	protected function getUrlEndpoint() :string {
+		return sprintf( 'invoices/%s/transitions/mark_as_%s', $this->entity_id, $this->mark_as );
 	}
 
 	/**

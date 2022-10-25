@@ -35,29 +35,19 @@ class StatementVO {
 		return $this->setLines( $aLines );
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getLines() {
+	public function getLines() :array {
 		return is_array( $this->lines ) ? $this->lines : [];
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getLinesAsString() {
+	public function getLinesAsString() :string {
 		return implode( "\n", $this->getLines() );
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasLines() {
+	public function hasLines() :bool {
 		return count( $this->getLines() ) > 0;
 	}
 
 	/**
-	 * @param array $lines
 	 * @return $this
 	 */
 	public function setLines( array $lines ) {

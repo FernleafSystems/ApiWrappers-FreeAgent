@@ -6,8 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
 /**
  * @deprecated - user iterator
- * Class Find
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  */
 class Find extends RetrieveBulk {
 

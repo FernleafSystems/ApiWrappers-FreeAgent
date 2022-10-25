@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-/**
- * Class Update
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
- */
 class Update extends Create {
 
 	const REQUEST_METHOD = 'put';
@@ -28,10 +24,7 @@ class Update extends Create {
 		}
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [];
 	}
 }

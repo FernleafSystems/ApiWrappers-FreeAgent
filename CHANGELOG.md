@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2022-10-25
+### Changed
+- Move to the newer Base API library to allow upgrading to the new Guzzle HTTP (v7) library.
+
 ## [0.3.1] - 2021-08-22
 ### Added
 - Add support for new Bill Items update to the API.

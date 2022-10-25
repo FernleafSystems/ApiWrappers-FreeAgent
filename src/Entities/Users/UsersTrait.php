@@ -1,24 +1,14 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
 
-/**
- * Trait UsersTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
- */
 trait UsersTrait {
 
-	/**
-	 * @return string
-	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return 'users';
 	}
 
-	/**
-	 * @return UserVO
-	 */
-	public function getVO() {
+	public function getVO() :UserVO {
 		return new UserVO();
 	}
 }

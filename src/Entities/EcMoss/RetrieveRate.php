@@ -4,11 +4,8 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\EcMoss;
 
 /**
  * https://dev.freeagent.com/docs/sales_tax#ec-vat-moss
- *
- * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\EcMoss
  */
-class Retrieve extends Base {
+class RetrieveRate extends Base {
 
 	/**
 	 * @param string $sCountry The place of supply
@@ -26,10 +23,7 @@ class Retrieve extends Base {
 		return $this->setDateAttribute( 'date', $sDate );
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
-		return sprintf( 'ec_moss/sales_tax_rates', $this->getEntityId() );
+	protected function getUrlEndpoint():string {
+		return sprintf( 'ec_moss/sales_tax_rates', $this->entity_id );
 	}
 }

@@ -7,12 +7,12 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities;
 class BillsIterator extends Entities\Common\CommonIterator {
 
 	/**
-	 * @param Entities\Contacts\ContactVO $oContact
+	 * @param Entities\Contacts\ContactVO $contact
 	 * @return $this
 	 */
-	public function filterByContact( $oContact ) {
+	public function filterByContact( $contact ) {
 		$this->getRetriever()
-			 ->setRequestDataItem( 'contact', $oContact->getUri() );
+			 ->setRequestDataItem( 'contact', $contact->getUri() );
 		return $this;
 	}
 

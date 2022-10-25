@@ -5,6 +5,10 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
+/**
+ * @property array $retrieval_filter_items
+ * @property int   $retrieve_results_limit
+ */
 abstract class RetrieveBulkBase extends Api {
 
 	const PER_PAGE_LIMIT_LOWER = 1;
@@ -15,7 +19,7 @@ abstract class RetrieveBulkBase extends Api {
 	 * @return EntityVO[]
 	 */
 	public function all() {
-		return $this->setResultsLimit( 0 )
+		return $this->setResultsLimit()
 					->run();
 	}
 
@@ -135,8 +139,8 @@ abstract class RetrieveBulkBase extends Api {
 	 * @return RetrievalFilterItems|null
 	 */
 	public function getFilterItems() {
-		$filterItems = $this->getParam( 'retrieval_filter_items' );
-		if ( !( $filterItems instanceof RetrievalFilterItems ) ) {
+		$filterItems = $this->retrieval_filter_items;
+		if ( !$filterItems instanceof RetrievalFilterItems ) {
 			$filterItems = new RetrievalFilterItems();
 			$this->setFilterItems( $filterItems );
 		}
@@ -161,18 +165,12 @@ abstract class RetrieveBulkBase extends Api {
 		return $this->getRequestDataItem( 'per_page' );
 	}
 
-	/**
-	 * @return int
-	 */
-	protected function getResultsLimit() {
-		return (int)$this->getNumericParam( 'retrieve_results_limit', 0 );
+	protected function getResultsLimit() :int {
+		return (int)$this->retrieve_results_limit;
 	}
 
-	/**
-	 * @return bool
-	 */
-	protected function hasResultsLimit() {
-		return ( $this->getResultsLimit() > 0 );
+	protected function hasResultsLimit() :bool {
+		return $this->getResultsLimit() > 0;
 	}
 
 	/**
@@ -185,21 +183,22 @@ abstract class RetrieveBulkBase extends Api {
 
 	/**
 	 * @return $this
-	 * @var int $nLimit 0 == no limit
+	 * @var int $limit 0 == no limit
 	 */
-	public function setResultsLimit( $nLimit = 0 ) {
-		return $this->setParam( 'retrieve_results_limit', $nLimit );
+	public function setResultsLimit( $limit = 0 ) {
+		$this->retrieve_results_limit = $limit;
+		return $this;
 	}
 
 	/**
-	 * @param int $nPage
+	 * @param int $page
 	 * @return $this
 	 */
-	public function setPage( $nPage = 1 ) {
-		if ( empty( $nPage ) || $nPage < 1 ) {
-			$nPage = 1;
+	public function setPage( $page = 1 ) {
+		if ( empty( $page ) || $page < 1 ) {
+			$page = 1;
 		}
-		return $this->setRequestDataItem( 'page', $nPage );
+		return $this->setRequestDataItem( 'page', $page );
 	}
 
 	/**
@@ -228,11 +227,11 @@ abstract class RetrieveBulkBase extends Api {
 
 	/**
 	 * IMPORTANT: Replaces all existing filter items
-	 * @param RetrievalFilterItems $filterItems
 	 * @return $this
 	 */
-	public function setFilterItems( RetrievalFilterItems $filterItems ) {
-		return $this->setParam( 'retrieval_filter_items', $filterItems );
+	public function setFilterItems( ?RetrievalFilterItems $filterItems ) {
+		$this->retrieval_filter_items = $filterItems;
+		return $this;
 	}
 
 	/**
@@ -305,10 +304,7 @@ abstract class RetrieveBulkBase extends Api {
 					->filterByDateTo( $nDate + $nDaysRadius );
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getRequestDataPayloadKey() {
+	protected function getRequestDataPayloadKey() :string {
 		return $this->getApiEndpoint(); // we don't truncate 's'
 	}
 }

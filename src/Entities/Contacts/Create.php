@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
-/**
- * Class Create
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
- */
 class Create extends Base {
 
 	const REQUEST_METHOD = 'post';
@@ -181,10 +177,7 @@ class Create extends Base {
 		return $this->setRequestDataItem( 'uses_contact_invoice_sequence', $bContactLevel );
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function getCriticalRequestItems() {
+	protected function getCriticalRequestItems() :array {
 		return [ 'first_name', 'last_name' ];
 	}
 }

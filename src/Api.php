@@ -6,8 +6,7 @@ use FernleafSystems\ApiWrappers\Base\BaseApi;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
- * Class Api
- * @package FernleafSystems\ApiWrappers\FreeAgent
+ * @property string $entity_id
  */
 class Api extends BaseApi {
 
@@ -17,14 +16,11 @@ class Api extends BaseApi {
 	 * @param int $nTimestamp
 	 * @return string
 	 */
-	static public function convertToStdDateFormat( $nTimestamp ) {
+	public static function convertToStdDateFormat( $nTimestamp ) {
 		return gmdate( 'Y-m-d', $nTimestamp );
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function prepFinalRequestData() {
+	protected function prepFinalRequestData() :array {
 
 		$aFinal = parent::prepFinalRequestData();
 
@@ -49,14 +45,11 @@ class Api extends BaseApi {
 	 * Chops off the trailing 's' from the data package key. Only exceptions are paged results.
 	 * @return string
 	 */
-	protected function getRequestDataPayloadKey() {
+	protected function getRequestDataPayloadKey() :string {
 		return rtrim( $this->getApiEndpoint(), 's' );
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getResponseDataPayloadKey() {
+	protected function getResponseDataPayloadKey() :string {
 		return $this->getRequestDataPayloadKey();
 	}
 
@@ -64,49 +57,38 @@ class Api extends BaseApi {
 	 * @return array|null
 	 */
 	public function getCoreResponseData() {
-		$aData = null;
+		$data = null;
 		if ( $this->isLastRequestSuccess() ) {
-			$sKey = $this->getResponseDataPayloadKey();
-			$aDecoded = $this->getDecodedResponseBody();
-			$aData = empty( $sKey ) ? $aDecoded : $aDecoded[ $sKey ];
+			$key = $this->getResponseDataPayloadKey();
+			$decoded = $this->getDecodedResponseBody();
+			$data = empty( $key ) ? $decoded : $decoded[ $key ];
 		}
-		return $aData;
+		return $data;
 	}
 
 	/**
 	 * @return int|string
+	 * @deprecated 1.0
 	 */
 	public function getEntityId() {
-		return $this->getParam( 'entity_id' );
+		return $this->entity_id;
 	}
 
-	/**
-	 * @return EntityVO
-	 */
-	public function getVO() {
+	public function getVO() :EntityVO {
 		return new EntityVO();
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getApiEndpoint() {
+	protected function getApiEndpoint() :string {
 		return '';
 	}
 
-	/**
-	 * @return string
-	 */
-	protected function getUrlEndpoint() {
-		$sBase = $this->getApiEndpoint();
-		return $this->hasEntityId() ? sprintf( '%s/%s', $sBase, $this->getEntityId() ) : $sBase;
+	protected function getUrlEndpoint() :string {
+		$base = $this->getApiEndpoint();
+		return $this->hasEntityId() ? sprintf( '%s/%s', $base, $this->entity_id ) : $base;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasEntityId() {
-		return !is_null( $this->getEntityId() );
+	public function hasEntityId() :bool {
+		return !is_null( $this->entity_id );
 	}
 
 	/**
@@ -123,14 +105,13 @@ class Api extends BaseApi {
 	 * @return EntityVO|mixed|null
 	 */
 	public function sendRequestWithVoResponse() {
-		$aData = $this->req()
-					  ->getCoreResponseData();
+		$data = $this->req()->getCoreResponseData();
 
-		$oNew = null;
-		if ( !empty( $aData ) ) {
-			$oNew = $this->getVO()->applyFromArray( $aData );
+		$VO = null;
+		if ( !empty( $data ) ) {
+			$VO = $this->getVO()->applyFromArray( $data );
 		}
-		return $oNew;
+		return $VO;
 	}
 
 	/**
@@ -150,12 +131,9 @@ class Api extends BaseApi {
 		return $this->setRequestDataItem( $sAttribute, $this->filterDateValue( $mDate ) );
 	}
 
-	/**
-	 * @param int $nId
-	 * @return $this
-	 */
-	public function setEntityId( $nId ) {
-		return $this->setParam( 'entity_id', is_numeric( $nId ) ? (int)$nId : $nId );
+	public function setEntityId( $id ) :self {
+		$this->entity_id = is_numeric( $id ) ? (int)$id : $id;
+		return $this;
 	}
 
 	/**
