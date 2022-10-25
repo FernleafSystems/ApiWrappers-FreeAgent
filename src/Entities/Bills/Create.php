@@ -6,10 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Bills\Items\BillItemVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Categories\CategoryVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
-/**
- * Class Create
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
- */
 class Create extends Base {
 
 	const REQUEST_METHOD = 'post';
@@ -25,7 +21,8 @@ class Create extends Base {
 
 	/**
 	 * @param BillItemVO $item
-	 * @return $this
+	 * @param bool       $merge
+	 * @return Create
 	 */
 	public function addBillItem( BillItemVO $item, $merge = true ) {
 		$items = $this->getRequestDataItem( 'bill_items' );
@@ -54,27 +51,27 @@ class Create extends Base {
 	}
 
 	/**
-	 * @param string $sComment
+	 * @param string $comment
 	 * @return $this
 	 */
-	public function setComment( $sComment ) {
-		return $this->setRequestDataItem( 'comments', $sComment );
+	public function setComment( $comment ) {
+		return $this->setRequestDataItem( 'comments', $comment );
 	}
 
 	/**
-	 * @param ContactVO $oContact
+	 * @param ContactVO $contact
 	 * @return $this
 	 */
-	public function setContact( $oContact ) {
-		return $this->setRequestDataItem( 'contact', $oContact->getUri() );
+	public function setContact( $contact ) {
+		return $this->setRequestDataItem( 'contact', $contact->getUri() );
 	}
 
 	/**
-	 * @param string $sCurrency e.g. GBP, USD, EUR
+	 * @param string $currency e.g. GBP, USD, EUR
 	 * @return $this
 	 */
-	public function setCurrency( $sCurrency ) {
-		return $this->setRequestDataItem( 'currency', strtoupper( $sCurrency ) );
+	public function setCurrency( $currency ) {
+		return $this->setRequestDataItem( 'currency', strtoupper( $currency ) );
 	}
 
 	/**

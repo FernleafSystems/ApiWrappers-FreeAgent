@@ -6,8 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
 /**
- * Class RetrieveBulkBase
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
  * @property array $retrieval_filter_items
  * @property int   $retrieve_results_limit
  */
@@ -141,12 +139,12 @@ abstract class RetrieveBulkBase extends Api {
 	 * @return RetrievalFilterItems|null
 	 */
 	public function getFilterItems() {
-		$oFilterItems = $this->retrieval_filter_items;
-		if ( !$oFilterItems instanceof RetrievalFilterItems ) {
-			$oFilterItems = new RetrievalFilterItems();
-			$this->setFilterItems( $oFilterItems );
+		$filterItems = $this->retrieval_filter_items;
+		if ( !$filterItems instanceof RetrievalFilterItems ) {
+			$filterItems = new RetrievalFilterItems();
+			$this->setFilterItems( $filterItems );
 		}
-		return $oFilterItems;
+		return $filterItems;
 	}
 
 	/**
@@ -229,11 +227,10 @@ abstract class RetrieveBulkBase extends Api {
 
 	/**
 	 * IMPORTANT: Replaces all existing filter items
-	 * @param RetrievalFilterItems $oFilterItems
 	 * @return $this
 	 */
-	public function setFilterItems( RetrievalFilterItems $oFilterItems ) {
-		$this->retrieval_filter_items = $oFilterItems;
+	public function setFilterItems( ?RetrievalFilterItems $filterItems ) {
+		$this->retrieval_filter_items = $filterItems;
 		return $this;
 	}
 
@@ -253,23 +250,23 @@ abstract class RetrieveBulkBase extends Api {
 	}
 
 	/**
-	 * @param Entities\Contacts\ContactVO $oContact
+	 * @param Entities\Contacts\ContactVO $contact
 	 * @return $this
 	 */
-	public function filterByContact( $oContact ) {
-		$oItem = ( new Entities\Common\RetrievalFilterItems() )
-			->setEqualityFilterItem( 'contact', $oContact->getUri() );
-		return $this->addFilterItems( $oItem );
+	public function filterByContact( $contact ) {
+		$item = ( new Entities\Common\RetrievalFilterItems() )
+			->setEqualityFilterItem( 'contact', $contact->url );
+		return $this->addFilterItems( $item );
 	}
 
 	/**
-	 * @param Entities\Categories\CategoryVO $oCat
+	 * @param Entities\Categories\CategoryVO $cat
 	 * @return $this
 	 */
-	public function filterByCategory( $oCat ) {
-		$oItem = ( new Entities\Common\RetrievalFilterItems() )
-			->setEqualityFilterItem( 'category', $oCat->getUri() );
-		return $this->addFilterItems( $oItem );
+	public function filterByCategory( $cat ) {
+		$item = ( new Entities\Common\RetrievalFilterItems() )
+			->setEqualityFilterItem( 'category', $cat->url );
+		return $this->addFilterItems( $item );
 	}
 
 	/**

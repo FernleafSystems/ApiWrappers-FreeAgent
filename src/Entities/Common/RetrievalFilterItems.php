@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 use FernleafSystems\Utilities\Data\Adapter\DynProperties;
 
 /**
- * Class RetrievalFilterItems
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
  * @property array $equality_filter_items
  */
 class RetrievalFilterItems {
@@ -15,13 +13,13 @@ class RetrievalFilterItems {
 
 	/**
 	 * @param string $key
-	 * @param mixed  $mValue
+	 * @param mixed  $value
 	 * @return $this
 	 */
-	public function setEqualityFilterItem( $key, $mValue ) {
-		$aItems = $this->getEqualityFilterItems();
-		$aItems[ $key ] = $mValue;
-		return $this->setEqualityFilterItems( $aItems );
+	public function setEqualityFilterItem( $key, $value ) {
+		$items = $this->getEqualityFilterItems();
+		$items[ $key ] = $value;
+		return $this->setEqualityFilterItems( $items );
 	}
 
 	public function getEqualityFilterItems() :array {

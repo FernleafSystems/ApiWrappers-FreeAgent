@@ -5,7 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\OAuth\Entity;
 use FernleafSystems\Utilities\Data\Adapter\DynProperties;
 
 /**
- * Class Company
  * @property string url
  * @property string name
  * @property string subdomain
@@ -27,6 +26,9 @@ class Company {
 
 	use DynProperties;
 
+	/**
+	 * @param array $attributes
+	 */
 	public function __construct( array $attributes ) {
 		$this->applyFromArray( $attributes );
 	}
