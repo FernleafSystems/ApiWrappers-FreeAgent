@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items;
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
 /**
- * Class InvoiceItemVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items
  * @property float  $sales_tax_rate
  * @property string $category        - url
  * @property string $description

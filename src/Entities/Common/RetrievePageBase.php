@@ -5,10 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 use FernleafSystems\ApiWrappers\Freeagent\Api;
 use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
-/**
- * Class RetrieveBulkBase
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
- */
 abstract class RetrievePageBase extends Api {
 
 	const PER_PAGE_LIMIT_LOWER = 1;

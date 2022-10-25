@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
 
-/**
- * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
- */
 class Retrieve extends Base {
 
 	/**

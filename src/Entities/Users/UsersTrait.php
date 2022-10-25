@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Users;
 
-/**
- * Trait UsersTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Users
- */
 trait UsersTrait {
 
 	protected function getApiEndpoint() :string {

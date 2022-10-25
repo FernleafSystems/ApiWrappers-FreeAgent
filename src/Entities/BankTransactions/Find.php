@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 
-/**
- * Class Find
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- */
 class Find extends RetrieveBulk {
 
 	/**

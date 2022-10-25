@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
-/**
- * Class RetrievePdf
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
- */
 class RetrievePdf extends Retrieve {
 
 	/**

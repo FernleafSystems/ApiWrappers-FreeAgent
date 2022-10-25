@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent;
 use FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider\Freeagent;
 
 /**
- * Class Connection
- * @package FernleafSystems\ApiWrappers\Freeagent
  * @property Freeagent $oauth_provider
  * @property string    $access_token
  * @property string    $base_url_override

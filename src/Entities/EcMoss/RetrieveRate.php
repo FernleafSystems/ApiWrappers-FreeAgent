@@ -4,9 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\EcMoss;
 
 /**
  * https://dev.freeagent.com/docs/sales_tax#ec-vat-moss
- *
- * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\EcMoss
  */
 class RetrieveRate extends Base {
 

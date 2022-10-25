@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
-/**
- * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
- */
 class Retrieve extends Base {
 
 	/**

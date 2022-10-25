@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 
-/**
- * Class Upload
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- */
 class UploadStatement extends Base {
 
 	const REQUEST_METHOD = 'post';

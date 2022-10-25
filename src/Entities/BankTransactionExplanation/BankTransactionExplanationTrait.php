@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
-/**
- * Trait BankTransactionExplanationTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
- */
 trait BankTransactionExplanationTrait {
 
 	protected function getApiEndpoint() :string {

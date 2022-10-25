@@ -6,8 +6,6 @@ use FernleafSystems\ApiWrappers\Base\BaseApi;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
- * Class Api
- * @package FernleafSystems\ApiWrappers\FreeAgent
  * @property string $entity_id
  */
 class Api extends BaseApi {

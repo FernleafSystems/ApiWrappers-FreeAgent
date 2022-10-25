@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Categories;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
- * Class CategoryVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Categories
  * @property string $description - category name
  * @property string $nominal_code
  * @property string $

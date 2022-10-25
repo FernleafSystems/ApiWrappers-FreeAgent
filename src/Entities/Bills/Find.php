@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
-/**
- * Class Find
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
- */
 class Find extends RetrieveBulk {
 
 	/**

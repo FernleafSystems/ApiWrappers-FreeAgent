@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
-/**
- * Class Create
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
- */
 class Create extends Base {
 
 	const REQUEST_METHOD = 'post';

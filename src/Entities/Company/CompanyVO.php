@@ -6,9 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/company
- *
- * Class CompanyVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Company
  * @property string $name
  * @property string $currency
  * @property string $company_start_date        - YYYY-MM-DD

@@ -7,8 +7,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
 
 /**
  * https://dev.freeagent.com/docs/invoices
- * Class InvoiceVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  * @property string  $contact  - URI
  * @property string  $dated_on - YYYY-MM-DD
  * @property string  $due_on   - YYYY-MM-DD

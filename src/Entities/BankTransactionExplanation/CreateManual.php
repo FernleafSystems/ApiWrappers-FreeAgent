@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
-/**
- * Class CreateManual
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
- */
 class CreateManual extends Create {
 
 	/**

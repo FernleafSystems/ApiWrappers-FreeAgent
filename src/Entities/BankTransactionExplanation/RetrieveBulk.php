@@ -5,10 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanat
 use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\RetrieveBulkBase;
 
-/**
- * Class RetrieveBulk
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
- */
 class RetrieveBulk extends RetrieveBulkBase {
 
 	use BankTransactionExplanationTrait;

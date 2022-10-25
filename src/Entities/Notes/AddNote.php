@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Notes;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 
-/**
- * Class AddNote
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Notes
- */
 class AddNote extends Base {
 
 	const REQUEST_METHOD = 'post';

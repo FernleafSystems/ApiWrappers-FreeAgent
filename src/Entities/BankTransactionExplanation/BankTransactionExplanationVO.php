@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanat
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
- * Class BankTransactionExplanationVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
  * @property string bank_account                - URI
  * @property string bank_transaction            - URI
  * @property string linked_transfer_account     - URI

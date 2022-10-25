@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Notes;
 
-/**
- * Class Base
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Notes
- */
 class Base extends \FernleafSystems\ApiWrappers\Freeagent\Api {
 
 	protected function getApiEndpoint() :string {

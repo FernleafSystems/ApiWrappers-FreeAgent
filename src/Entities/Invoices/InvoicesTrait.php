@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
-/**
- * Trait InvoicesTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
- */
 trait InvoicesTrait {
 
 	protected function getApiEndpoint() :string {

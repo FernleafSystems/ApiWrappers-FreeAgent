@@ -6,8 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\InvoiceVO;
 
 /**
  * https://dev.freeagent.com/docs/recurring_invoices
- * Class RecurringInvoiceVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  * @property string $frequency
  *          - Weekly, Two Weekly,Four Weekly, Monthly, Two Monthly, Quarterly, Biannually, Annually, 2-Yearly
  * @property string $recurring_status   - Draft, Active

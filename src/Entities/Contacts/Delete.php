@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
-/**
- * Class Delete
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
- */
 class Delete extends Base {
 
 	const REQUEST_METHOD = 'delete';

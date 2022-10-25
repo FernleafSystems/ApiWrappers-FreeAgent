@@ -5,8 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
- * Class BankAccountVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts
  * @property string $account_number
  * @property string $currency
  * @property float  $current_balance

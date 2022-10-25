@@ -3,8 +3,6 @@
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
 /**
- * Class MarkAs
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices
  * @property string $mark_as
  */
 class MarkAs extends Base {

@@ -6,9 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/bills
- *
- * Class BillVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
  * @property string $bill                   - URL
  * @property string $category               - URL
  * @property string $description

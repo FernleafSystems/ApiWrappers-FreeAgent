@@ -7,10 +7,6 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Class Freeagent
- * @package FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider
- */
 class Freeagent extends AbstractProvider {
 
 	const URL_LIVE = 'https://api.freeagent.com/v2';
@@ -93,11 +89,11 @@ class Freeagent extends AbstractProvider {
 	}
 
 	/**
-	 * @param string $sUrl
+	 * @param string $url
 	 * @return $this
 	 */
-	public function setBaseUrl( $sUrl ) {
-		$this->sBaseUrl = $sUrl;
+	public function setBaseUrl( $url ) {
+		$this->sBaseUrl = $url;
 		return $this;
 	}
 

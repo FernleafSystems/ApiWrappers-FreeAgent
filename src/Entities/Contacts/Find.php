@@ -4,8 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 /**
  * @deprecated
- * Class Find
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  */
 class Find extends RetrieveBulk {
 

@@ -5,10 +5,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 use Elliotchance\Iterator\AbstractPagedIterator;
 use FernleafSystems\ApiWrappers\Base\ConnectionConsumer;
 
-/**
- * Class CommonIterator
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
- */
 abstract class CommonIterator extends AbstractPagedIterator {
 
 	use ConnectionConsumer;

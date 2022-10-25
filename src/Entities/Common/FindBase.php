@@ -4,10 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Common;
 
 use FernleafSystems\ApiWrappers\Freeagent\Api;
 
-/**
- * Class FindBase
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Common
- */
 class FindBase extends Api {
 
 	/**

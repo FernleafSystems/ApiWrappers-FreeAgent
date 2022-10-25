@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-/**
- * Trait BillsTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
- */
 trait BillsTrait {
 
 	protected function getApiEndpoint() :string {

@@ -6,8 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation\Ba
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
- * Class BankTransactionVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
  * @property float   $amount                  - grand total
  * @property float   $unexplained_amount
  * @property string  $bank_account            - URI

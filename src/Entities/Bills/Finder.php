@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Bills;
 
-/**
- * Class Finder
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Bills
- */
 class Finder extends BillsIterator {
 
 	/**

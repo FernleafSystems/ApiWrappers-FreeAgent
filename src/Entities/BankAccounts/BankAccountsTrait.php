@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts;
 
-/**
- * Trait BankAccountsTrait
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts
- */
 trait BankAccountsTrait {
 
 	protected function getApiEndpoint() :string {

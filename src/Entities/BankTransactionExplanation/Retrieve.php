@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation;
 
-/**
- * Class Retrieve
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactionExplanation
- */
 class Retrieve extends Base {
 
 	/**

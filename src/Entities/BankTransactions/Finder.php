@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions;
 
-/**
- * Class Finder
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\BankTransactions
- */
 class Finder extends BankTransactionsIterator {
 
 	/**

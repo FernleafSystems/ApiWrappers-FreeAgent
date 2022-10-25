@@ -6,9 +6,6 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/contacts
- *
- * Class ContactVO
- * @package FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts
  * @property string $email
  * @property string $first_name
  * @property string $last_name
