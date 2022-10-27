@@ -107,7 +107,6 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
 	/**
 	 * @param int $nVal
-	 * @return $this
 	 */
 	public function setExpiration( $nVal ) :self {
 		$this->expiration = $nVal;
@@ -116,7 +115,6 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
 	/**
 	 * @param bool $isSandbox
-	 * @return $this
 	 */
 	public function setIsSandbox( $isSandbox ) :self {
 		$this->sandbox = $isSandbox;
@@ -125,7 +123,6 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 
 	/**
 	 * @param Freeagent $provider
-	 * @return $this
 	 */
 	public function setOAuthProvider( $provider ) :self {
 		$this->oauth_provider = $provider;
@@ -133,29 +130,26 @@ class Connection extends \FernleafSystems\ApiWrappers\Base\Connection {
 	}
 
 	/**
-	 * @param string $sVal
-	 * @return $this
+	 * @param string $value
 	 */
-	public function setUrlAccessToken( $sVal ) {
-		$this->uri_redirect = $sVal;
+	public function setUrlAccessToken( $value ) :self {
+		$this->uri_redirect = $value;
 		return $this;
 	}
 
 	/**
-	 * @param string $sVal
-	 * @return $this
+	 * @param string $value
 	 */
-	public function setUrlAuthorize( $sVal ) {
-		$this->uri_auth = $sVal;
+	public function setUrlAuthorize( $value ) :self {
+		$this->uri_auth = $value;
 		return $this;
 	}
 
 	/**
-	 * @param string $sVal
-	 * @return $this
+	 * @param string $value
 	 */
-	public function setUrlResourceDetails( $sVal ) {
-		$this->uri_resource = $sVal;
+	public function setUrlResourceDetails( $value ) :self {
+		$this->uri_resource = $value;
 		return $this;
 	}
 }

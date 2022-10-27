@@ -10,121 +10,89 @@ class Create extends Base {
 	const REQUEST_METHOD = 'post';
 
 	/**
-	 * @param array $aData
+	 * @param array $data
 	 * @return InvoiceVO|null
 	 */
-	public function create( $aData = [] ) {
-		return $this->setRequestData( $aData, true )
+	public function create( $data = [] ) {
+		return $this->setRequestData( $data )
 					->sendRequestWithVoResponse();
 	}
 
-	/**
-	 * @param InvoiceItemVO $oItem
-	 * @return $this
-	 */
-	public function addInvoiceItem( $oItem ) {
-		return $this->addInvoiceItemVOs( [ $oItem ] );
+	public function addInvoiceItem( InvoiceItemVO $item ) :self {
+		return $this->addInvoiceItemVOs( [ $item ] );
 	}
 
 	/**
-	 * @param array[] $aNewItems
-	 * @return $this
+	 * @param array[] $newItems
 	 */
-	public function addInvoiceItems( $aNewItems ) {
-		$aItems = $this->getRequestDataItem( 'invoice_items' );
-		if ( !is_array( $aItems ) ) {
-			$aItems = [];
-		}
-		$aItems = array_merge(
-			$aItems,
-			$aNewItems
-		);
-		return $this->setRequestDataItem( 'invoice_items', $aItems );
+	public function addInvoiceItems( array $newItems ) :self {
+		$items = $this->getRequestDataItem( 'invoice_items' );
+		return $this->setRequestDataItem( 'invoice_items', array_merge(
+			is_array( $items ) ? $items : [],
+			$newItems
+		) );
 	}
 
 	/**
-	 * @param InvoiceItemVO[] $aNewItems
-	 * @return $this
+	 * @param InvoiceItemVO[] $newItems
 	 */
-	public function addInvoiceItemVOs( $aNewItems ) {
-		return $this->addInvoiceItems(
-			array_map(
-				function ( $oNewItem ) {
-					/** @var InvoiceItemVO $oNewItem */
-					return $oNewItem->getRawDataAsArray();
-				},
-				$aNewItems
-			)
-		);
+	public function addInvoiceItemVOs( array $newItems ) :self {
+		return $this->addInvoiceItems( array_map( fn( $item ) => $item->getRawData(), $newItems ) );
 	}
 
 	/**
-	 * @param string $sComments
+	 * @param string $comments
 	 * @return $this
 	 */
-	public function setComments( $sComments ) {
-		return $this->setRequestDataItem( 'comments', $sComments );
+	public function setComments( $comments ) :self {
+		return $this->setRequestDataItem( 'comments', $comments );
+	}
+
+	public function setContact( ContactVO $contact ) :self {
+		return $this->setRequestDataItem( 'contact', $contact->getUri() );
 	}
 
 	/**
-	 * @param ContactVO $oContact
-	 * @return $this
+	 * @param string $currency e.g. GBP, USD, EUR
 	 */
-	public function setContact( $oContact ) {
-		return $this->setRequestDataItem( 'contact', $oContact->getUri() );
+	public function setCurrency( string $currency ) :self {
+		return $this->setRequestDataItem( 'currency', strtoupper( $currency ) );
+	}
+
+	public function setEcPlaceOfSupply( string $country ) :self {
+		return $this->setRequestDataItem( 'place_of_supply', $country );
 	}
 
 	/**
-	 * @param string $sCurrency e.g. GBP, USD, EUR
-	 * @return $this
+	 * @param string $status 'EC VAT MOSS' : 'Non-EC'
 	 */
-	public function setCurrency( $sCurrency ) {
-		return $this->setRequestDataItem( 'currency', strtoupper( $sCurrency ) );
+	public function setEcStatus( string $status ) :self {
+		return $this->setRequestDataItem( 'ec_status', $status );
 	}
 
-	/**
-	 * @param string $sCountry
-	 * @return $this
-	 */
-	public function setEcPlaceOfSupply( $sCountry ) {
-		return $this->setRequestDataItem( 'place_of_supply', $sCountry );
-	}
-
-	/**
-	 * @param string $sStatus 'EC VAT MOSS' : 'Non-EC'
-	 * @return $this
-	 */
-	public function setEcStatus( $sStatus ) {
-		return $this->setRequestDataItem( 'ec_status', $sStatus );
-	}
-
-	/**
-	 * @return $this
-	 */
-	public function setEcStatusNonEc() {
+	public function setEcStatusNonEc() :self {
 		return $this->setEcStatus( 'Non-EC' );
 	}
 
-	/**
-	 * @return $this
-	 */
-	public function setEcStatusVatMoss() {
+	public function setEcStatusVatMoss() :self {
 		return $this->setEcStatus( 'EC VAT MOSS' );
 	}
 
-	/**
-	 * @param float $nRate
-	 * @return $this
-	 */
-	public function setExchangeRate( $nRate ) {
-		return $this->setRequestDataItem( 'exchange_rate', $nRate );
+	public function setEcStatus_ReverseCharge() :self {
+		return $this->setEcStatus( 'Reverse Charge' );
 	}
 
 	/**
-	 * @param int $nDays
-	 * @return $this
+	 * @param float $rate
 	 */
-	public function setPaymentTerms( $nDays ) {
-		return $this->setRequestDataItem( 'payment_terms_in_days', (int)$nDays );
+	public function setExchangeRate( $rate ) :self {
+		return $this->setRequestDataItem( 'exchange_rate', $rate );
+	}
+
+	/**
+	 * @param int $days
+	 */
+	public function setPaymentTerms( $days ) :self {
+		return $this->setRequestDataItem( 'payment_terms_in_days', (int)$days );
 	}
 }
