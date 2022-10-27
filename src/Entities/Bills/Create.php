@@ -123,6 +123,6 @@ class Create extends Base {
 	}
 
 	protected function getCriticalRequestItems() :array {
-		return [ 'contact', 'dated_on', 'due_on', 'reference', 'total_value', 'category' ];
+		return [ 'contact', 'dated_on', 'due_on', 'reference' ];
 	}
 }
