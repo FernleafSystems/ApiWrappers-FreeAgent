@@ -11,66 +11,52 @@ class Create extends Base {
 	const REQUEST_METHOD = 'post';
 
 	/**
-	 * @param array $data
 	 * @return BillVO|null
 	 */
 	public function create( array $data = [] ) {
-		return $this->setRequestData( $data, true )
+		return $this->setRequestData( $data )
 					->sendRequestWithVoResponse();
 	}
 
-	/**
-	 * @param BillItemVO $item
-	 * @param bool       $merge
-	 * @return Create
-	 */
-	public function addBillItem( BillItemVO $item, $merge = true ) {
+	public function addBillItem( BillItemVO $item, bool $merge = true ) :self {
 		$items = $this->getRequestDataItem( 'bill_items' );
 		if ( !$merge || !is_array( $items ) ) {
 			$items = [];
 		}
-		$items[] = $item->getRawDataAsArray();
+		$items[] = $item->getRawData();
 		return $this->setRequestDataItem( 'bill_items', $items );
 	}
 
-	/**
-	 * @param CategoryVO $category
-	 * @return $this
-	 */
-	public function setCategory( CategoryVO $category ) {
+	public function setCategory( CategoryVO $category ) :self {
 		return $this->setRequestDataItem( 'category', $category->getUri() );
 	}
 
 	/**
 	 * Will attempt to construct the URI for this category from the Base ID
 	 * @param int $id
-	 * @return $this
 	 */
-	public function setCategoryId( $id ) {
+	public function setCategoryId( $id ) :self {
 		return $this->setRequestDataItem( 'category', $this->getCategoryUrl( $id ) );
 	}
 
 	/**
 	 * @param string $comment
-	 * @return $this
 	 */
-	public function setComment( $comment ) {
+	public function setComment( $comment ) :self {
 		return $this->setRequestDataItem( 'comments', $comment );
 	}
 
 	/**
 	 * @param ContactVO $contact
-	 * @return $this
 	 */
-	public function setContact( $contact ) {
+	public function setContact( $contact ) :self {
 		return $this->setRequestDataItem( 'contact', $contact->getUri() );
 	}
 
 	/**
 	 * @param string $currency e.g. GBP, USD, EUR
-	 * @return $this
 	 */
-	public function setCurrency( $currency ) {
+	public function setCurrency( string $currency ) :self {
 		return $this->setRequestDataItem( 'currency', strtoupper( $currency ) );
 	}
 
@@ -78,51 +64,44 @@ class Create extends Base {
 	 * @param int|string $mDate
 	 * @return $this
 	 */
-	public function setDueOn( $mDate ) {
+	public function setDueOn( $mDate ) :self {
 		return $this->setDateAttribute( 'due_on', $mDate );
 	}
 
-	/**
-	 * @param string string
-	 * @return $this
-	 */
-	public function setEcStatus( $sStatus ) {
-		return $this->setRequestDataItem( 'ec_status', $sStatus );
+	public function setEcStatus( string $status ) :self {
+		return $this->setRequestDataItem( 'ec_status', $status );
 	}
 
 	/**
-	 * @param string $sRef
-	 * @return $this
+	 * @param string $ref
 	 */
-	public function setReference( $sRef ) {
-		return $this->setRequestDataItem( 'reference', $sRef );
+	public function setReference( $ref ) :self {
+		return $this->setRequestDataItem( 'reference', $ref );
 	}
 
 	/**
-	 * @param int $nRate
-	 * @return $this
+	 * @param int $rate
 	 */
-	public function setSalesTaxRate( $nRate ) {
-		return $this->setRequestDataItem( 'sales_tax_rate', (string)$nRate );
+	public function setSalesTaxRate( $rate ) :self {
+		return $this->setRequestDataItem( 'sales_tax_rate', (string)$rate );
 	}
 
 	/**
-	 * @param float $nTotal
+	 * @param float $total
 	 * @return $this
 	 */
-	public function setTotalValue( $nTotal ) {
-		return $this->setRequestDataItem( 'total_value', (string)round( $nTotal, 2 ) );
+	public function setTotalValue( $total ) :self {
+		return $this->setRequestDataItem( 'total_value', (string)round( $total, 2 ) );
 	}
 
 	/**
-	 * @param int $nId
-	 * @return string
+	 * @param int $ID
 	 */
-	protected function getCategoryUrl( $nId ) {
-		return sprintf( '%scategories/%s', $this->getBaseUrl(), str_pad( $nId, 3, '0', STR_PAD_LEFT ) );
+	protected function getCategoryUrl( $ID ) :string {
+		return sprintf( '%scategories/%s', $this->getBaseUrl(), str_pad( $ID, 3, '0', STR_PAD_LEFT ) );
 	}
 
 	protected function getCriticalRequestItems() :array {
-		return [ 'contact', 'dated_on', 'due_on', 'reference', 'total_value', 'category' ];
+		return [ 'contact', 'dated_on', 'due_on', 'reference' ];
 	}
 }

@@ -31,7 +31,7 @@ class BillVO extends EntityVO {
 	 */
 	public function addBillItem( BillItemVO $item ) {
 		$items = is_array( $this->bill_items ) ? $this->bill_items : [];
-		$items[] = $item->getRawDataAsArray();
+		$items[] = $item->getRawData();
 		$this->bill_items = $items;
 		return $this;
 	}

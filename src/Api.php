@@ -13,11 +13,11 @@ class Api extends BaseApi {
 	const REQUEST_METHOD = 'get';
 
 	/**
-	 * @param int $nTimestamp
+	 * @param int $ts
 	 * @return string
 	 */
-	public static function convertToStdDateFormat( $nTimestamp ) {
-		return gmdate( 'Y-m-d', $nTimestamp );
+	public static function convertToStdDateFormat( $ts ) {
+		return gmdate( 'Y-m-d', $ts );
 	}
 
 	protected function prepFinalRequestData() :array {
@@ -36,9 +36,9 @@ class Api extends BaseApi {
 	}
 
 	protected function preFlight() {
-		/** @var Connection $oCon */
-		$oCon = $this->getConnection();
-		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $oCon->access_token ) );
+		/** @var Connection $conn */
+		$conn = $this->getConnection();
+		$this->setRequestHeader( 'Authorization', sprintf( 'Bearer %s', $conn->access_token ) );
 	}
 
 	/**
@@ -125,9 +125,8 @@ class Api extends BaseApi {
 	/**
 	 * @param string     $sAttribute
 	 * @param int|string $mDate
-	 * @return $this
 	 */
-	public function setDateAttribute( $sAttribute, $mDate ) {
+	public function setDateAttribute( $sAttribute, $mDate ) :self {
 		return $this->setRequestDataItem( $sAttribute, $this->filterDateValue( $mDate ) );
 	}
 
