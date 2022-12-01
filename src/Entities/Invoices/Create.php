@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\Constants;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
 
@@ -10,10 +11,9 @@ class Create extends Base {
 	const REQUEST_METHOD = 'post';
 
 	/**
-	 * @param array $data
 	 * @return InvoiceVO|null
 	 */
-	public function create( $data = [] ) {
+	public function create( array $data = [] ) {
 		return $this->setRequestData( $data )
 					->sendRequestWithVoResponse();
 	}
@@ -63,23 +63,20 @@ class Create extends Base {
 		return $this->setRequestDataItem( 'place_of_supply', $country );
 	}
 
-	/**
-	 * @param string $status 'EC VAT MOSS' : 'Non-EC'
-	 */
 	public function setEcStatus( string $status ) :self {
 		return $this->setRequestDataItem( 'ec_status', $status );
 	}
 
 	public function setEcStatusNonEc() :self {
-		return $this->setEcStatus( 'Non-EC' );
+		return $this->setEcStatus( Constants::VAT_STATUS_UK_NON_EC );
 	}
 
 	public function setEcStatusVatMoss() :self {
-		return $this->setEcStatus( 'EC VAT MOSS' );
+		return $this->setEcStatus( Constants::VAT_STATUS_EC_MOSS );
 	}
 
 	public function setEcStatus_ReverseCharge() :self {
-		return $this->setEcStatus( 'Reverse Charge' );
+		return $this->setEcStatus( Constants::VAT_STATUS_REVERSE_CHARGE );
 	}
 
 	/**
