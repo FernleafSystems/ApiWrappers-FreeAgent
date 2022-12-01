@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\Constants;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
 
@@ -35,49 +36,38 @@ class InvoiceVO extends EntityVO {
 	/**
 	 * @return InvoiceItemVO[]
 	 */
-	public function getItems() {
+	public function getItems() :array {
 		return array_map(
-			function ( $aItem ) {
-				return ( new InvoiceItemVO() )->applyFromArray( $aItem );
-			},
+			fn( $item ) => ( new InvoiceItemVO() )->applyFromArray( $item ),
 			$this->invoice_items
 		);
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function isEcStatusUkNonEc() {
-		return $this->isEcStatus( 'UK/Non-EC' );
+	public function isEcStatusUkNonEc() :bool {
+		return $this->isEcStatus( Constants::VAT_STATUS_UK_NON_EC );
+	}
+
+	public function isEcStatusReverseCharge() :bool {
+		return $this->isEcStatus( Constants::VAT_STATUS_REVERSE_CHARGE );
+	}
+
+	public function isEcStatusGoods() :bool {
+		return $this->isEcStatus( Constants::VAT_STATUS_EC_GOODS );
+	}
+
+	public function isEcStatusServices() :bool {
+		return $this->isEcStatus( Constants::VAT_STATUS_EC_SERVICES );
+	}
+
+	public function isEcStatusVatMoss() :bool {
+		return $this->isEcStatus( Constants::VAT_STATUS_EC_MOSS );
 	}
 
 	/**
-	 * @return bool
+	 * @param string|int $status - case insensitive status to compare
 	 */
-	public function isEcStatusGoods() {
-		return $this->isEcStatus( 'EC Goods' );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isEcStatusServices() {
-		return $this->isEcStatus( 'EC Services' );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isEcStatusVatMoss() {
-		return $this->isEcStatus( 'EC VAT MOSS' );
-	}
-
-	/**
-	 * @param string $sStatus - case insensitive status to compare
-	 * @return bool
-	 */
-	public function isEcStatus( $sStatus ) {
-		return ( strcasecmp( $this->ec_status, $sStatus ) === 0 );
+	public function isEcStatus( $status ) :bool {
+		return strcasecmp( $this->ec_status, $status ) === 0;
 	}
 
 	/**

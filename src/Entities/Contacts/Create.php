@@ -2,6 +2,7 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
+use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\Constants;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 class Create extends Base {
@@ -13,35 +14,24 @@ class Create extends Base {
 	 * @return ContactVO|null
 	 */
 	public function create( $aData = [] ) {
-		/** @var ContactVO $oContact */
-		$oContact = $this->setRequestData( $aData, true )
-						 ->sendRequestWithVoResponse();
+		/** @var ContactVO $contact */
+		$contact = $this->setRequestData( $aData, true )
+						->sendRequestWithVoResponse();
 
-		{ // Fix for FreeAgent API broken country names.
-			$aMap = $this->getBrokenCountriesMap();
-			$sRequestedCo = $this->getRequestDataItem( 'country' );
-			if ( $oContact instanceof EntityVO && in_array( $sRequestedCo, $aMap )
-				 && !in_array( $oContact->getCountry(), [ $sRequestedCo, $aMap[ $sRequestedCo ] ] ) ) {
-				$oContact = $this->setAddress_Country( $aMap[ $sRequestedCo ] )
-								 ->sendRequestWithVoResponse();
+		{ // Fix for FreeAgent API broken country names. Find which FA Country corresponds to the requested country.
+			$requestedCountry = $this->getRequestDataItem( 'country' );
+			if ( $contact instanceof EntityVO && $contact->country !== $requestedCountry ) {
+				foreach ( Constants::FREEAGENT_EU_COUNTRIES as $faCountry => $alternatives ) {
+					if ( in_array( strtolower( $requestedCountry ), array_map( 'strtolower', $alternatives ) ) ) {
+						$contact = $this->setAddress_Country( $faCountry )
+										->sendRequestWithVoResponse();
+						break;
+					}
+				}
 			}
 		}
 
-		return $oContact;
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getBrokenCountriesMap() {
-		$aCountryMap = [
-			'Czechia'         => 'Czech Republic',
-			'Slovak Republic' => 'Slovakia',
-		];
-		return array_merge(
-			$aCountryMap,
-			array_flip( $aCountryMap )
-		);
+		return $contact;
 	}
 
 	/**
@@ -52,23 +42,23 @@ class Create extends Base {
 
 		$sOrganisationName = $this->getRequestDataItem( 'organisation_name' );
 		if ( empty( $sOrganisationName ) ) {
-			$sFirstName = $this->getRequestDataItem( 'first_name' );
-			if ( empty( $sFirstName ) ) {
+			$firstName = $this->getRequestDataItem( 'first_name' );
+			if ( empty( $firstName ) ) {
 				throw new \Exception( sprintf( 'Field "%s" cannot be empty.', 'first_name' ) );
 			}
-			$sLastName = $this->getRequestDataItem( 'last_name' );
-			if ( empty( $sLastName ) ) {
+			$lastname = $this->getRequestDataItem( 'last_name' );
+			if ( empty( $lastname ) ) {
 				throw new \Exception( sprintf( 'Field "%s" cannot be empty.', 'last_name' ) );
 			}
 		}
 	}
 
 	/**
-	 * @param string $sValue
+	 * @param string $value
 	 * @return $this
 	 */
-	public function setAddress_Country( $sValue ) {
-		return $this->setRequestDataItem( 'country', $sValue );
+	public function setAddress_Country( $value ) {
+		return $this->setRequestDataItem( 'country', $value );
 	}
 
 	/**
@@ -105,20 +95,20 @@ class Create extends Base {
 	}
 
 	/**
-	 * @param string $sEmail - will set both account email and billing email
+	 * @param string $email - will set both account email and billing email
 	 * @return $this
 	 */
-	public function setEmail( $sEmail ) {
-		return $this->setRequestDataItem( 'email', $sEmail )
-					->setEmailForBilling( $sEmail );
+	public function setEmail( $email ) {
+		return $this->setRequestDataItem( 'email', $email )
+					->setEmailForBilling( $email );
 	}
 
 	/**
-	 * @param string $sEmail
+	 * @param string $email
 	 * @return $this
 	 */
-	public function setEmailForBilling( $sEmail ) {
-		return $this->setRequestDataItem( 'billing_email', $sEmail );
+	public function setEmailForBilling( $email ) {
+		return $this->setRequestDataItem( 'billing_email', $email );
 	}
 
 	/**
@@ -130,19 +120,19 @@ class Create extends Base {
 	}
 
 	/**
-	 * @param string $sName
+	 * @param string $name
 	 * @return $this
 	 */
-	public function setLastName( $sName ) {
-		return $this->setRequestDataItem( 'last_name', $sName );
+	public function setLastName( $name ) {
+		return $this->setRequestDataItem( 'last_name', $name );
 	}
 
 	/**
-	 * @param string $sName
+	 * @param string $name
 	 * @return $this
 	 */
-	public function setOrganisationName( $sName ) {
-		return $this->setRequestDataItem( 'organisation_name', $sName );
+	public function setOrganisationName( $name ) {
+		return $this->setRequestDataItem( 'organisation_name', $name );
 	}
 
 	/**

@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2022-12-01
+### Changed
+- Provide a constants class to make FreeAgent API strings consistent.
+
 ## [1.0.0] - 2022-10-25
 ### Changed
 - Move to the newer Base API library to allow upgrading to the new Guzzle HTTP (v7) library.

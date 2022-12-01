@@ -10,10 +10,7 @@ class Create extends Base {
 
 	const REQUEST_METHOD = 'post';
 
-	/**
-	 * @return BillVO|null
-	 */
-	public function create( array $data = [] ) {
+	public function create( array $data = [] ) :?BillVO {
 		return $this->setRequestData( $data )
 					->sendRequestWithVoResponse();
 	}
