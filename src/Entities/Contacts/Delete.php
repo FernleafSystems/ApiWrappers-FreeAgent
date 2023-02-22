@@ -4,15 +4,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 class Delete extends Base {
 
-	const REQUEST_METHOD = 'delete';
+	public const REQUEST_METHOD = 'delete';
 
-	/**
-	 * @param int $nContactId
-	 * @return $this
-	 */
-	public function delete( $nContactId = 0 ) {
-		if ( is_int( $nContactId ) && $nContactId > 0 ) {
-			$this->setEntityId( $nContactId );
+	public function delete( $contactId = 0 ) :self {
+		if ( is_int( $contactId ) && $contactId > 0 ) {
+			$this->setEntityId( $contactId );
 		}
 		return $this->send();
 	}

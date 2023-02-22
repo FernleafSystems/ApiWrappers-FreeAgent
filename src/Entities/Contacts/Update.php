@@ -16,12 +16,8 @@ class Update extends Create {
 		}
 	}
 
-	/**
-	 * @param array $aUpdateData
-	 * @return ContactVO|null
-	 */
-	public function update( $aUpdateData = [] ) {
-		return $this->create( $aUpdateData );
+	public function update( array $data = [] ) :?ContactVO {
+		return $this->create( $data );
 	}
 
 	protected function getCriticalRequestItems() :array {

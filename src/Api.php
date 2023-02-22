@@ -53,15 +53,11 @@ class Api extends BaseApi {
 		return $this->getRequestDataPayloadKey();
 	}
 
-	/**
-	 * @return array|null
-	 */
-	public function getCoreResponseData() {
+	public function getCoreResponseData() :?array {
 		$data = null;
 		if ( $this->isLastRequestSuccess() ) {
 			$key = $this->getResponseDataPayloadKey();
-			$decoded = $this->getDecodedResponseBody();
-			$data = empty( $key ) ? $decoded : $decoded[ $key ];
+			$data = empty( $key ) ? $this->getDecodedResponseBody() : $this->getDecodedResponseBody()[ $key ];
 		}
 		return $data;
 	}
@@ -101,17 +97,9 @@ class Api extends BaseApi {
 		}
 	}
 
-	/**
-	 * @return EntityVO|mixed|null
-	 */
-	public function sendRequestWithVoResponse() {
+	public function sendRequestWithVoResponse() :?EntityVO {
 		$data = $this->req()->getCoreResponseData();
-
-		$VO = null;
-		if ( !empty( $data ) ) {
-			$VO = $this->getVO()->applyFromArray( $data );
-		}
-		return $VO;
+		return empty( $data ) ? null : $this->getVO()->applyFromArray( $data );
 	}
 
 	/**

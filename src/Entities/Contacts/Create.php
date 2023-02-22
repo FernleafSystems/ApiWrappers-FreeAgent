@@ -3,24 +3,18 @@
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\Constants;
-use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 class Create extends Base {
 
-	const REQUEST_METHOD = 'post';
+	public const REQUEST_METHOD = 'post';
 
-	/**
-	 * @param array $aData
-	 * @return ContactVO|null
-	 */
-	public function create( $aData = [] ) {
+	public function create( array $data = [] ) :?ContactVO {
 		/** @var ContactVO $contact */
-		$contact = $this->setRequestData( $aData, true )
-						->sendRequestWithVoResponse();
+		$contact = $this->setRequestData( $data )->sendRequestWithVoResponse();
 
 		{ // Fix for FreeAgent API broken country names. Find which FA Country corresponds to the requested country.
 			$requestedCountry = $this->getRequestDataItem( 'country' );
-			if ( $contact instanceof EntityVO && $contact->country !== $requestedCountry ) {
+			if ( $contact instanceof ContactVO && $contact->country !== $requestedCountry ) {
 				foreach ( Constants::FREEAGENT_EU_COUNTRIES as $faCountry => $alternatives ) {
 					if ( in_array( strtolower( $requestedCountry ), array_map( 'strtolower', $alternatives ) ) ) {
 						$contact = $this->setAddress_Country( $faCountry )
@@ -34,14 +28,18 @@ class Create extends Base {
 		return $contact;
 	}
 
+	public function createFromVO( ContactVO $contact ) :?ContactVO {
+		return $this->create( $contact->getRawData() );
+	}
+
 	/**
 	 * @throws \Exception
 	 */
 	protected function preSendVerification() {
 		parent::preSendVerification();
 
-		$sOrganisationName = $this->getRequestDataItem( 'organisation_name' );
-		if ( empty( $sOrganisationName ) ) {
+		$orgName = $this->getRequestDataItem( 'organisation_name' );
+		if ( empty( $orgName ) ) {
 			$firstName = $this->getRequestDataItem( 'first_name' );
 			if ( empty( $firstName ) ) {
 				throw new \Exception( sprintf( 'Field "%s" cannot be empty.', 'first_name' ) );
@@ -53,118 +51,71 @@ class Create extends Base {
 		}
 	}
 
-	/**
-	 * @param string $value
-	 * @return $this
-	 */
-	public function setAddress_Country( $value ) {
+	public function setAddress_Country( string $value ) :self {
 		return $this->setRequestDataItem( 'country', $value );
 	}
 
-	/**
-	 * @param string $sValue
-	 * @param int    $nLine
-	 * @return $this
-	 */
-	public function setAddress_Line( $sValue, $nLine = 1 ) {
-		return $this->setRequestDataItem( 'address'.$nLine, $sValue );
+	public function setAddress_Line( string $value, int $line = 1 ) :self {
+		return $this->setRequestDataItem( 'address'.max( min( $line, 3 ), 1 ), $value );
 	}
 
-	/**
-	 * @param string $sValue
-	 * @return $this
-	 */
-	public function setAddress_PostalCode( $sValue ) {
-		return $this->setRequestDataItem( 'postcode', $sValue );
+	public function setAddress_PostalCode( string $value ) :self {
+		return $this->setRequestDataItem( 'postcode', $value );
 	}
 
-	/**
-	 * @param string $sValue
-	 * @return $this
-	 */
-	public function setAddress_Region( $sValue ) {
-		return $this->setRequestDataItem( 'region', $sValue );
+	public function setAddress_Region( string $value ) :self {
+		return $this->setRequestDataItem( 'region', $value );
 	}
 
-	/**
-	 * @param string $sValue
-	 * @return $this
-	 */
-	public function setAddress_Town( $sValue ) {
-		return $this->setRequestDataItem( 'town', $sValue );
+	public function setAddress_Town( string $value ) :self {
+		return $this->setRequestDataItem( 'town', $value );
 	}
 
-	/**
-	 * @param string $email - will set both account email and billing email
-	 * @return $this
-	 */
-	public function setEmail( $email ) {
+	public function setEmail( string $email ) :self {
 		return $this->setRequestDataItem( 'email', $email )
 					->setEmailForBilling( $email );
 	}
 
-	/**
-	 * @param string $email
-	 * @return $this
-	 */
-	public function setEmailForBilling( $email ) {
+	public function setEmailForBilling( string $email ) :self {
 		return $this->setRequestDataItem( 'billing_email', $email );
 	}
 
-	/**
-	 * @param string $sName
-	 * @return $this
-	 */
-	public function setFirstName( $sName ) {
-		return $this->setRequestDataItem( 'first_name', $sName );
+	public function setFirstName( string $name ) :self {
+		return $this->setRequestDataItem( 'first_name', $name );
 	}
 
-	/**
-	 * @param string $name
-	 * @return $this
-	 */
-	public function setLastName( $name ) {
+	public function setLastName( string $name ) :self {
 		return $this->setRequestDataItem( 'last_name', $name );
 	}
 
-	/**
-	 * @param string $name
-	 * @return $this
-	 */
-	public function setOrganisationName( $name ) {
+	public function setOrganisationName( string $name ) :self {
 		return $this->setRequestDataItem( 'organisation_name', $name );
 	}
 
-	/**
-	 * @param string $sAutoAlwaysNever
-	 * @return $this
-	 */
-	public function setSalesTaxCharge( $sAutoAlwaysNever ) {
-		return $this->setRequestDataItem( 'charge_sales_tax', $sAutoAlwaysNever );
+	public function setSalesTaxCharge( string $charge ) :self {
+		if ( in_array( $charge, [
+			ContactVO::CHARGE_SALES_TAX_ALWAYS,
+			ContactVO::CHARGE_SALES_TAX_AUTO,
+			ContactVO::CHARGE_SALES_TAX_NEVER
+		] ) ) {
+			$this->setRequestDataItem( 'charge_sales_tax', $charge );
+		}
+		return $this;
 	}
 
-	/**
-	 * @param string $sRegistrationNumber
-	 * @return $this
-	 */
-	public function setSalesTaxNumber( $sRegistrationNumber ) {
-		return $this->setRequestDataItem( 'sales_tax_registration_number', $sRegistrationNumber );
+	public function setSalesTaxNumber( string $taxRegistrationNumber ) :self {
+		return $this->setRequestDataItem( 'sales_tax_registration_number', $taxRegistrationNumber );
 	}
 
-	/**
-	 * @param string $sStatus
-	 * @return $this
-	 */
-	public function setStatus( $sStatus ) {
-		return $this->setRequestDataItem( 'status', ucfirst( strtolower( $sStatus ) ) );
+	public function setStatus( string $status ) :self {
+		if ( in_array( $status, [ ContactVO::STATUS_HIDDEN, ContactVO::STATUS_ACTIVE ] ) ) {
+			$this->setRequestDataItem( 'status', $status );
+		}
+		return $this;
 	}
 
-	/**
-	 * @param bool $bContactLevel
-	 * @return $this
-	 */
-	public function setUseContactLevelInvoiceSequence( $bContactLevel ) {
-		return $this->setRequestDataItem( 'uses_contact_invoice_sequence', $bContactLevel );
+	public function setUseContactLevelInvoiceSequence( bool $contactLevel ) :self {
+		return $this->setRequestDataItem( 'uses_contact_invoice_sequence', $contactLevel );
 	}
 
 	protected function getCriticalRequestItems() :array {

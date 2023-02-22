@@ -38,35 +38,35 @@ class Create extends Base {
 	 */
 	public function setBankAccount( $oBankAccount ) {
 		return $this->removeRequestDataItem( 'bank_transaction' )
-					->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
+					->setRequestDataItem( 'bank_account', $oBankAccount->url );
 	}
 
 	/**
-	 * @param BankTransactionVO $oBankTxn
+	 * @param BankTransactionVO $txn
 	 * @return $this
 	 */
-	public function setBankTxn( $oBankTxn ) {
+	public function setBankTxn( $txn ) {
 		return $this->removeRequestDataItem( 'bank_account' )
-					->setRequestDataItem( 'bank_transaction', $oBankTxn->getUri() )
-					->setDatedOn( $oBankTxn->getDatedOn() );
+					->setRequestDataItem( 'bank_transaction', $txn->url )
+					->setDatedOn( $txn->dated_on );
 	}
 
 	/**
-	 * @param BillVO $oBill
+	 * @param BillVO $bill
 	 * @return $this
 	 */
-	public function setBillPaid( $oBill ) {
+	public function setBillPaid( $bill ) {
 		return $this->removeRequestDataItem( 'paid_invoice' )
-					->setAssociatedPaidTo( 'bill', $oBill->getUri() );
+					->setAssociatedPaidTo( 'bill', $bill->url );
 	}
 
 	/**
-	 * @param InvoiceVO $oInvoice
+	 * @param InvoiceVO $invoice
 	 * @return $this
 	 */
-	public function setInvoicePaid( $oInvoice ) {
+	public function setInvoicePaid( $invoice ) {
 		return $this->removeRequestDataItem( 'paid_bill' )
-					->setAssociatedPaidTo( 'invoice', $oInvoice->getUri() );
+					->setAssociatedPaidTo( 'invoice', $invoice->url );
 	}
 
 	/**

@@ -4,9 +4,6 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 trait ContactsTrait {
 
-	/**
-	 * @return string
-	 */
 	protected function getApiEndpoint() :string {
 		return 'contacts';
 	}

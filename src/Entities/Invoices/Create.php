@@ -49,7 +49,7 @@ class Create extends Base {
 	}
 
 	public function setContact( ContactVO $contact ) :self {
-		return $this->setRequestDataItem( 'contact', $contact->getUri() );
+		return $this->setRequestDataItem( 'contact', $contact->url );
 	}
 
 	/**

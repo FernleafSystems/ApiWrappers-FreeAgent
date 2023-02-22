@@ -4,17 +4,11 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 class Retrieve extends Base {
 
-	/**
-	 * @return bool
-	 */
-	public function exists() {
-		return !is_null( $this->retrieve() );
+	public function exists() :bool {
+		return $this->retrieve() !== null;
 	}
 
-	/**
-	 * @return ContactVO
-	 */
-	public function retrieve() {
+	public function retrieve() :?ContactVO {
 		return $this->sendRequestWithVoResponse();
 	}
 

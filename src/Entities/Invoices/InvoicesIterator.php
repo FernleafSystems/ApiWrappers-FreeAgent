@@ -12,7 +12,7 @@ class InvoicesIterator extends Entities\Common\CommonIterator {
 	 */
 	public function filterByContact( $contact ) {
 		$this->getRetriever()
-			 ->setRequestDataItem( 'contact', $contact->getUri() );
+			 ->setRequestDataItem( 'contact', $contact->url );
 		return $this;
 	}
 

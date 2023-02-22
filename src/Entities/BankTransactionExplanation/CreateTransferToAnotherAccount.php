@@ -7,10 +7,9 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 class CreateTransferToAnotherAccount extends Create {
 
 	/**
-	 * @param BankAccountVO $oBankAccount
 	 * @return $this
 	 */
-	public function setTargetBankAccount( $oBankAccount ) {
-		return $this->setRequestDataItem( 'transfer_bank_account', $oBankAccount->getUri() );
+	public function setTargetBankAccount( BankAccountVO $bankAccount ) {
+		return $this->setRequestDataItem( 'transfer_bank_account', $bankAccount->url );
 	}
 }

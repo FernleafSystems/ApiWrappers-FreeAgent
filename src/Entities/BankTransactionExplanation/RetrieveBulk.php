@@ -14,6 +14,6 @@ class RetrieveBulk extends RetrieveBulkBase {
 	 * @return $this
 	 */
 	public function setBankAccount( $oBankAccount ) {
-		return $this->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
+		return $this->setRequestDataItem( 'bank_account', $oBankAccount->url );
 	}
 }
