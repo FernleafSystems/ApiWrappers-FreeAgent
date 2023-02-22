@@ -4,37 +4,26 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Categories;
 
 class Retrieve extends Base {
 
-	/**
-	 * @return bool
-	 */
-	public function exists() {
-		return !is_null( $this->retrieve() );
+	public function exists() :bool {
+		return $this->retrieve() !== null;
 	}
 
-	/**
-	 * @return CategoryVO
-	 */
-	public function retrieve() {
+	public function retrieve() :?CategoryVO {
 		return $this->sendRequestWithVoResponse();
 	}
 
-	/**
-	 * @return CategoryVO|mixed|null
-	 */
-	public function sendRequestWithVoResponse() {
+	public function sendRequestWithVoResponse() :?CategoryVO {
 		try {
-			$aData = $this->send()
-						  ->getCoreResponseData();
+			$data = $this->send()->getCoreResponseData();
 		}
 		catch ( \Exception $e ) {
 		}
 
 		$VO = null;
-		if ( !empty( $aData ) && is_array( $aData ) ) {
-			foreach ( $aData as $sCatType => $aCategory ) {
+		if ( !empty( $data ) && is_array( $data ) ) {
+			foreach ( $data as $sCatType => $aCategory ) {
 				if ( $aCategory[ 'nominal_code' ] == $this->entity_id ) {
-					$VO = $this->getVO()
-							   ->applyFromArray( $aCategory );
+					$VO = $this->getVO()->applyFromArray( $aCategory );
 				}
 			}
 		}
@@ -50,9 +39,6 @@ class Retrieve extends Base {
 		return $this;
 	}
 
-	/**
-	 * @throws \Exception
-	 */
 	protected function preSendVerification() {
 		parent::preSendVerification();
 		if ( !$this->hasEntityId() ) {

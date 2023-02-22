@@ -58,7 +58,7 @@ class UploadStatement extends Base {
 	 * @return $this
 	 */
 	public function setBankAccount( $oBankAccount ) {
-		return $this->setRequestQueryDataItem( 'bank_account', $oBankAccount->getUri() );
+		return $this->setRequestQueryDataItem( 'bank_account', $oBankAccount->url );
 	}
 
 	/**

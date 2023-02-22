@@ -5,17 +5,17 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 class Finder extends ContactsIterator {
 
 	/**
-	 * @param string $sEmail
+	 * @param string $email
 	 * @return ContactVO|null
 	 */
-	public function findByEmail( $sEmail ) {
-		$oTheOne = null;
-		foreach ( $this as $oContact ) {
-			if ( strcasecmp( $oContact->email, $sEmail ) === 0 ) {
-				$oTheOne = $oContact;
+	public function findByEmail( $email ) {
+		$theOne = null;
+		foreach ( $this as $contact ) {
+			if ( strcasecmp( $contact->email, $email ) === 0 ) {
+				$theOne = $contact;
 				break;
 			}
 		}
-		return $oTheOne;
+		return $theOne;
 	}
 }

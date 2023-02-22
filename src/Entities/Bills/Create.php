@@ -25,7 +25,7 @@ class Create extends Base {
 	}
 
 	public function setCategory( CategoryVO $category ) :self {
-		return $this->setRequestDataItem( 'category', $category->getUri() );
+		return $this->setRequestDataItem( 'category', $category->url );
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Create extends Base {
 	 * @param ContactVO $contact
 	 */
 	public function setContact( $contact ) :self {
-		return $this->setRequestDataItem( 'contact', $contact->getUri() );
+		return $this->setRequestDataItem( 'contact', $contact->url );
 	}
 
 	/**

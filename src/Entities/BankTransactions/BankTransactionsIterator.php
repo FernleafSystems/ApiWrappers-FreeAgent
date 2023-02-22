@@ -6,13 +6,9 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
 class BankTransactionsIterator extends Entities\Common\CommonIterator {
 
-	/**
-	 * @param Entities\BankAccounts\BankAccountVO $oBankAccount
-	 * @return $this
-	 */
-	public function filterByBankAccount( $oBankAccount ) {
+	public function filterByBankAccount( Entities\BankAccounts\BankAccountVO $bankAccount ) :self {
 		$this->getRetriever()
-			 ->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
+			 ->setRequestDataItem( 'bank_account', $bankAccount->url );
 		return $this;
 	}
 

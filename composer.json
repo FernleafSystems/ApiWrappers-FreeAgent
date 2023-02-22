@@ -17,8 +17,8 @@
   ],
   "require":      {
     "php":                              ">=7.4",
-    "fernleafsystems/apiwrappers-base": "^2.0",
-    "league/oauth2-client":             "^2.0"
+    "fernleafsystems/apiwrappers-base": "^2.1",
+    "league/oauth2-client":             "^2.6"
   },
   "require-dev":  {
   },

@@ -7,11 +7,11 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\BankAccounts\BankAccountVO;
 class Find extends RetrieveBulk {
 
 	/**
-	 * @param BankAccountVO $oBankAccount
+	 * @param BankAccountVO $bankAccount
 	 * @return $this
 	 */
-	public function setBankAccount( $oBankAccount ) {
-		return $this->setRequestDataItem( 'bank_account', $oBankAccount->getUri() );
+	public function setBankAccount( $bankAccount ) {
+		return $this->setRequestDataItem( 'bank_account', $bankAccount->url );
 	}
 
 	/**
