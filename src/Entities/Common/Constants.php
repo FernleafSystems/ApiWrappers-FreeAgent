@@ -12,11 +12,11 @@ final class Constants {
 	public const VAT_STATUS_EC_GOODS_CODE = 2;
 	public const VAT_STATUS_EC_MOSS = 'EC VAT MOSS';
 	public const VAT_STATUS_EC_MOSS_CODE = 3;
-	public const VAT_STATUS_REVERSE_CHARGE = 'REVERSE CHARGE';
+	public const VAT_STATUS_REVERSE_CHARGE = 'Reverse Charge';
 	public const VAT_STATUS_REVERSE_CHARGE_CODE = 4;
 	/**
-	 * Left: Freeagent
-	 * Right: Alternatives
+	 * key: Freeagent
+	 * value: Alternatives
 	 */
 	public const FREEAGENT_EU_COUNTRIES = [
 		'Austria'        => [],
