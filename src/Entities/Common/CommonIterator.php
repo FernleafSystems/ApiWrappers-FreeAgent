@@ -9,12 +9,12 @@ abstract class CommonIterator extends AbstractPagedIterator {
 
 	use ConnectionConsumer;
 
-	const PAGE_LIMIT = RetrievePageBase::PER_PAGE_LIMIT_UPPER;
+	public const PAGE_LIMIT = RetrievePageBase::PER_PAGE_LIMIT_UPPER;
 
 	/**
 	 * @var RetrievePageBase
 	 */
-	private $oPageRetriever;
+	private $pageRetriever;
 
 	/**
 	 * @var int
@@ -22,69 +22,54 @@ abstract class CommonIterator extends AbstractPagedIterator {
 	protected $nTotalSize;
 
 	/**
-	 * @param $nTimestamp
-	 * @return $this
+	 * @param int $ts
 	 */
-	public function filterByDateFrom( $nTimestamp ) {
-		$this->getRetriever()
-			 ->filterByDateFrom( $nTimestamp );
+	public function filterByDateFrom( $ts ) :self {
+		$this->getRetriever()->filterByDateFrom( $ts );
 		return $this;
 	}
 
 	/**
-	 * @param $nTimestamp
-	 * @return $this
+	 * @param int $ts
 	 */
-	public function filterByDateTo( $nTimestamp ) {
-		$this->getRetriever()
-			 ->filterByDateTo( $nTimestamp );
+	public function filterByDateTo( $ts ) :self {
+		$this->getRetriever()->filterByDateTo( $ts );
 		return $this;
 	}
 
 	/**
 	 * @param int $nDateTs
 	 * @param int $nRadius
-	 * @return $this
 	 */
-	public function filterByDateRange( $nDateTs, $nRadius = 5 ) {
+	public function filterByDateRange( $nDateTs, $nRadius = 5 ) :self {
 		$nDaysRadius = 86400*$nRadius;
 		return $this->filterByDateFrom( $nDateTs - $nDaysRadius )
 					->filterByDateTo( $nDateTs + $nDaysRadius );
 	}
 
 	/**
-	 * @param $nTimestamp
-	 * @return $this
+	 * @param $ts
 	 */
-	public function filterByDateUpdatedSince( $nTimestamp ) {
-		$this->getRetriever()
-			 ->filterByDateUpdatedSince( $nTimestamp );
+	public function filterByDateUpdatedSince( $ts ) :self {
+		$this->getRetriever()->filterByDateUpdatedSince( $ts );
 		return $this;
 	}
 
 	public function filterByView( string $view ) :self {
-		$this->getRetriever()
-			 ->filterByView( $view );
+		$this->getRetriever()->filterByView( $view );
 		return $this;
 	}
 
-	/**
-	 * @return $this;
-	 */
-	public function filterByView_All() {
-		$this->getRetriever()
-			 ->filterByView_All();
+	public function filterByView_All() :self {
+		$this->getRetriever()->filterByView_All();
 		return $this;
 	}
 
 	/**
 	 * @param string $field
-	 * @param bool   $bDescendingOrder
-	 * @return $this
 	 */
-	public function orderBy( $field, $bDescendingOrder = false ) {
-		$sPrefix = $bDescendingOrder ? '-' : '';
-		$this->getRetriever()->setRequestDataItem( 'sort', $sPrefix.$field );
+	public function orderBy( $field, bool $descendingOrder = false ) :self {
+		$this->getRetriever()->setRequestDataItem( 'sort', ( $descendingOrder ? '-' : '' ).$field );
 		return $this;
 	}
 
@@ -93,38 +78,28 @@ abstract class CommonIterator extends AbstractPagedIterator {
 	 */
 	public function getTotalSize() {
 		if ( !isset( $this->nTotalSize ) ) {
-			$oRtr = $this->getRetriever();
-			$oRtr->retrieve( 1, 1 );
-			$aCount = $oRtr->getLastApiResponse()
-						   ->getHeader( 'X-Total-Count' );
-			$this->nTotalSize = (int)array_shift( $aCount );
+			$r = $this->getRetriever();
+			$r->retrieve( 1, 1 );
+			$count = $r->getLastApiResponse()->getHeader( 'X-Total-Count' );
+			$this->nTotalSize = (int)array_shift( $count );
 		}
 		return $this->nTotalSize;
 	}
 
 	/**
-	 * @param int $nPage
+	 * @param int $pageNumber
 	 * @return EntityVO[]|array
 	 */
-	public function getPage( $nPage ) {
-		return $this->getRetriever()->retrieve( $nPage, $this->getPageSize() );
+	public function getPage( $pageNumber ) {
+		return $this->getRetriever()->retrieve( $pageNumber, $this->getPageSize() );
 	}
 
-	/**
-	 * @return RetrievePageBase
-	 */
-	protected function getRetriever() {
-		if ( !$this->oPageRetriever instanceof RetrievePageBase ) {
-			$this->oPageRetriever = $this->getNewRetriever()
-										 ->setConnection( $this->getConnection() );
-		}
-		return $this->oPageRetriever;
+	public function getRetriever() :RetrievePageBase {
+		return $this->pageRetriever ??
+			   $this->pageRetriever = $this->getNewRetriever()->setConnection( $this->getConnection() );
 	}
 
-	/**
-	 * @return RetrievePageBase
-	 */
-	abstract protected function getNewRetriever();
+	abstract protected function getNewRetriever() :RetrievePageBase;
 
 	/**
 	 * @return int

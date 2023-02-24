@@ -8,14 +8,17 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
 
 /**
  * https://dev.freeagent.com/docs/invoices
- * @property string  $contact  - URI
- * @property string  $dated_on - YYYY-MM-DD
- * @property string  $due_on   - YYYY-MM-DD
- * @property string  $paid_on  - YYYY-MM-DD
+ * @property string  $contact           - URI
+ * @property string  $dated_on          - YYYY-MM-DD
+ * @property string  $due_on            - YYYY-MM-DD
+ * @property string  $paid_on           - YYYY-MM-DD
+ * @property string  $written_off_date  - YYYY-MM-DD
+ * @property string  $recurring_invoice - URI
  * @property string  $reference
- * @property string  $place_of_supply
  * @property string  $status
  * @property string  $ec_status
+ * @property string  $place_of_supply
+ * @property string  $comments
  * @property array[] $invoice_items
  * @property float   $exchange_rate
  * @property float   $due_value
@@ -23,6 +26,9 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
  * @property float   $paid_value
  * @property float   $total_value
  * @property float   $sales_tax_value
+ * @property float   $discount_percent
+ * @property bool    $involves_sales_tax
+ * @property string  $payment_terms
  */
 class InvoiceVO extends EntityVO {
 
@@ -39,7 +45,7 @@ class InvoiceVO extends EntityVO {
 	public function getItems() :array {
 		return array_map(
 			fn( $item ) => ( new InvoiceItemVO() )->applyFromArray( $item ),
-			$this->invoice_items
+			is_array( $this->invoice_items ) ? $this->invoice_items : []
 		);
 	}
 

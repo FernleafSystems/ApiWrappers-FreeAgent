@@ -82,10 +82,7 @@ class ContactsIterator extends Entities\Common\CommonIterator {
 		return parent::current();
 	}
 
-	/**
-	 * @return RetrievePage
-	 */
-	protected function getNewRetriever() {
+	protected function getNewRetriever() :RetrievePage {
 		return new RetrievePage();
 	}
 }
