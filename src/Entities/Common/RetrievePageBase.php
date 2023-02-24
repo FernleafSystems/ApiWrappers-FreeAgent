@@ -7,104 +7,89 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities;
 
 abstract class RetrievePageBase extends Api {
 
-	const PER_PAGE_LIMIT_LOWER = 1;
-	const PER_PAGE_LIMIT_UPPER = 100;
+	public const PER_PAGE_LIMIT_LOWER = 1;
+	public const PER_PAGE_LIMIT_UPPER = 100;
 
 	/**
-	 * @param int $nPage
-	 * @param int $nPerPage
+	 * @param int $page
+	 * @param int $perPage
 	 * @return EntityVO[]|array
 	 */
-	public function retrieve( $nPage, $nPerPage = self::PER_PAGE_LIMIT_UPPER ) {
-		$aResults = [];
+	public function retrieve( $page, $perPage = self::PER_PAGE_LIMIT_UPPER ) :array {
 		try {
-			$this->setPage( $nPage )
-				 ->setPerPage( $nPerPage )
-				 ->send();
-			$aResults = array_map(
-				function ( $aResultItem ) {
-					return $this->getVO()
-								->applyFromArray( $aResultItem );
-				},
-				$this->getCoreResponseData()
+			$results = array_map(
+				fn( $result ) => $this->getVO()->applyFromArray( $result ),
+				$this->setPage( $page )
+					 ->setPerPage( $perPage )
+					 ->send()
+					 ->getCoreResponseData()
 			);
 		}
-		catch ( \Exception $oE ) {
+		catch ( \Exception $e ) {
+			$results = [];
 		}
-
-		return $aResults;
+		return $results;
 	}
 
 	/**
-	 * @param int $nPage
-	 * @return $this
+	 * @param int $page
 	 */
-	public function setPage( $nPage = 1 ) {
-		return $this->setRequestDataItem( 'page', max( 1, $nPage + 1 ) ); //because pages start at 0
+	public function setPage( $page = 1 ) :self {
+		return $this->setRequestDataItem( 'page', max( 1, $page + 1 ) ); //because pages start at 0
 	}
 
 	/**
-	 * @param int $nPerPage
-	 * @return $this
+	 * @param int $perPage
 	 */
-	public function setPerPage( $nPerPage = 25 ) {
-		$nPerPage = min( max( (int)$nPerPage, self::PER_PAGE_LIMIT_LOWER ), self::PER_PAGE_LIMIT_UPPER );
-		return $this->setRequestDataItem( 'per_page', $nPerPage );
+	public function setPerPage( $perPage = 25 ) :self {
+		return $this->setRequestDataItem(
+			'per_page',
+			min( max( (int)$perPage, self::PER_PAGE_LIMIT_LOWER ), self::PER_PAGE_LIMIT_UPPER )
+		);
 	}
 
 	/**
-	 * @param string $sViewFilter
-	 * @return $this
+	 * @param string $viewFilter
 	 */
-	public function filterByView( $sViewFilter ) {
-		return $this->setRequestDataItem( 'view', $sViewFilter );
+	public function filterByView( $viewFilter ) :self {
+		return $this->setRequestDataItem( 'view', $viewFilter );
 	}
 
-	/**
-	 * @return $this
-	 */
-	public function filterByView_All() {
+	public function filterByView_All() :self {
 		return $this->filterByView( 'all' );
 	}
 
 	/**
-	 * @param int $nTimestamp Unix Timestamp
-	 * @return $this
+	 * @param int $ts Unix Timestamp
 	 */
-	public function filterByDateFrom( $nTimestamp ) {
-		return $this->setRequestDataItem( 'from_date', $this->convertToStdDateFormat( $nTimestamp ) );
+	public function filterByDateFrom( $ts ) :self {
+		return $this->setRequestDataItem( 'from_date', $this->convertToStdDateFormat( $ts ) );
 	}
 
 	/**
-	 * @param int $nTimestamp Unix Timestamp
-	 * @return $this
+	 * @param int $ts Unix Timestamp
 	 */
-	public function filterByDateTo( $nTimestamp ) {
-		return $this->setRequestDataItem( 'to_date', $this->convertToStdDateFormat( $nTimestamp ) );
+	public function filterByDateTo( $ts ) :self {
+		return $this->setRequestDataItem( 'to_date', $this->convertToStdDateFormat( $ts ) );
 	}
 
 	/**
-	 * @param int $nTimestamp Unix Timestamp
-	 * @return $this
+	 * @param int $ts Unix Timestamp
 	 */
-	public function filterByDateUpdatedSince( $nTimestamp ) {
-		return $this->setRequestDataItem( 'updated_since', $this->convertToStdDateFormat( $nTimestamp ) );
+	public function filterByDateUpdatedSince( $ts ) :self {
+		return $this->setRequestDataItem( 'updated_since', $this->convertToStdDateFormat( $ts ) );
 	}
 
 	/**
-	 * @param int $nDate
-	 * @param int $nRadius
-	 * @return $this
+	 * @param int $date
+	 * @param int $radius
 	 */
-	public function filterByDateRange( $nDate, $nRadius = 5 ) {
-		$nDaysRadius = 86400*$nRadius;
-		return $this->filterByDateFrom( $nDate - $nDaysRadius )
-					->filterByDateTo( $nDate + $nDaysRadius );
+	public function filterByDateRange( $date, $radius = 5 ) :self {
+		$daysRadius = 86400*$radius;
+		return $this->filterByDateFrom( $date - $daysRadius )
+					->filterByDateTo( $date + $daysRadius );
 	}
 
-	/**
-	 * @return string
-	 */
 	protected function getRequestDataPayloadKey() :string {
 		return $this->getApiEndpoint(); // we don't truncate 's'
 	}
