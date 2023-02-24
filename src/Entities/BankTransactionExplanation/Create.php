@@ -14,10 +14,9 @@ class Create extends Base {
 	/**
 	 * @return BankTransactionExplanationVO|null
 	 */
-	public function create() {
-
-		$sDescription = $this->getRequestDataItem( 'description' );
-		if ( empty( $sDescription ) ) {
+	public function create() :?BankTransactionExplanationVO {
+		$description = $this->getRequestDataItem( 'description' );
+		if ( empty( $description ) ) {
 			$this->setDescription( 'Filler description for Bank Transaction Explanation.' );
 		}
 		return $this->sendRequestWithVoResponse();
