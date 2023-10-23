@@ -5,6 +5,7 @@ namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\Constants;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts\ContactVO;
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Invoices\Items\InvoiceItemVO;
+use FernleafSystems\ApiWrappers\Freeagent\Utility\FreeagentCountryFromCountry;
 
 class Create extends Base {
 
@@ -60,7 +61,7 @@ class Create extends Base {
 	}
 
 	public function setEcPlaceOfSupply( string $country ) :self {
-		return $this->setRequestDataItem( 'place_of_supply', $country );
+		return $this->setRequestDataItem( 'place_of_supply', ( new FreeagentCountryFromCountry() )->from( $country ) );
 	}
 
 	public function setEcStatus( string $status ) :self {
