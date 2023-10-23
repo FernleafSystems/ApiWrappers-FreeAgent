@@ -2,17 +2,19 @@
 
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\EcMoss;
 
+use FernleafSystems\ApiWrappers\Freeagent\Utility\FreeagentCountryFromCountry;
+
 /**
  * https://dev.freeagent.com/docs/sales_tax#ec-vat-moss
  */
 class RetrieveRate extends Base {
 
 	/**
-	 * @param string $sCountry The place of supply
+	 * @param string $country The place of supply
 	 * @return $this
 	 */
-	public function setCountry( $sCountry ) {
-		return $this->setRequestDataItem( 'country', ucfirst( strtolower( $sCountry ) ) );
+	public function setCountry( $country ) {
+		return $this->setRequestDataItem( 'country', ( new FreeagentCountryFromCountry() )->from( (string)$country ) );
 	}
 
 	/**

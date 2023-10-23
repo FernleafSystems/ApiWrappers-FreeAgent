@@ -3,6 +3,7 @@
 namespace FernleafSystems\ApiWrappers\Freeagent\Entities\Contacts;
 
 use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\Constants;
+use FernleafSystems\ApiWrappers\Freeagent\Utility\FreeagentCountryFromCountry;
 
 class Create extends Base {
 
@@ -10,22 +11,7 @@ class Create extends Base {
 
 	public function create( array $data = [] ) :?ContactVO {
 		/** @var ContactVO $contact */
-		$contact = $this->setRequestData( $data )->sendRequestWithVoResponse();
-
-		{ // Fix for FreeAgent API broken country names. Find which FA Country corresponds to the requested country.
-			$requestedCountry = $this->getRequestDataItem( 'country' );
-			if ( $contact instanceof ContactVO && $contact->country !== $requestedCountry ) {
-				foreach ( Constants::FREEAGENT_EU_COUNTRIES as $faCountry => $alternatives ) {
-					if ( in_array( strtolower( $requestedCountry ), array_map( 'strtolower', $alternatives ) ) ) {
-						$contact = $this->setAddress_Country( $faCountry )
-										->sendRequestWithVoResponse();
-						break;
-					}
-				}
-			}
-		}
-
-		return $contact;
+		return $this->setRequestData( $data )->sendRequestWithVoResponse();
 	}
 
 	public function createFromVO( ContactVO $contact ) :?ContactVO {
@@ -52,7 +38,7 @@ class Create extends Base {
 	}
 
 	public function setAddress_Country( string $value ) :self {
-		return $this->setRequestDataItem( 'country', $value );
+		return $this->setRequestDataItem( 'country', ( new FreeagentCountryFromCountry() )->from( $value ) );
 	}
 
 	public function setAddress_Line( string $value, int $line = 1 ) :self {
