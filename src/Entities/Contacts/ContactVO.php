@@ -6,7 +6,7 @@ use FernleafSystems\ApiWrappers\Freeagent\Entities\Common\EntityVO;
 
 /**
  * https://dev.freeagent.com/docs/contacts
- * @property string $email
+ * @property ?string $email
  * @property string $first_name
  * @property string $last_name
  * @property string $organisation_name

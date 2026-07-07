@@ -11,7 +11,7 @@ class Finder extends ContactsIterator {
 	public function findByEmail( $email ) {
 		$theOne = null;
 		foreach ( $this as $contact ) {
-			if ( strcasecmp( $contact->email, $email ) === 0 ) {
+			if ( \strcasecmp( (string)$contact->email, $email ) === 0 ) {
 				$theOne = $contact;
 				break;
 			}
