@@ -10,10 +10,17 @@ class RetrieveBulk extends RetrieveBulkBase {
 	use BankTransactionExplanationTrait;
 
 	/**
-	 * @param BankAccountVO $oBankAccount
-	 * @return $this
+	 * @param BankAccountVO $bankAccount
 	 */
-	public function setBankAccount( $oBankAccount ) {
-		return $this->setRequestDataItem( 'bank_account', $oBankAccount->url );
+	public function setBankAccount( $bankAccount ) :self {
+		return $this->setRequestDataItem( 'bank_account', $bankAccount->url );
+	}
+
+	public function setBankAccountFromID( int $id ) :self {
+		return $this->setRequestDataItem( 'bank_account', $this->getConnection()->getBaseUrl().'/bank_account/'.$id );
+	}
+
+	protected function getCriticalRequestItems() :array {
+		return [ 'bank_account' ];
 	}
 }

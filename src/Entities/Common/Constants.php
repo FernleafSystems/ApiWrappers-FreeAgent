@@ -17,6 +17,7 @@ final class Constants {
 	/**
 	 * key: Freeagent
 	 * value: Alternatives
+	 * @var array[]
 	 */
 	public const FREEAGENT_EU_COUNTRIES = [
 		'Austria'        => [],
