@@ -21,18 +21,17 @@ class Api extends BaseApi {
 	}
 
 	protected function prepFinalRequestData() :array {
+		$final = parent::prepFinalRequestData();
 
-		$aFinal = parent::prepFinalRequestData();
-
-		$sChannel = $this->getDataChannel();
-		if ( in_array( $this->getHttpRequestMethod(), [ 'post', 'put' ] ) ) {
-			$sDataPayloadKey = $this->getRequestDataPayloadKey();
-			if ( !empty( $sDataPayloadKey ) && !empty( $aFinal[ $sChannel ] ) ) {
-				$aFinal[ $sChannel ] = [ $sDataPayloadKey => $aFinal[ $sChannel ] ];
+		$channel = $this->getDataChannel();
+		if ( \in_array( $this->getHttpRequestMethod(), [ 'POST', 'PUT' ] ) ) {
+			$payloadKey = $this->getRequestDataPayloadKey();
+			if ( !empty( $payloadKey ) && !empty( $final[ $channel ] ) ) {
+				$final[ $channel ] = [ $payloadKey => $final[ $channel ] ];
 			}
 		}
 
-		return $aFinal;
+		return $final;
 	}
 
 	protected function preFlight() {
