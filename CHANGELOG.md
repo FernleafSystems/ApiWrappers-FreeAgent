@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.9] - 2026-11-05
+### Changed
+- Throw `IdentityProviderException` when FreeAgent refuses a token request, instead of ignoring it.
+- Mark a nullable parameter explicitly, which PHP 8.4 otherwise deprecates.
+
 ## [1.0.2] - 2022-12-01
 ### Changed
 - Provide a constants class to make FreeAgent API strings consistent.
