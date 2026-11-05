@@ -4,6 +4,7 @@ namespace FernleafSystems\ApiWrappers\Freeagent\OAuth\Provider;
 
 use FernleafSystems\ApiWrappers\Freeagent\OAuth\Entity\Company;
 use League\OAuth2\Client\Provider\AbstractProvider;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 
@@ -23,7 +24,14 @@ class Freeagent extends AbstractProvider {
 	protected $sBaseUrl;
 
 	protected function checkResponse( ResponseInterface $response, $data ) {
-		// TODO: Implement checkResponse() method.
+		$error = \is_array( $data ) ? ( $data[ 'error_description' ] ?? $data[ 'error' ] ?? null ) : null;
+		if ( $error !== null || $response->getStatusCode() >= 400 ) {
+			throw new IdentityProviderException(
+				(string)( $error ?? $response->getReasonPhrase() ),
+				$response->getStatusCode(),
+				$data
+			);
+		}
 	}
 
 	protected function createResourceOwner( array $response, AccessToken $token ) {
@@ -106,7 +114,7 @@ class Freeagent extends AbstractProvider {
 		return $this;
 	}
 
-	public function urlUserDetails( AccessToken $token = null ) {
+	public function urlUserDetails( ?AccessToken $token = null ) {
 		return $this->sBaseUrl.'company';
 	}
 
